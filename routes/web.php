@@ -17,9 +17,9 @@ use App\Http\Controllers\MasterdataController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes([
   'register' => false, // Registration Routes...
@@ -29,7 +29,7 @@ Auth::routes([
 
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Route::get('/data-register', [RegisterController::class, 'form'])->name('data-register');
+Route::get('/', [RegisterController::class, 'form'])->name('data-register');
 Route::get('/masterdata', [MasterdataController::class, 'index'])->name('masterdata')->middleware('auth');
