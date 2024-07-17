@@ -40,9 +40,9 @@ Route::controller(RegisterController::class)->group(function () {
 
 Route::controller(MasterdataController::class)->middleware('auth')->group(function () {
   Route::get('/masterdata', 'index')->name('masterdata');
+  Route::post('/school/simpan', 'save');
 });
   Route::get('/school', [MasterdataController::class, 'school'])->name('school');
-  Route::post('/school/simpan', [MasterdataController::class, 'save']);
 
 Route::get('/tambah-sekolah', function () {
     return view('masterdata.inputsekolah');
