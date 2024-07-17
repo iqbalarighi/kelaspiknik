@@ -32,6 +32,7 @@ Auth::routes([
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
+
 Route::controller(RegisterController::class)->group(function () {
   Route::get('/', 'form')->name('data-register');
   Route::post('/regis', 'save')->name('regis');
