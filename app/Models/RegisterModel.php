@@ -17,6 +17,7 @@ class RegisterModel extends Model
         'kelas',
         'nis',
         'ttl',
+        'penyakit',
         'alamat',
         'email',
         'no_tel',

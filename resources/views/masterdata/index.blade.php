@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card">
-                <div class="card-header">{{ __('Master Data') }}</div>
+                <div class="card-header">{{ __('Master Data') }}
+                    <a href="{{route('tambah-sekolah')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))

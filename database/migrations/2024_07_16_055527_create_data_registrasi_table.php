@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('kelas');
             $table->string('nis');
             $table->string('ttl');
+            $table->string('email')->unique();
             $table->text('alamat');
-            $table->string('email');
+            $table->text('penyakit');
             $table->string('no_tel');
             $table->string('no_wa');
             $table->text('foto');

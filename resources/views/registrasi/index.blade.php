@@ -24,22 +24,51 @@
         background-color: #1ec28b;
     }
 </style>
+
+
+
 <div class="container">
+        @if ($message = Session::get('sukses'))
+            <script type="text/javascript">
+            Swal.fire({
+              icon: "success",
+              title: "{{$message}}",
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            // setTimeout(function () {
+            //                    //redirect
+            //                 }, 1700); 
+            </script>
+        @endif
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
                 <div class="card-header fw-bold bg-header text-white">{{ __('Formulir Registrasi') }}</div>
-                <form action="#" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
+                <form action="{{Route('regis')}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
             @csrf
+
                 <div class="card-body">
+            
+                <div class="mb-3">
+                    <select style="width:100%;" class="form-select" id="school" name="sekolah" required></select>
+                </div>
+                    
                     <div class="fw-bold">Data Peserta</div>
                     <div class="form-floating mb-1">
                         <input type="text" class="form-control form-control-sm" placeholder="" id="nama" name="nama" value="" required>
                         <label for="nama">Nama Lengkap <font size="2" color="red">*</font></label>
                     </div>
+
                     <div class="form-floating mb-1">
                         <input type="text" class="form-control form-control-sm" placeholder="" id="kelas" name="kelas" value="" required>
                         <label for="kelas">Kelas <font size="2" color="red">*</font></label>
+                    </div>
+
+                    <div class="form-floating mb-1">
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nis" name="nis" value="" required>
+                        <label for="nis">Nomor Induk Siswa (NIS) <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
@@ -73,13 +102,13 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm" placeholder="" id="nowa" name="nowa" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nowa" name="nowa" value="" required>
                         <label for="nowa">Nomor Whatsapp<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="input-group custom-file-button mt-1">
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto Peserta <font size="2" color="red">*</font></label>
-                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple required>
                     </div>
                     
                     <div class="mt-3 fw-bold">Data Orang Tua Peserta</div>
@@ -147,6 +176,30 @@ function filterNumericAndDecimal(event) {
     formControl.val(''); //without this the DOT will not go away on my phone!
     formControl.val(newtext);
 });
+</script>
+
+<script>
+$('#school').select2({
+        ajax: {
+            url: "{{route('school')}}",
+            dataType: "json",
+              delay: 250,
+
+processResults: function (data) {
+      // Transforms the top-level key of the response object from 'items' to 'results'
+      return {
+        results: $.map(data, function (item) {
+                        return { text: item.lokasi, id: item.id }
+                    })
+      };
+    }
+},
+maximumSelectionLength: 1,
+placeholder: 'Pilih Nama Sekolah',
+width: 'resolve'
+
+});
+
 </script>
 @endsection
 
