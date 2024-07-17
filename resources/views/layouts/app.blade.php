@@ -33,7 +33,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-green shadow-sm ">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{-- {{ config('app.name', 'Test') }} --}}
+                    <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
