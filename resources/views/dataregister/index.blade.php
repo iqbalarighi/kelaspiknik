@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Data Peserta Registrasi') }}</div>
 
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: auto;">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}

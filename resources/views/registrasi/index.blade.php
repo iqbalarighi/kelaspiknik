@@ -32,14 +32,15 @@
             <script type="text/javascript">
             Swal.fire({
               icon: "success",
-              title: "{{$message}}",
+              title: "Terima Kasih Telah Melakukan Registrasi",
+              text: "{{$message}}",
               showConfirmButton: false,
-              timer: 1500
+              timer: 2000
             });
 
-            // setTimeout(function () {
-            //                    //redirect
-            //                 }, 1700); 
+            setTimeout(function () {
+               window.location.replace("https://www.instagram.com/kelaspiknik/");
+            }, 2500); 
             </script>
         @endif
     <div class="row justify-content-center">
@@ -153,7 +154,7 @@
         form.submit();
         Swal.fire({
             title: "Loading . . . ",
-            text: "Sedang validasi data",
+            text: "Sedang menyimpan data registrasi",
             showConfirmButton: false, 
             allowOutsideClick: false,
               didOpen: () => {
