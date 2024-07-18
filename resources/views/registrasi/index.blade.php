@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="number" class="form-control form-control-sm kontak" placeholder="" id="notel" name="notel" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel" name="notel" value="" required>
                         <label for="notel">Nomor Telepon<font size="2" color="red">*</font></label>
                     </div>
 
@@ -119,12 +119,12 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="number" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_1" name="notel_ortu_1" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_1" name="notel_ortu_1" value="" required>
                         <label for="notel_ortu_1">Nomor Telepon Orang Tua 1<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="number" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_2" name="notel_ortu_2" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_2" name="notel_ortu_2" value="" required>
                         <label for="notel_ortu_2">Nomor Telepon Orang Tua 2<font size="2" color="red">*</font></label>
                     </div>
 

@@ -35,7 +35,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-green shadow-sm ">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="https://kelaspiknik.com">
                     {{-- {{ config('app.name', 'Test') }} --}}
                     <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
                 </a>

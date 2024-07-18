@@ -93,8 +93,9 @@
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading bg-side"><img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
-                </a></div>
+        <div class="sidebar-heading bg-side">
+            <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
+        </div>
             <a href="{{route('home')}}" class="list-group-item list-group-item-action bg-light {{Request::is('dashboard')?'active':''}}">Dashboard</a>
             <a href="{{route('masterdata')}}" class="list-group-item list-group-item-action bg-light {{Request::is('masterdata')?'active':''}}">Master Data</a>
             <a href="{{route('datareg')}}" class="list-group-item list-group-item-action bg-light {{Request::is('datareg')?'active':''}}">Data Registrasi</a>
