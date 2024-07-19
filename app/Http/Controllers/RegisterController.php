@@ -29,7 +29,7 @@ class RegisterController extends Controller
                 $image_name = md5(rand(100, 1000));
                 $ext = strtolower($file->getClientOriginalExtension());
                 $image_full_name = $image_name.'.'.$ext;
-                $image_path = public_path('storage/'.$nod.'/'.$request->nama.'/');
+                $image_path = public_path('storage/registrasi/'.$nod.'/'.$request->nama.'/');
                 $image_url = $image_path.$image_full_name;
                 $file->move($image_path, $image_full_name);
                 $image[] = $image_full_name;

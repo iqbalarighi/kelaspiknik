@@ -204,5 +204,9 @@
 }
 </script>
 
-
+@if(Auth::user()->name == null)
+    <script type="text/javascript">
+        window.location.replace("{{url('/')}}");
+    </script>
+@endif
 </html>

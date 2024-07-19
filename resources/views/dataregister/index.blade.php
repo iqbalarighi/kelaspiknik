@@ -8,12 +8,23 @@
                 <div class="card-header">{{ __('Data Peserta Registrasi') }}</div>
 
                 <div class="card-body" style="overflow-x: auto;">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
+        @if ($message = Session::get('sukses'))
+            <script type="text/javascript">
+            Swal.fire({
+              icon: "success",
+              title: "Berhasil",
+              text: "{{$message}}",
+              showConfirmButton: false,
+              timer: 2000
+            });
+            </script>
+        @endif
+<style type="text/css">
+    th {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
                     <table class="table-striped table-hover" width="100%">
                         <tr>
                             <th>No</th>
@@ -24,6 +35,7 @@
                             <th>Email</th>
                             <th>Alamat</th>
                             <th>Penyakit</th>
+                            <th>Opsi</th>
                         </tr>
                         @foreach($data as $key => $item)
                         <tr>
@@ -35,6 +47,16 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->alamat}}</td>
                             <td>{{$item->penyakit}}</td>
+                            <td align="center" class="d-flex justify-content-between">
+                                <span><a href="/datareg/edit/{{$item->id}}" class="btn btn-primary btn-sm p-1">Ubah</a></span>
+                                <form method="POST" action="/datareg/hapus/{{$item->id}}" onsubmit="return loding(this);">
+                                 @csrf
+                                 @method('DELETE')
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-danger delete-user btn-sm p-1" value="Hapus">
+                                    </div>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </table>
@@ -43,4 +65,35 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+     function loding(form){
+    Swal.fire({
+          title: "Sudah Yakin ?",
+          text: "Data terhapus tidak dapat dikembalikan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Batal",
+          confirmButtonText: "Hapus"
+        }).then((result) => {
+          if (result.isConfirmed) {
+        form.submit();
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang menghapus data registrasi",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });  
+          }
+        });
+    return false;
+ }
+</script>
+
 @endsection

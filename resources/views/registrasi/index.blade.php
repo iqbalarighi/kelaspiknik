@@ -35,12 +35,12 @@
               title: "Terima Kasih Telah Melakukan Registrasi",
               text: "{{$message}}",
               showConfirmButton: false,
-              timer: 2000
+              timer: 2500
             });
 
             setTimeout(function () {
                window.location.replace("https://www.instagram.com/kelaspiknik/");
-            }, 2500); 
+            }, 3500); 
             </script>
         @endif
     <div class="row justify-content-center">

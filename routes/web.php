@@ -41,6 +41,7 @@ Route::controller(RegisterController::class)->group(function () {
 Route::controller(MasterdataController::class)->middleware('auth')->group(function () {
   Route::get('/masterdata', 'index')->name('masterdata');
   Route::post('/school/simpan', 'save');
+  Route::delete('/masterdata/hapus/{id}', 'delete');
 });
   Route::get('/school', [MasterdataController::class, 'school'])->name('school');
 
@@ -48,4 +49,9 @@ Route::get('/tambah-sekolah', function () {
     return view('masterdata.inputsekolah');
 })->name('tambah-sekolah');
 
- Route::get('/datareg', [DataregisterController::class, 'index'])->name('datareg');
+Route::controller(DataregisterController::class)->middleware('auth')->group(function () {
+ Route::get('/datareg', 'index')->name('datareg');
+ Route::get('/datareg/edit/{id}', 'edit');
+ Route::delete('/datareg/hapus/{id}', 'delete');
+
+});

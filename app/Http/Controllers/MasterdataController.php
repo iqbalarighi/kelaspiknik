@@ -9,7 +9,9 @@ class MasterdataController extends Controller
 {
    public function index()
    {
-       return view('masterdata.index');
+    $data = MasterdataModel::latest()->paginate(10);
+
+       return view('masterdata.index', compact('data'));
    }
 
 public function school(Request $request)
@@ -42,4 +44,14 @@ public function save(Request $request)
     return back()
       ->with('sukses', 'Data Sekolah Telah Tersimpan');
  }
+
+   public function delete($id)
+   {
+        $data = MasterdataModel::findOrFail($id);
+        $data->delete();
+
+       return back()
+       ->with('sukses','Data Sekolah Telah Terhapus');
+   }
+
 }
