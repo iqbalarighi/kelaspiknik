@@ -7,6 +7,18 @@
         text-align: center;
     }
 </style>
+
+        @if ($message = Session::get('sukses'))
+            <script type="text/javascript">
+            Swal.fire({
+              icon: "success",
+              title: "Berhasil",
+              text: "{{$message}}",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            </script>
+        @endif
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
