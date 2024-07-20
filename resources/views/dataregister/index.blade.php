@@ -28,6 +28,7 @@
                     <table class="table-striped table-hover" width="100%">
                         <tr>
                             <th>No</th>
+                            <th>No. Registrasi</th>
                             <th>Nama</th>
                             <th>Sekolah</th>
                             <th>Kelas</th>
@@ -40,10 +41,11 @@
                         @foreach($data as $key => $item)
                         <tr>
                             <td>{{$data->firstitem()+$key}}</td>
+                            <td>{{$item->id_reg}}</td>
                             <td>{{$item->nama_lengkap}}</td>
                             <td>{{$item->sekolah}}</td>
                             <td>{{$item->kelas}}</td>
-                            <td>{{$item->ttl}}</td>
+                            <td>{{explode(',', $item->ttl)[0]}}, {{Carbon\Carbon::parse(str_replace(' ', '', explode(',', $item->ttl)[1]))->isoFormat('DD MMMM YYYY')}}</td>
                             <td>{{$item->email}}</td>
                             <td>{{$item->alamat}}</td>
                             <td>{{$item->penyakit}}</td>

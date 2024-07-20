@@ -39,7 +39,7 @@
             });
 
             setTimeout(function () {
-               window.location.replace("https://www.instagram.com/kelaspiknik/");
+               // window.location.replace("https://www.instagram.com/kelaspiknik/");
             }, 3500); 
             </script>
         @endif
@@ -53,80 +53,95 @@
                 <div class="card-body">
             
                 <div class="mb-3">
-                    <select style="width:100%;" class="form-select" id="school" name="sekolah" required></select>
+                    <select style="width:100%;" class="form-contol form-select" id="school" name="sekolah" required>
+                        @if( old('sekolah') )
+                            <option value="{{ old('sekolah') }}" selected>{{ old('sekolah') }}</option>
+                        @endif
+                    </select>
                 </div>
                     
                     <div class="fw-bold">Data Peserta</div>
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm" placeholder="" id="nama" name="nama" value="" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="" id="nama" name="nama" value="{{ old('nama') }}" required>
                         <label for="nama">Nama Lengkap <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm" placeholder="" id="kelas" name="kelas" value="" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="" id="kelas" name="kelas" value="{{ old('kelas') }}" required>
                         <label for="kelas">Kelas <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nis" name="nis" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nis" name="nis" value="{{ old('nis') }}" required>
                         <label for="nis">Nomor Induk Siswa (NIS) <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm" placeholder="" id="tempat" name="tempat" value="" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="" id="tempat" name="tempat" value="{{ old('tempat') }}" required>
                         <label for="tempat">Tempat Lahir<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="date" class="form-control form-control-sm" placeholder="" id="tgl" name="tgl" value="" required>
+                        <input type="date" class="form-control form-control-sm" placeholder="" id="tgl" name="tgl" value="{{ old('tgl') }}" required>
                         <label for="tgl">Tanggal Lahir <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="email" class="form-control form-control-sm" placeholder="" id="email" name="email" value="" required>
+                        <input type="email" class="form-control form-control-sm" placeholder="" id="email" name="email" value="{{ old('email') }}" required>
                         <label for="email">Email<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating ">
-                        <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="alamat" style="height: 100px;" name="alamat" required></textarea>
+                        <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="alamat" style="height: 100px;" name="alamat" required>{{ old('alamat') }}</textarea>
                         <label for="alamat">Alamat Lengkap <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating ">
-                        <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="penyakit" style="height: 100px;" name="penyakit" required></textarea>
+                        <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="penyakit" style="height: 100px;" name="penyakit" required>{{ old('penyakit') }}</textarea>
                         <label for="penyakit">Riwayat Penyakit Khusus <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel" name="notel" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel" name="notel" value="{{ old('notel') }}" required>
                         <label for="notel">Nomor Telepon<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nowa" name="nowa" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nowa" name="nowa" value="{{ old('nowa') }}" required>
                         <label for="nowa">Nomor Whatsapp<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="input-group custom-file-button mt-1">
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto Peserta <font size="2" color="red">*</font></label>
-                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple required>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images" id="foto" value="{{ old('images') }}" required>
                     </div>
+                        @if ($errors->has('images'))
+                           <div><span class="text-danger">{{ $errors->first('images2') }}</span></div>
+                        @endif
                     
                     <div class="mt-3 fw-bold">Data Orang Tua Peserta</div>
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm" placeholder="" id="nm_ortu" name="nm_ortu" value="" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="" id="nm_ortu" name="nm_ortu" value="{{ old('nm_ortu') }}" required>
                         <label for="nm_ortu">Nama Orang Tua (Ibu/Ayah) <font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_1" name="notel_ortu_1" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_1" name="notel_ortu_1" value="{{ old('notel_ortu_1') }}" required>
                         <label for="notel_ortu_1">Nomor Telepon Orang Tua 1<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_2" name="notel_ortu_2" value="" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_2" name="notel_ortu_2" value="{{ old('notel_ortu_2') }}" required>
                         <label for="notel_ortu_2">Nomor Telepon Orang Tua 2<font size="2" color="red">*</font></label>
                     </div>
+
+                    <div class="input-group custom-file-button mt-1">
+                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto2" style="font-size: 10pt;">Upload Surat Pernyataan <font size="2" color="red">*</font></label>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images2" id="foto2" value="{{ old('images2') }}" required>
+                    </div>
+                    @if ($errors->has('images2'))
+                        <div><span class="text-danger">{{ $errors->first('images2') }}</span></div>
+                    @endif
 
                     <div class="text-center mt-2">
                         <button type="submit" class="btn btn-primary ">Kirim</button>
@@ -197,7 +212,8 @@ processResults: function (data) {
 },
 maximumSelectionLength: 1,
 placeholder: 'Pilih Nama Sekolah',
-width: 'resolve'
+width: 'resolve',
+allowClear: true
 
 });
 

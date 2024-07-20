@@ -52,6 +52,8 @@ Route::get('/tambah-sekolah', function () {
 Route::controller(DataregisterController::class)->middleware('auth')->group(function () {
  Route::get('/datareg', 'index')->name('datareg');
  Route::get('/datareg/edit/{id}', 'edit');
+ Route::put('/datareg/update/{id}', 'update');
  Route::delete('/datareg/hapus/{id}', 'delete');
+ Route::get('/datareg/hapus/foto/{id}', 'hapusfoto');
 
 });

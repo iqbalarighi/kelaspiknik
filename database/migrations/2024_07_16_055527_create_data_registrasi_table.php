@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('data_registrasi', function (Blueprint $table) {
             $table->id();
+            $table->string('id_reg', 20)->unique();
             $table->string('sekolah');
             $table->string('nama_lengkap');
             $table->string('kelas');
             $table->string('nis');
             $table->string('ttl');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->text('alamat');
             $table->text('penyakit');
             $table->string('no_tel');

@@ -12,6 +12,7 @@ class RegisterModel extends Model
     protected $table = 'data_registrasi';
 
     protected $fillable = [
+        'id_reg',
         'sekolah',
         'nama_lengkap', 
         'kelas',

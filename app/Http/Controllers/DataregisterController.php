@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RegisterModel;
-use Illuminate\Support\Facades\File;
+use File;
 use Illuminate\Support\Facades\Storage;
 
 class DataregisterController extends Controller
@@ -19,15 +19,64 @@ class DataregisterController extends Controller
    public function edit($id)
    {
       $data = RegisterModel::findOrFail($id);
+// dd();
+      $value = explode(',', $data->ttl);
 
-      dd($data);
+      return view('dataregister.edit', compact('data', 'value'));
    }
+
+   public function update(Request $request, $id)
+   {
+      $data = RegisterModel::findOrFail($id);
+
+      $ttl = $request->tempat.', '. $request->tgl;
+
+      if ($data->foto == null){
+         $files = $request->file('images');
+         $nod = $data->id_reg;
+           $image = [];
+
+           if ($files != null) {
+               foreach ($files as $file) {
+                   $image_name = md5(rand(100, 1000));
+                   $ext = strtolower($file->getClientOriginalExtension());
+                   $image_full_name = $image_name.'.'.$ext;
+                   $image_path = public_path('storage/registrasi/'.$nod.'/');
+                   $image_url = $image_path.$image_full_name;
+                   $file->move($image_path, $image_full_name);
+                   $image[] = $image_full_name;
+               }
+           }
+
+           $data->foto = implode('|', $image);
+      }
+
+      $data->sekolah = $request->sekolah;
+      $data->nama_lengkap = $request->nama;
+      $data->kelas = $request->kelas;
+      $data->nis = $request->nis;
+      $data->ttl = $ttl;
+      $data->penyakit = $request->penyakit;
+      $data->alamat = $request->alamat;
+      $data->email = $request->email;
+      $data->no_tel = $request->notel;
+      $data->no_wa = $request->nowa;
+      $data->nm_ortu = $request->nm_ortu;
+      $data->no_tel_ortu1 = $request->notel_ortu_1;
+      $data->no_tel_ortu2 = $request->notel_ortu_2;
+
+      $data->save();
+
+      return back()
+      ->with('sukses', 'Data Telah Diperbarui');
+   }
+
 
    public function delete($id)
    {
       $data = RegisterModel::findOrFail($id);
 
-         $del = File::deleteDirectory(public_path('storage/registrasi/'.$data->sekolah.'/'.$data->nama_lengkap));
+         $del = File::deleteDirectory(public_path('storage/registrasi/'.$data->id_reg));
       
       if ($del == true) {
             $data->delete();
@@ -35,5 +84,23 @@ class DataregisterController extends Controller
 
        return back()
        ->with('sukses','Data Registrasi Telah Terhapus');
+   }
+
+   public function hapusfoto($id)
+   {
+     $data = RegisterModel::findOrFail($id);
+
+      $del = File::delete(public_path('storage/registrasi/'.$data->id_reg.'/'.$data->foto));
+     
+   if ($del == true){
+      $data->foto = '';
+      $data->save();
+     } else {
+      $data->foto = '';
+      $data->save();
+     }
+
+     return back()
+      ->with('sukses','Foto Peserta Telah Terhapus');
    }
 }
