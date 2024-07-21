@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('nm_ortu');
             $table->string('no_tel_ortu1');
             $table->string('no_tel_ortu2');
+            $table->text('surat');
             $table->timestamps();
         });
     }

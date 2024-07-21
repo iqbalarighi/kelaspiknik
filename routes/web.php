@@ -55,5 +55,6 @@ Route::controller(DataregisterController::class)->middleware('auth')->group(func
  Route::put('/datareg/update/{id}', 'update');
  Route::delete('/datareg/hapus/{id}', 'delete');
  Route::get('/datareg/hapus/foto/{id}', 'hapusfoto');
+ Route::get('/datareg/hapus/surat/{id}', 'hapusurat');
 
 });

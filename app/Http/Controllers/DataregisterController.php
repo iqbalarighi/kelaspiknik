@@ -18,7 +18,7 @@ class DataregisterController extends Controller
 
    public function edit($id)
    {
-      $data = RegisterModel::findOrFail($id);
+      $data = RegisterModel::where('id_reg', $id)->first();
 // dd();
       $value = explode(',', $data->ttl);
 
@@ -32,23 +32,23 @@ class DataregisterController extends Controller
       $ttl = $request->tempat.', '. $request->tgl;
 
       if ($data->foto == null){
-         $files = $request->file('images');
          $nod = $data->id_reg;
-           $image = [];
+         $foto = $request->file('images');
+         $image_name = md5(rand(100, 1000));
+         $ext = strtolower($foto->getClientOriginalExtension());
+         $imageName = $image_name.'.'.$ext;
+         $foto->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $data->foto = $imageName;
+      }
 
-           if ($files != null) {
-               foreach ($files as $file) {
-                   $image_name = md5(rand(100, 1000));
-                   $ext = strtolower($file->getClientOriginalExtension());
-                   $image_full_name = $image_name.'.'.$ext;
-                   $image_path = public_path('storage/registrasi/'.$nod.'/');
-                   $image_url = $image_path.$image_full_name;
-                   $file->move($image_path, $image_full_name);
-                   $image[] = $image_full_name;
-               }
-           }
-
-           $data->foto = implode('|', $image);
+      if ($data->surat == null){
+         $nod = $data->id_reg;
+         $surat = $request->file('images2');
+         $image_name = md5(rand(100, 1000));
+         $ext = strtolower($surat->getClientOriginalExtension());
+         $imageName = $image_name.'.'.$ext;
+         $surat->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $data->surat = $imageName;
       }
 
       $data->sekolah = $request->sekolah;
@@ -102,5 +102,23 @@ class DataregisterController extends Controller
 
      return back()
       ->with('sukses','Foto Peserta Telah Terhapus');
+   }
+
+   public function hapusurat($id)
+   {
+     $data = RegisterModel::findOrFail($id);
+
+      $del = File::delete(public_path('storage/registrasi/'.$data->id_reg.'/'.$data->surat));
+     
+   if ($del == true){
+      $data->surat = '';
+      $data->save();
+     } else {
+      $data->surat = '';
+      $data->save();
+     }
+
+     return back()
+      ->with('sukses','Surat Pernyataan Terhapus');
    }
 }

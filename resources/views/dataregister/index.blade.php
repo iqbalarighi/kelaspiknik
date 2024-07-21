@@ -49,12 +49,12 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->alamat}}</td>
                             <td>{{$item->penyakit}}</td>
-                            <td align="center" class="d-flex justify-content-between">
-                                <span><a href="/datareg/edit/{{$item->id}}" class="btn btn-primary btn-sm p-1">Ubah</a></span>
+                            <td align="center" class="d-flex justify-content-center">
+                                <span class="px-1"><a href="/datareg/edit/{{$item->id_reg}}" class="btn btn-primary btn-sm p-1">Ubah</a></span>
                                 <form method="POST" action="/datareg/hapus/{{$item->id}}" onsubmit="return loding(this);">
                                  @csrf
                                  @method('DELETE')
-                                    <div class="form-group">
+                                    <div class="form-group px-1">
                                         <input type="submit" class="btn btn-danger delete-user btn-sm p-1" value="Hapus">
                                     </div>
                                 </form>

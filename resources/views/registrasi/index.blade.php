@@ -23,11 +23,26 @@
     .bg-header {
         background-color: #1ec28b;
     }
+
+    .select2-selection__placeholder {
+  color: black !important;
+}
 </style>
 
 
 
 <div class="container">
+@if ($errors->any())
+<script type="text/javascript">
+    Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Perhatikan kembali isian formulir, silahkan bertanya jika mengalami kesulitan",
+});
+</script>
+@endif
+
+
         @if ($message = Session::get('sukses'))
             <script type="text/javascript">
             Swal.fire({
@@ -39,7 +54,7 @@
             });
 
             setTimeout(function () {
-               // window.location.replace("https://www.instagram.com/kelaspiknik/");
+               window.location.replace("https://www.instagram.com/kelaspiknik/");
             }, 3500); 
             </script>
         @endif
@@ -115,9 +130,11 @@
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto Peserta <font size="2" color="red">*</font></label>
                         <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images" id="foto" value="{{ old('images') }}" required>
                     </div>
-                        @if ($errors->has('images'))
-                           <div><span class="text-danger">{{ $errors->first('images2') }}</span></div>
-                        @endif
+                @if ($errors->has('images'))
+                    @foreach($errors->get('images') as $err ) 
+                        <div><span class="text-danger">{{$err}}</span></div>
+                    @endforeach
+                @endif
                     
                     <div class="mt-3 fw-bold">Data Orang Tua Peserta</div>
                     <div class="form-floating mb-1">
@@ -139,9 +156,11 @@
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto2" style="font-size: 10pt;">Upload Surat Pernyataan <font size="2" color="red">*</font></label>
                         <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images2" id="foto2" value="{{ old('images2') }}" required>
                     </div>
-                    @if ($errors->has('images2'))
-                        <div><span class="text-danger">{{ $errors->first('images2') }}</span></div>
-                    @endif
+                @if ($errors->has('images2'))
+                    @foreach($errors->get('images2') as $errs ) 
+                        <div><span class="text-danger">{{$errs}}</span></div>
+                    @endforeach
+                @endif
 
                     <div class="text-center mt-2">
                         <button type="submit" class="btn btn-primary ">Kirim</button>
@@ -211,7 +230,8 @@ processResults: function (data) {
     }
 },
 maximumSelectionLength: 1,
-placeholder: 'Pilih Nama Sekolah',
+color: 'black',
+placeholder: 'Nama Sekolah',
 width: 'resolve',
 allowClear: true
 

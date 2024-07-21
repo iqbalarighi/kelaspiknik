@@ -47,12 +47,12 @@
                                     <td>{{$data->firstitem()+$key}}</td>
                                     <td>{{$item->nama_sekolah}}</td>
                                     <td>{{$item->alamat_sekolah}}</td>
-                                    <td align="center" class="d-flex justify-content-between">
-                                        <span><a href="{{route('masterdata')}}/ubah/{{$item->id}}" class="btn btn-primary btn-sm p-1" title="Ubah Data Sekolah">Ubah</a></span>
+                                    <td align="center" class="d-flex justify-content-center">
+                                        <span class="px-1"><a href="{{route('masterdata')}}/ubah/{{$item->id}}" class="btn btn-primary btn-sm p-1" title="Ubah Data Sekolah">Ubah</a></span>
                                         <form method="POST" action="{{route('masterdata')}}/hapus/{{$item->id}}" onsubmit="return loding(this);">
                                          @csrf
                                          @method('DELETE')
-                                            <div class="form-group">
+                                            <div class="form-group px-1">
                                                 <input type="submit" class="btn btn-danger delete-user btn-sm p-1" title="Hapus Data Sekolah" value="Hapus">
                                             </div>
                                         </form>

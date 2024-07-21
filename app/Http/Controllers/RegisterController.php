@@ -22,6 +22,30 @@ class RegisterController extends Controller
 
 //start of validator
 
+$input = request()->all();
+
+    $validator = Validator::make($input, [
+                'images' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'images2' => 'image|mimes:jpeg,png,jpg|max:2048'
+            ],
+            [
+                'images.image' => 'Foto Dokumentasi harus berupa Gambar',
+                'images.mimes' => 'File yang diterima hanya format :values',
+                'images.max' => 'Ukuran Foto melebihi 2048 KB (2 MB)',
+                'images2.image' => 'Foto Dokumentasi harus berupa Gambar',
+                'images2.mimes' => 'File yang diterima hanya format :values',
+                'images2.max' => 'Ukuran Foto melebihi 2048 KB (2 MB)',
+            ]);
+
+    if ($validator->fails()) {
+        $messages = $validator->messages();
+        return back()
+            ->withInput()
+            ->withErrors($messages);
+    }
+
+//end of validator
+
     $year = Carbon::now()->format('Y');
     $month = Carbon::now()->format('m');
     $th = Str::substr($year, -2);
@@ -37,58 +61,26 @@ class RegisterController extends Controller
       $files = $request->file('images');
       $files2 = $request->file('images2');
       $nod = $request->sekolah;
-        // $image = [];
 
-        // if ($files != null) {
-        //     foreach ($files as $file) {
-        //         $image_name = md5(rand(100, 1000));
-        //         $ext = strtolower($file->getClientOriginalExtension());
-        //         $image_full_name = $image_name.'.'.$ext;
-        //         $image_path = public_path('storage/registrasi/'.$nod.'/'.$request->nama.'/');
-        //         $image_url = $image_path.$image_full_name;
-        //         $file->move($image_path, $image_full_name);
-        //         $image[] = $image_full_name;
-        //     }
-        // }
+      if ($files != null){
+         $nod = $data->id_reg;
+         $foto = $request->file('images');
+         $image_name = md5(rand(100, 1000));
+         $ext = strtolower($foto->getClientOriginalExtension());
+         $imageName = $image_name.'.'.$ext;
+         $foto->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $data->foto = $imageName;
+      }
 
-        if ($files != null) {
-                $image_name = md5(rand(10, 100));
-                $ext = strtolower($files->getClientOriginalExtension());
-                $image_full_name = $image_name.'.'.$ext;
-                $image_path = public_path('storage/registrasi/'.$id_reg.'/');
-                $image_url = $image_path.$image_full_name;
-                !is_dir($image_url) && File::makeDirectory($image_path, $mode = 0777, true, true);
-                // ResizeImage::make($files)
-                //      ->orientate()
-                //      ->resize(200, 300)
-                //      ->save($image_path.$image_full_name);
-                $files->move($image_path, $image_full_name);
-                $image = $image_full_name;
-
-                $data->foto = $image;
-        }
-                if ($files2 != null) {
-                $image_name = md5(rand(10, 100));
-                $ext = strtolower($files2->getClientOriginalExtension());
-                $image_full_name = $image_name.'.'.$ext;
-                $image_path = public_path('storage/registrasi/'.$id_reg.'/');
-                $image_url = $image_path.$image_full_name;
-                !is_dir($image_url) && File::makeDirectory($image_path, $mode = 0777, true, true);
-                // ResizeImage::make($files)
-                //      ->orientate()
-                //      ->resize(200, 300)
-                //      ->save($image_path.$image_full_name);
-                $files2->move($image_path, $image_full_name);   
-                $image2 = $image_full_name;
-
-                $data->surat = $image2;
-        }
-
-
-
-
-
-
+      if ($files2 != null){
+         $nod = $data->id_reg;
+         $surat = $request->file('images2');
+         $image_name = md5(rand(100, 1000));
+         $ext = strtolower($surat->getClientOriginalExtension());
+         $imageName = $image_name.'.'.$ext;
+         $surat->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $data->surat = $imageName;
+      }
 
       $data->id_reg = $id_reg;
       $data->sekolah = $request->sekolah;

@@ -5,7 +5,7 @@
 <style>
 .containerx {
   position: relative;
-  width: 30%;
+  width: 50%;
 }
 
 .image {
@@ -153,7 +153,7 @@
                 @if ($data->foto == null)
                    <div class="input-group custom-file-button mt-1">
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto Peserta <font size="2" color="red">*</font></label>
-                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple required>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images" id="foto" required>
                     </div>
                 @else
                     <div style="text-align: left !important;"><b>Foto Peserta</b>:
@@ -168,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                    @endif
+                @endif
 
                     <div class="mt-3 fw-bold" style="text-align: left !important;">Data Orang Tua Peserta</div>
                     <div class="form-floating mb-1">
@@ -186,6 +186,25 @@
                         <label for="notel_ortu_2">Nomor Telepon Orang Tua 2<font size="2" color="red">*</font></label>
                     </div>
 
+                @if ($data->surat == null)
+                   <div class="input-group custom-file-button mt-1">
+                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Surat Pernyataan <font size="2" color="red">*</font></label>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images2" id="foto" required>
+                    </div>
+                @else
+                    <div style="text-align: left !important;"><b>Surat Pernyataan</b>:
+                        <div class="row">
+                            <div class="containerx">
+                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->id_reg}}/{{$data->surat}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
+                                <div class="middle">
+                                    <div class="text">
+                                        <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Foto" onclick="return hapus2(this);"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
                     <div class="text-center mt-2">
                         <button type="submit" class="btn btn-primary ">Kirim</button>
                     </div>
@@ -227,7 +246,7 @@ allowClear: true
 <script type="text/javascript">
      function hapus(form){
     Swal.fire({
-          title: "Sudah Yakin ?",
+          title: "Hapus Foto ?",
           text: "Data terhapus tidak dapat dikembalikan",
           icon: "warning",
           showCancelButton: true,
@@ -241,6 +260,36 @@ allowClear: true
         Swal.fire({
             title: "Loading . . . ",
             text: "Sedang menghapus foto registrasi",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });  
+          }
+        });
+    return false;
+ }
+</script>
+
+<script type="text/javascript">
+     function hapus2(form){
+    Swal.fire({
+          title: "Hapus Surat Pernyataan ?",
+          text: "Data terhapus tidak dapat dikembalikan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Batal",
+          confirmButtonText: "Hapus"
+        }).then((result) => {
+          if (result.isConfirmed) {
+        window.location.href = "{{url('/datareg/hapus/surat/'.$data->id)}}";
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang menghapus surat pernyataan",
             showConfirmButton: false, 
             allowOutsideClick: false,
               didOpen: () => {
