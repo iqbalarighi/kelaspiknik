@@ -42,12 +42,9 @@ Route::controller(MasterdataController::class)->middleware('auth')->group(functi
   Route::get('/masterdata', 'index')->name('masterdata');
   Route::post('/school/simpan', 'save');
   Route::delete('/masterdata/hapus/{id}', 'delete');
+  Route::get('masterdata/tambah', 'input');
 });
-  Route::get('/school', [MasterdataController::class, 'school'])->name('school');
-
-Route::get('/tambah-sekolah', function () {
-    return view('masterdata.inputsekolah');
-})->name('tambah-sekolah');
+  Route::get('/school', [MasterdataController::class, 'school'])->name('school'); //request diluar login
 
 Route::controller(DataregisterController::class)->middleware('auth')->group(function () {
  Route::get('/datareg', 'index')->name('datareg');

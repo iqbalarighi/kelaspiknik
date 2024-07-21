@@ -30,7 +30,7 @@
 
                     <div class="card col-md-6">
                         <div class="card-header p-1">{{ __('Data Sekolah') }}
-                            <a href="{{route('tambah-sekolah')}}"><span class="btn btn-primary float-right btn-sm p-0">Tambah Data</span></a>
+                            <a href="{{route('masterdata')}}/tambah"><span class="btn btn-primary float-right btn-sm p-0">Tambah Data</span></a>
                         </div>
 
                         <div class="card-body">

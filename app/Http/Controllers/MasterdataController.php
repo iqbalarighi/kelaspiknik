@@ -14,6 +14,11 @@ class MasterdataController extends Controller
        return view('masterdata.index', compact('data'));
    }
 
+public function input()
+{
+    return view('masterdata.inputsekolah');
+}
+
 public function school(Request $request)
     {
         $scl = MasterdataModel::where('nama_sekolah', 'LIKE', '%'.$request->get('term'). '%')
