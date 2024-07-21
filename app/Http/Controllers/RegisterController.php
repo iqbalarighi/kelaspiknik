@@ -98,7 +98,7 @@ $input = request()->all();
       $data->save();
 
       return back()
-      ->with('sukses', 'Data Registrasi Anda Telah Tersimpan');
+      ->with('sukses', 'Data Registrasi Anda Telah Tersimpan'); 
    }
    
 }
