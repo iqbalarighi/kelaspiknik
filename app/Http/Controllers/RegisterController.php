@@ -60,25 +60,22 @@ $input = request()->all();
 
       $files = $request->file('images');
       $files2 = $request->file('images2');
-      $nod = $request->sekolah;
 
       if ($files != null){
-         $nod = $data->id_reg;
          $foto = $request->file('images');
          $image_name = md5(rand(100, 1000));
          $ext = strtolower($foto->getClientOriginalExtension());
          $imageName = $image_name.'.'.$ext;
-         $foto->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $foto->move(public_path('storage/registrasi/'.$id_reg.'/'), $imageName);
          $data->foto = $imageName;
       }
 
       if ($files2 != null){
-         $nod = $data->id_reg;
          $surat = $request->file('images2');
          $image_name = md5(rand(100, 1000));
          $ext = strtolower($surat->getClientOriginalExtension());
          $imageName = $image_name.'.'.$ext;
-         $surat->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $surat->move(public_path('storage/registrasi/'.$id_reg.'/'), $imageName);
          $data->surat = $imageName;
       }
 
