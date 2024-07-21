@@ -24,6 +24,10 @@
         vertical-align: middle;
         text-align: center;
     }
+    td {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 </style>
                     <table class="table-striped table-hover" width="100%">
                         <tr>
@@ -49,15 +53,18 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->alamat}}</td>
                             <td>{{$item->penyakit}}</td>
-                            <td align="center" class="d-flex justify-content-center">
-                                <span class="px-1"><a href="/datareg/edit/{{$item->id_reg}}" class="btn btn-primary btn-sm p-1">Ubah</a></span>
-                                <form method="POST" action="/datareg/hapus/{{$item->id}}" onsubmit="return loding(this);">
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <span class="px-1" style="vertical-align: middle; cursor: pointer;" ><a href="/datareg/edit/{{$item->id_reg}}" class="btn btn-primary btn-sm p-1 align-self-center">Ubah</a></span>
+                                <form method="POST" action="/datareg/hapus/{{$item->id}}" onsubmit="return loding(this);" class="m-0">
                                  @csrf
                                  @method('DELETE')
                                     <div class="form-group px-1">
-                                        <input type="submit" class="btn btn-danger delete-user btn-sm p-1" value="Hapus">
+                                        <input type="submit" class="btn btn-danger delete-user btn-sm p-1 align-self-center" value="Hapus" style="vertical-align: middle; cursor: pointer;" >
                                     </div>
                                 </form>
+                            </div>
+
                             </td>
                         </tr>
                         @endforeach
