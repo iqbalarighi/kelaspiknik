@@ -100,6 +100,7 @@
             <a href="{{route('home')}}" class="list-group-item list-group-item-action bg-light {{Request::is('dashboard')?'active':''}}">Dashboard</a>
             <a href="{{route('masterdata')}}" class="list-group-item list-group-item-action bg-light {{Request::is('masterdata')?'active':''}}">Master Data</a>
             <a href="{{route('datareg')}}" class="list-group-item list-group-item-action bg-light {{Request::is('datareg')?'active':''}}">Data Registrasi</a>
+            <a href="{{route('qrcode')}}" class="list-group-item list-group-item-action bg-light {{Request::is('qrcode')?'active':''}}">QR Code</a>
 
             {{-- <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan 

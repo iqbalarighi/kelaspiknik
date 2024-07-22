@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MasterdataController;
 use App\Http\Controllers\DataregisterController;
@@ -42,7 +43,7 @@ Route::controller(MasterdataController::class)->middleware('auth')->group(functi
   Route::get('/masterdata', 'index')->name('masterdata');
   Route::post('/school/simpan', 'save');
   Route::delete('/masterdata/hapus/{id}', 'delete');
-  Route::get('masterdata/tambah', 'input');
+  Route::get('/masterdata/tambah', 'input');
 });
   Route::get('/school', [MasterdataController::class, 'school'])->name('school'); //request diluar login
 
@@ -53,5 +54,12 @@ Route::controller(DataregisterController::class)->middleware('auth')->group(func
  Route::delete('/datareg/hapus/{id}', 'delete');
  Route::get('/datareg/hapus/foto/{id}', 'hapusfoto');
  Route::get('/datareg/hapus/surat/{id}', 'hapusurat');
-
 });
+
+Route::get('/qrcode', function () {
+    return view('qrcode.index');
+})->name('qrcode');
+
+Route::get('/absensi/{id_reg}', [AbsensiController::class, 'absen'])->middleware('auth');
+Route::get('/enkripsi', [AbsensiController::class, 'enkripsi'])->middleware('auth');
+Route::get('/qrgen', [AbsensiController::class, 'qrgen'])->middleware('auth');
