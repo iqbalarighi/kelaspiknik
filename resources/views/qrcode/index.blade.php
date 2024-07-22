@@ -57,7 +57,7 @@
 
 #html5-qrcode-anchor-scan-type-change {
 	text-decoration: none !important;
-	color: #1d9bf0;
+	color: white;
 }
 
 video {
@@ -93,7 +93,7 @@ video {
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Absensi') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -110,6 +110,7 @@ video {
 				    </div>
 </center>
 				    <script src="{{asset('storage/html5-qrcode.min.js')}}"></script>
+				    @if($agent->isDesktop())
 				    <script type="text/javascript">
 				    	// script.js file
 
@@ -141,22 +142,70 @@ domReady(function () {
                 target.style.opacity = '0'
             }
             });
-		  window.location.replace("http://localhost:8000/absensi/" +decodeText, decodeResult);
+		  window.location.replace("{{url('absensi')}}/" +decodeText, decodeResult);
 		
 	}
 
 	let htmlscanner = new Html5QrcodeScanner(
 		"my-qr-reader",
-		{ fps: 10, qrbos: 250 }
+		{ fps: 10, qrbos: 250}, 
+		
 	);
+
 	htmlscanner.render(onScanSuccess);
 });
-
 				    </script>
+				    @else 
+				    <script type="text/javascript">
+				    	// script.js file
+
+function domReady(fn) {
+	if (
+		document.readyState === "complete" ||
+		document.readyState === "interactive"
+	) {
+		setTimeout(fn, 1000);
+	} else {
+		document.addEventListener("DOMContentLoaded", fn);
+	}
+}
+
+domReady(function () {
+
+	// If found you qr code
+	function onScanSuccess(decodeText, decodeResult) {
+		// alert("You Qr is : " + decodeText, decodeResult);
+			$('#html5-qrcode-button-camera-stop').click();
+
+			Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang validasi absensi",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });
+		  window.location.replace("{{url('absensi')}}/" +decodeText, decodeResult);
+		
+	}
+
+	let htmlscanner = new Html5QrcodeScanner(
+		"my-qr-reader",
+		{ fps: 10, qrbos: 250, videoConstraints: {
+                    facingMode: { exact: "environment" },
+                },
+            }, 
+		);
+
+	htmlscanner.render(onScanSuccess);
+});
+				    </script>
+				    @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-

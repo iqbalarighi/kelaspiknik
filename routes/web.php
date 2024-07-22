@@ -56,10 +56,15 @@ Route::controller(DataregisterController::class)->middleware('auth')->group(func
  Route::get('/datareg/hapus/surat/{id}', 'hapusurat');
 });
 
-Route::get('/qrcode', function () {
-    return view('qrcode.index');
-})->name('qrcode');
+// Route::get('/qrcode', function () {
+//     return view('qrcode.index');
+// })->name('qrcode');
 
-Route::get('/absensi/{id_reg}', [AbsensiController::class, 'absen'])->middleware('auth');
-Route::get('/enkripsi', [AbsensiController::class, 'enkripsi'])->middleware('auth');
-Route::get('/qrgen', [AbsensiController::class, 'qrgen'])->middleware('auth');
+
+Route::controller(AbsensiController::class)->middleware('auth')->group(function () {
+Route::get('/qrcode/', 'index')->name('qrcode');
+Route::get('/absensi/{id_reg}', 'absen');
+Route::get('/enkripsi', 'enkripsi');
+Route::get('/qrgen', 'qrgen');
+
+});

@@ -13,8 +13,9 @@
 
         @foreach ($data as $key => $item)
 
+
             <img class="p-1 m-1" id='barcode{{$key}}' 
-                src="https://api.qrserver.com/v1/create-qr-code/?data={{Illuminate\Support\Facades\Crypt::encryptString($item->id_reg)}}&amp;size=300x300" 
+                src="https://api.qrserver.com/v1/create-qr-code/?data={{base64_encode($item->id_reg)}}&amp;size=300x300" 
                 alt="" 
                 title="{{($item->id_reg)}}" 
                 width="100" 
