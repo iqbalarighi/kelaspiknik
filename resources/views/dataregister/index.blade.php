@@ -44,15 +44,15 @@
                         </tr>
                         @foreach($data as $key => $item)
                         <tr>
-                            <td>{{$data->firstitem()+$key}}</td>
-                            <td>{{$item->id_reg}}</td>
-                            <td>{{$item->nama_lengkap}}</td>
-                            <td>{{$item->sekolah}}</td>
-                            <td>{{$item->kelas}}</td>
-                            <td>{{explode(',', $item->ttl)[0]}}, {{Carbon\Carbon::parse(str_replace(' ', '', explode(',', $item->ttl)[1]))->isoFormat('DD MMMM YYYY')}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{$item->alamat}}</td>
-                            <td>{{$item->penyakit}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$data->firstitem()+$key}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->id_reg}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->nama_lengkap}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->sekolah}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->kelas}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{explode(',', $item->ttl)[0]}}, {{Carbon\Carbon::parse(str_replace(' ', '', explode(',', $item->ttl)[1]))->isoFormat('DD MMMM YYYY')}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->email}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->alamat}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->penyakit}}</td>
                             <td>
                                 <div class="d-flex justify-content-center">
                                     <span class="px-1" style="vertical-align: middle; cursor: pointer;" ><a href="/datareg/edit/{{$item->id_reg}}" class="btn btn-primary btn-sm p-1 align-self-center">Ubah</a></span>

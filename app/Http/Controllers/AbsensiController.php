@@ -11,15 +11,20 @@ class AbsensiController extends Controller
 
     public function index()
     {
+        return view('absensi.index');
+    }
+
+    public function qrcode()
+    {
         $agent = new Agent();
 
-        return view('qrcode.index', compact('agent'));
+        return view('absensi.qrcode', compact('agent'));
     }
 
     public function absen($id_reg)
     {
 
-        $decrypted = base64_decode($id_reg);
+        $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
@@ -47,6 +52,6 @@ if ($data == true){
     {
        $data = RegisterModel::latest()->get();
 
-       return view('qrcode.qrgen', compact('data'));
+       return view('absensi.qrgen', compact('data'));
     }
 }

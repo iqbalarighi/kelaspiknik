@@ -121,4 +121,16 @@ class DataregisterController extends Controller
      return back()
       ->with('sukses','Surat Pernyataan Terhapus');
    }
+
+   public function detail($id_reg)
+   {
+      $data = RegisterModel::where('id_reg', $id_reg)->first();
+
+      $item = explode(',', $data->ttl);
+
+      // dd($item[0]);
+
+      return view('dataregister.detail', compact('data', 'item'));
+   }
+
 }

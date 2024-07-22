@@ -54,6 +54,7 @@ Route::controller(DataregisterController::class)->middleware('auth')->group(func
  Route::delete('/datareg/hapus/{id}', 'delete');
  Route::get('/datareg/hapus/foto/{id}', 'hapusfoto');
  Route::get('/datareg/hapus/surat/{id}', 'hapusurat');
+ Route::get('/datareg/detail/{id_reg}', 'detail');
 });
 
 // Route::get('/qrcode', function () {
@@ -62,7 +63,8 @@ Route::controller(DataregisterController::class)->middleware('auth')->group(func
 
 
 Route::controller(AbsensiController::class)->middleware('auth')->group(function () {
-Route::get('/qrcode/', 'index')->name('qrcode');
+Route::get('/qrcode/', 'qrcode')->name('qrcode');
+Route::get('/absensi', 'index')->name('absensi');
 Route::get('/absensi/{id_reg}', 'absen');
 Route::get('/enkripsi', 'enkripsi');
 Route::get('/qrgen', 'qrgen');
