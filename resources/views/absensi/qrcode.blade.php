@@ -142,7 +142,12 @@ domReady(function () {
                 target.style.opacity = '0'
             }
             });
-		  window.location.replace("{{url('absensi')}}/" +decodeText, decodeResult);
+            setTimeout(
+			  function() 
+			  {
+					window.location.replace("{{url('absensi')}}/" +decodeText, decodeResult);
+			}, 2000);
+
 		
 	}
 
@@ -175,6 +180,7 @@ domReady(function () {
 	// If found you qr code
 	function onScanSuccess(decodeText, decodeResult) {
 		// alert("You Qr is : " + decodeText, decodeResult);
+			$('#html5-qrcode-button-camera-stop').click();
 
 			Swal.fire({
             title: "Loading . . . ",
@@ -182,16 +188,15 @@ domReady(function () {
             showConfirmButton: false, 
             allowOutsideClick: false,
               didOpen: () => {
-              	$('#html5-qrcode-button-camera-stop').click();
                 Swal.showLoading();
                 target.style.opacity = '0'
             }
             });
-
-setTimeout(function(){
+            setTimeout(
+			  function() 
+			  {
 					window.location.replace("{{url('absensi')}}/" +decodeText, decodeResult);
-},5000); 
-
+			}, 2000);
 		
 	}
 
