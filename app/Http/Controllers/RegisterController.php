@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use App\Models\RegisterModel;
+use App\Models\MasterdataModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Helpers\Helper;
@@ -12,11 +13,26 @@ use File;
 
 class RegisterController extends Controller
 {
-   public function form(){
-       return view('registrasi.index');
+   public function form(Request $request){
+
+    // dd(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 5));
+    $kode = $request->kode_trip;
+
+      if($kode != null){
+        $data = MasterdataModel::where('kode_trip', $kode)->first();
+            
+            if($data == null){
+                return back()
+                ->with('error', 'Kode Trip Tidak Ditemukan');
+            }
+       return view('registrasi.index', compact('data', 'kode'));
+      } else {
+        $data = null;
+        return view('registrasi.index', compact('data'));
+      }
    }
 
-   public function save(Request $request)
+   public function save(Request $request, $kode)
    {
 
 
@@ -66,7 +82,7 @@ $input = request()->all();
          $image_name = md5(rand(100, 1000));
          $ext = strtolower($foto->getClientOriginalExtension());
          $imageName = $image_name.'.'.$ext;
-         $foto->move(public_path('storage/registrasi/'.$id_reg.'/'), $imageName);
+         $foto->move(public_path('storage/registrasi/'.$kode.'/'.$id_reg.'/'), $imageName);
          $data->foto = $imageName;
       }
 
@@ -75,15 +91,15 @@ $input = request()->all();
          $image_name = md5(rand(100, 1000));
          $ext = strtolower($surat->getClientOriginalExtension());
          $imageName = $image_name.'.'.$ext;
-         $surat->move(public_path('storage/registrasi/'.$id_reg.'/'), $imageName);
+         $surat->move(public_path('storage/registrasi/'.$kode.'/'.$id_reg.'/'), $imageName);
          $data->surat = $imageName;
       }
 
       $data->id_reg = $id_reg;
+      $data->kode_trip = $kode;
       $data->sekolah = $request->sekolah;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;
-      $data->nis = $request->nis;
       $data->ttl = $ttl;
       $data->penyakit = $request->penyakit;
       $data->alamat = $request->alamat;

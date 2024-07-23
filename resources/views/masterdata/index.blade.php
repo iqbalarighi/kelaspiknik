@@ -38,15 +38,17 @@
                             <table style="width: 100%;" class="table-stripped table-hover">
                                 <tr>
                                     <th>No</th>
+                                    <th>Kode Trip</th>
+                                    <th>Judul Trip</th>
                                     <th>Nama Sekolah</th>
-                                    <th>Alamat</th>
                                     <th>Opsi</th>
                                 </tr>
                                 @foreach($data as $key=>$item)
                                 <tr>
                                     <td>{{$data->firstitem()+$key}}</td>
+                                    <td>{{$item->kode_trip}}</td>
+                                    <td>{{$item->judul_trip}}</td>
                                     <td>{{$item->nama_sekolah}}</td>
-                                    <td>{{$item->alamat_sekolah}}</td>
                                     <td align="center" class="d-flex justify-content-center">
                                         <span class="px-1"><a href="{{route('masterdata')}}/ubah/{{$item->id}}" class="btn btn-primary btn-sm p-1" title="Ubah Data Sekolah">Ubah</a></span>
                                         <form method="POST" action="{{route('masterdata')}}/hapus/{{$item->id}}" onsubmit="return loding(this);">

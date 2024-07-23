@@ -32,6 +32,7 @@
                     <table class="table-striped table-hover" width="100%">
                         <tr>
                             <th>No</th>
+                            <th>Kode Trip</th>
                             <th>No. Registrasi</th>
                             <th>Nama</th>
                             <th>Sekolah</th>
@@ -45,6 +46,7 @@
                         @foreach($data as $key => $item)
                         <tr>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$data->firstitem()+$key}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->kode_trip}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->id_reg}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->nama_lengkap}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->sekolah}}</td>

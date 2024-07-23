@@ -22,11 +22,11 @@
         <td>:</td>
         <td>{{$data->nama_lengkap}}</td>
     </tr>
-    <tr>
+{{--     <tr>
         <td>NIS</td>
         <td>:</td>
         <td>{{$data->nis}}</td>
-    </tr>
+    </tr> --}}
     <tr>
         <td>Kelas</td>
         <td>:</td>
@@ -60,7 +60,7 @@
     <tr>
         <td>Foto</td>
         <td>:</td>
-        <td> <img src="{{asset('storage/registrasi/'.$data->id_reg.'/'.$data->foto)}}" width="300px"> </td>
+        <td> <img src="{{asset('storage/registrasi/'.$data->kode_trip.'/'.$data->id_reg.'/'.$data->foto)}}" width="300px"> </td>
     </tr>
     <tr>
         <td>Nama Orang Tua</td>
@@ -80,7 +80,7 @@
     <tr>
         <td>Surat Pernyataan</td>
         <td>:</td>
-        <td> <img src="{{asset('storage/registrasi/'.$data->id_reg.'/'.$data->surat)}}" width="300px"> </td>
+        <td> <img src="{{asset('storage/registrasi/'.$data->kode_trip.'/'.$data->id_reg.'/'.$data->surat)}}" width="300px"> </td>
     </tr>
 </table>
                 </div>

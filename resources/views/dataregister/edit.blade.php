@@ -159,7 +159,7 @@
                     <div style="text-align: left !important;"><b>Foto Peserta</b>:
                         <div class="row">
                             <div class="containerx">
-                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->id_reg}}/{{$data->foto}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
+                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->kode_trip}}/{{$data->id_reg}}/{{$data->foto}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
                                 <div class="middle">
                                     <div class="text">
                                         <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Foto" onclick="return hapus(this);"></i>
@@ -195,7 +195,7 @@
                     <div style="text-align: left !important;"><b>Surat Pernyataan</b>:
                         <div class="row">
                             <div class="containerx">
-                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->id_reg}}/{{$data->surat}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
+                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->kode_trip}}/{{$data->id_reg}}/{{$data->surat}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
                                 <div class="middle">
                                     <div class="text">
                                         <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Foto" onclick="return hapus2(this);"></i>

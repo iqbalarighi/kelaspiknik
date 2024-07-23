@@ -42,6 +42,16 @@
 </script>
 @endif
 
+@if ($message = Session::get('error'))
+<script type="text/javascript">
+    Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "{{$message}}",
+});
+</script>
+@endif
+
 
         @if ($message = Session::get('sukses'))
             <script type="text/javascript">
@@ -61,19 +71,46 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
-                <div class="card-header fw-bold bg-header text-white">{{ __('Formulir Registrasi') }}</div>
-                <form action="{{Route('regis')}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
-            @csrf
+                <div class="card-body">   
+                    @if($data != null)
+                        <div class="card-header fw-bold bg-header text-white">{{ __('Formulir Registrasi') }}
+                            <a href="{{route('data-register')}}"><span class="btn btn-secondary float-end btn-sm">Kembali</span></a>
+                        </div>
+                    @else
+                        <div class="card-header fw-bold bg-header text-white">{{ __('Input Kode Trip') }}</div>
+                    @endif
 
-                <div class="card-body">
-            
-                <div class="mb-3">
-                    <select style="width:100%;" class="form-contol form-select" id="school" name="sekolah" required>
-                        @if( old('sekolah') )
-                            <option value="{{ old('sekolah') }}" selected>{{ old('sekolah') }}</option>
-                        @endif
-                    </select>
-                </div>
+                    @if($data == null)
+                    <form action="" method="GET">
+                        <div class="form-floating mb-1">
+                            <input type="text" class="form-control form-control-sm" maxlength="5" placeholder="" id="kode_trip" name="kode_trip" value="{{ old('kode_trip') }}" required>
+                            <label for="kode_trip">Input Kode Trip</label>
+                        </div>
+{{--                         <select class="form-select form-select-sm" >
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                            <option>Bis 1</option>
+                        </select> --}}
+
+                        <div class="text-center mt-2">
+                            <button type="submit" class="btn btn-primary ">Kirim</button>
+                        </div>
+                    </form>
+                        @else
+                   
+                    <form action="{{url('regis')}}/{{$kode}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
+                @csrf
+                    <div class="mb-3 mt-1">
+                        <input type="text" class="form-control form-control-sm" placeholder="" id="sekolah" name="sekolah" value="{{$data->nama_sekolah}}" required readonly>
+                    </div>
                     
                     <div class="fw-bold">Data Peserta</div>
                     <div class="form-floating mb-1">
@@ -86,10 +123,10 @@
                         <label for="kelas">Kelas <font size="2" color="red">*</font></label>
                     </div>
 
-                    <div class="form-floating mb-1">
+{{--                     <div class="form-floating mb-1">
                         <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nis" name="nis" value="{{ old('nis') }}" required>
                         <label for="nis">Nomor Induk Siswa (NIS) <font size="2" color="red">*</font></label>
-                    </div>
+                    </div> --}}
 
                     <div class="form-floating mb-1">
                         <input type="text" class="form-control form-control-sm" placeholder="" id="tempat" name="tempat" value="{{ old('tempat') }}" required>
@@ -97,7 +134,7 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="date" class="form-control form-control-sm" placeholder="" id="tgl" name="tgl" value="{{ old('tgl') }}" required>
+                        <input type="date" class="form-control form-control-sm" placeholder="" id="tgl" name="tgl" min="1980-01-01" max="{{Carbon\Carbon::now()->addYear(-6)->format('Y-m-d')}}" value="{{ old('tgl') }}" required>
                         <label for="tgl">Tanggal Lahir <font size="2" color="red">*</font></label>
                     </div>
 
@@ -117,12 +154,12 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel" name="notel" value="{{ old('notel') }}" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" onblur="checkLength(this)" maxlength="15" id="notel" name="notel" value="{{ old('notel') }}" required>
                         <label for="notel">Nomor Telepon<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nowa" name="nowa" value="{{ old('nowa') }}" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" onblur="checkLength(this)" maxlength="15" id="nowa" name="nowa" value="{{ old('nowa') }}" required>
                         <label for="nowa">Nomor Whatsapp<font size="2" color="red">*</font></label>
                     </div>
 
@@ -143,12 +180,12 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_1" name="notel_ortu_1" value="{{ old('notel_ortu_1') }}" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" onblur="checkLength(this)" maxlength="15" id="notel_ortu_1" name="notel_ortu_1" value="{{ old('notel_ortu_1') }}" required>
                         <label for="notel_ortu_1">Nomor Telepon Orang Tua 1<font size="2" color="red">*</font></label>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="notel_ortu_2" name="notel_ortu_2" value="{{ old('notel_ortu_2') }}" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" onblur="checkLength(this)" maxlength="15" id="notel_ortu_2" name="notel_ortu_2" value="{{ old('notel_ortu_2') }}" required>
                         <label for="notel_ortu_2">Nomor Telepon Orang Tua 2<font size="2" color="red">*</font></label>
                     </div>
 
@@ -165,8 +202,9 @@
                     <div class="text-center mt-2">
                         <button type="submit" class="btn btn-primary ">Kirim</button>
                     </div>
-                </div>
                 </form>
+                 @endif
+                </div>
             </div>
         </div>
     </div>
@@ -174,15 +212,30 @@
 
 <script type="text/javascript">
  function loding(form){
+    console.log($('#notel').val().length);
+    if ($('#notel').val().length < 10) {
+        $('#notel').focus();
+        return false;
+    } else if ($('#nowa').val().length < 10) {
+        $('#nowa').focus();
+        return false;
+    } else if ($('#notel_ortu_1').val().length < 10) {
+        $('#notel_ortu_1').focus();
+        return false;
+    } else if ($('#notel_ortu_2').val().length < 10) {
+        $('#notel_ortu_2').focus();
+        return false;
+    } else {
+
     Swal.fire({
-          title: "Sudah Yakin ?",
+          title: "Siap Tour Bersama Kelas Piknik ?",
           text: "Pastikan seluruh data benar dan lengkap",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          cancelButtonText: "Batal",
-          confirmButtonText: "Kirim"
+          cancelButtonText: "Tidak",
+          confirmButtonText: "Ya, Saya Siap"
         }).then((result) => {
           if (result.isConfirmed) {
         form.submit();
@@ -200,6 +253,8 @@
         });
     return false;
  }
+
+ }
 </script>
 
 <script>
@@ -213,7 +268,18 @@ function filterNumericAndDecimal(event) {
 });
 </script>
 
-<script>
+<script type="text/javascript">
+    function checkLength(el) {
+  if (el.value.length < 10) {
+        Swal.fire({
+          icon: "warning",
+          title: "Peringatan",
+          text: "Nomor Anda kurang dari 10 angka",
+        });
+  }
+}
+</script>
+{{-- <script>
 $('#school').select2({
         ajax: {
             url: "{{route('school')}}",
@@ -237,7 +303,7 @@ allowClear: true
 
 });
 
-</script>
+</script> --}}
 @endsection
 
 

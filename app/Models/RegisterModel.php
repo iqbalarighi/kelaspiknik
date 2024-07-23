@@ -13,10 +13,10 @@ class RegisterModel extends Model
 
     protected $fillable = [
         'id_reg',
+        'kode_trip',
         'sekolah',
         'nama_lengkap', 
         'kelas',
-        'nis',
         'ttl',
         'penyakit',
         'alamat',

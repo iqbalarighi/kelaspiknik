@@ -36,8 +36,9 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middle
 
 Route::controller(RegisterController::class)->group(function () {
   Route::get('/', 'form')->name('data-register');
-  Route::post('/regis', 'save')->name('regis');
+  Route::post('/regis/{kode}', 'save');
 });
+  Route::get('/school', [MasterdataController::class, 'school'])->name('school'); //request diluar login
 
 Route::controller(MasterdataController::class)->middleware('auth')->group(function () {
   Route::get('/masterdata', 'index')->name('masterdata');
@@ -45,7 +46,6 @@ Route::controller(MasterdataController::class)->middleware('auth')->group(functi
   Route::delete('/masterdata/hapus/{id}', 'delete');
   Route::get('/masterdata/tambah', 'input');
 });
-  Route::get('/school', [MasterdataController::class, 'school'])->name('school'); //request diluar login
 
 Route::controller(DataregisterController::class)->middleware('auth')->group(function () {
  Route::get('/datareg', 'index')->name('datareg');

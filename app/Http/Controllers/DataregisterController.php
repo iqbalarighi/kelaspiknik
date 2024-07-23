@@ -30,24 +30,24 @@ class DataregisterController extends Controller
       $data = RegisterModel::findOrFail($id);
 
       $ttl = $request->tempat.', '. $request->tgl;
+      $nod = $data->id_reg;
+      $kod = $data->kode_trip;
 
       if ($data->foto == null){
-         $nod = $data->id_reg;
          $foto = $request->file('images');
          $image_name = md5(rand(100, 1000));
          $ext = strtolower($foto->getClientOriginalExtension());
          $imageName = $image_name.'.'.$ext;
-         $foto->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $foto->move(public_path('storage/registrasi/'.$kod.'/'.$nod.'/'), $imageName);
          $data->foto = $imageName;
       }
 
       if ($data->surat == null){
-         $nod = $data->id_reg;
          $surat = $request->file('images2');
          $image_name = md5(rand(100, 1000));
          $ext = strtolower($surat->getClientOriginalExtension());
          $imageName = $image_name.'.'.$ext;
-         $surat->move(public_path('storage/registrasi/'.$nod.'/'), $imageName);
+         $surat->move(public_path('storage/registrasi/'.$kod.'/'.$nod.'/'), $imageName);
          $data->surat = $imageName;
       }
 
@@ -76,7 +76,7 @@ class DataregisterController extends Controller
    {
       $data = RegisterModel::findOrFail($id);
 
-         $del = File::deleteDirectory(public_path('storage/registrasi/'.$data->id_reg));
+         $del = File::deleteDirectory(public_path('storage/registrasi/'.$data->kode_trip.'/'.$data->id_reg));
       
       if ($del == true) {
             $data->delete();
@@ -90,7 +90,7 @@ class DataregisterController extends Controller
    {
      $data = RegisterModel::findOrFail($id);
 
-      $del = File::delete(public_path('storage/registrasi/'.$data->id_reg.'/'.$data->foto));
+      $del = File::delete(public_path('storage/registrasi/'.$data->kode_trip.'/'.$data->id_reg.'/'.$data->foto));
      
    if ($del == true){
       $data->foto = '';

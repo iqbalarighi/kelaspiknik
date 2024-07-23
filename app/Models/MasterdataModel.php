@@ -9,10 +9,11 @@ class MasterdataModel extends Model
 {
     use HasFactory;
 
-     protected $table = 'sekolah';
+     protected $table = 'trip';
 
     protected $fillable = [
-        'nama_sekolah',
-        'alamat_sekolah'
+        'kode_trip',
+        'judul_trip',
+        'nama_sekolah'
     ];
 }
