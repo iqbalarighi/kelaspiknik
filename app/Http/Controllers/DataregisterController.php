@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RegisterModel;
+use App\Models\TripModel;
 use File;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,10 +20,10 @@ class DataregisterController extends Controller
    public function edit($id)
    {
       $data = RegisterModel::where('id_reg', $id)->first();
-// dd();
+      $jmlh = TripModel::where('kode_trip', $data->kode_trip)->first();
       $value = explode(',', $data->ttl);
 
-      return view('dataregister.edit', compact('data', 'value'));
+      return view('dataregister.edit', compact('data', 'value', 'jmlh'));
    }
 
    public function update(Request $request, $id)

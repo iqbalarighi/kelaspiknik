@@ -16,11 +16,20 @@ class AbsensiController extends Controller
         $absen = $request->absen;
         $kode_trip = $request->kode_trip;
         $debus = $request->bus;
-
         $agent = new Agent();
-        if($request->kode_trip != null){
-        $data = RegisterModel::where('kode_trip', $request->kode_trip)
-                    ->where('bus', $request->bus)
+
+        if($request->kode_trip != null && $request->bus == null){
+            $data = RegisterModel::where('kode_trip', $request->kode_trip)
+                    // ->orWhere('bus', $request->bus)
+                    ->paginate(15);
+
+            $bus = TripModel::where('kode_trip', $request->kode_trip)->get('jumlah_bus');
+            $kode = TripModel::get('kode_trip');
+
+            return view('absensi.index', compact('data', 'bus', 'kode_trip', 'debus', 'kode', 'agent', 'absen'));
+        } elseif($request->kode_trip != null && $request->bus != null){
+            $data = RegisterModel::where('kode_trip', $request->kode_trip)
+                    ->Where('bus', $request->bus)
                     ->paginate(15);
 
             $bus = TripModel::where('kode_trip', $request->kode_trip)->get('jumlah_bus');
@@ -68,12 +77,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen1 == null){
             $data->absen1 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -103,12 +112,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen2 == null){
             $data->absen2 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -138,12 +147,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen3 == null){
             $data->absen3 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -173,12 +182,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen4 == null){
             $data->absen4 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -208,12 +217,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen5 == null){
             $data->absen5 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -243,12 +252,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen6 == null){
             $data->absen6 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -278,12 +287,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen7 == null){
             $data->absen7 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -313,12 +322,12 @@ class AbsensiController extends Controller
         $decrypted = base64_decode(base64_decode($id_reg));
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
+
+    if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-
-    if ($data == true){
         if($data->absen8 == null){
             $data->absen8 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();

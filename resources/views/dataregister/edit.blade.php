@@ -98,6 +98,14 @@
                         <option value="{{$data->sekolah}}" selected>{{$data->sekolah}}</option>
                     </select>
                 </div>
+
+                <div class="mb-3 mt-1">
+                    <div style="text-align: left !important;" >Kendaraan : {{$data->bus}}</div>
+                    <select class="form-select form-select-sm" name="bus" id="bus" required>
+                         <option value="" selected >Pilih Bus</option>
+                    </select>
+                    <center><span id="hasil"></span></center>
+                </div>
                     
                     <div class="fw-bold" style="text-align: left !important;">Data Peserta</div>
                     <div class="form-floating mb-1">
@@ -302,5 +310,47 @@
         });
     return false;
  }
+</script>
+
+    <script type="text/javascript">
+(function() {
+    var elm = document.getElementById('bus'),
+        df = document.createDocumentFragment();
+    for (var i = 1; i <= {{$jmlh->jumlah_bus}}; i++) {
+        var option = document.createElement('option');
+        option.value = "Bus " + i;
+        option.appendChild(document.createTextNode("Bus " + i));
+        df.appendChild(option);
+    }
+    elm.appendChild(df);
+}());
+    </script>
+
+
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+
+<script type="text/javascript">
+
+    $('#bus').on('change', function() {
+    $value = $(this).val();
+    $kode = '{{$data->kode_trip}}';
+    
+    $.ajax({
+        type : 'get',
+        url : '{{route('bus')}}',
+        data:{'bus':$value, 'kode':$kode},
+        
+        success:function(data){
+            console.log(data);
+            if(data.bus < 45){
+        $('#hasil').html(data.bus2 +' masih tersedia <i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i>').css("color","green");
+    } else {
+        $('#hasil').html(data.bus2 +' tidak tersedia <i style="font-size:15pt;" class="bi bi-x-circle-fill ps-3"></i>').css("color","red");
+        $('#bus').val('');
+    }
+
+        }
+    });
+});
 </script>
 @endsection

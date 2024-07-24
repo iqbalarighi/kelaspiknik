@@ -115,7 +115,7 @@
             <a href="{{route('home')}}" class="list-group-item list-group-item-action bg-light {{Request::is('dashboard')?'active':''}}">Dashboard</a>
             <a href="{{route('datareg')}}" class="list-group-item list-group-item-action bg-light {{Request::is('datareg')?'active':''}}">Data Registrasi</a>
             <a href="{{route('absensi')}}" class="list-group-item list-group-item-action bg-light {{Request::is('absensi')?'active':''}}">Data Absensi</a>
-            <a href="{{route('qrcode')}}" class="list-group-item list-group-item-action bg-light {{Request::is('qrcode')?'active':''}}">QR Scanner</a>
+            {{-- <a href="{{route('qrcode')}}" class="list-group-item list-group-item-action bg-light {{Request::is('qrcode')?'active':''}}">QR Scanner</a> --}}
 
 
         </div>
