@@ -218,30 +218,7 @@
     </div>
 </div>
 
-<script>
-$('#school').select2({
-        ajax: {
-            url: "{{route('school')}}",
-            dataType: "json",
-              delay: 250,
 
-processResults: function (data) {
-      // Transforms the top-level key of the response object from 'items' to 'results'
-      return {
-        results: $.map(data, function (item) {
-                        return { text: item.lokasi, id: item.id }
-                    })
-      };
-    }
-},
-maximumSelectionLength: 1,
-placeholder: 'Pilih Nama Sekolah',
-width: 'resolve',
-allowClear: true
-
-});
-
-</script>
 
 <script type="text/javascript">
      function hapus(form){
