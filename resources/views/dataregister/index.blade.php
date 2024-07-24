@@ -33,6 +33,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kode Trip</th>
+                            <th>Bus</th>
                             <th>No. Registrasi</th>
                             <th>Nama</th>
                             <th>Sekolah</th>
@@ -47,6 +48,7 @@
                         <tr>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$data->firstitem()+$key}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->kode_trip}}</td>
+                            <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->bus}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->id_reg}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->nama_lengkap}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->sekolah}}</td>
@@ -56,17 +58,22 @@
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->alamat}}</td>
                             <td onclick="window.location.href='{{route('datareg')}}/detail/{{$item->id_reg}}'" style="cursor: pointer;" title="klik untuk lihat detail">{{$item->penyakit}}</td>
                             <td>
-                                <div class="d-flex justify-content-center">
-                                    <span class="px-1" style="vertical-align: middle; cursor: pointer;" ><a href="/datareg/edit/{{$item->id_reg}}" class="btn btn-primary btn-sm p-1 align-self-center">Ubah</a></span>
-                                <form method="POST" action="/datareg/hapus/{{$item->id}}" onsubmit="return loding(this);" class="m-0">
-                                 @csrf
-                                 @method('DELETE')
-                                    <div class="form-group px-1">
-                                        <input type="submit" class="btn btn-danger delete-user btn-sm p-1 align-self-center" value="Hapus" style="vertical-align: middle; cursor: pointer;" >
+                                <div style="display: flex;">
+                                    <div class="px-1">
+                                        <a href="/datareg/edit/{{$item->id_reg}}"  hidden>
+                                            <button id="{{$data->firstitem() + $key}}" type="submit" title="Ubah Data"></button>
+                                        </a>
+                                            <label for="{{$data->firstitem() + $key}}" class="bi bi-pencil-fill bg-warning btn-sm align-self-center m-0" style="cursor: pointer;"></label>
                                     </div>
-                                </form>
-                            </div>
-
+                                    <div class="px-1">    
+                                        <form action="/datareg/hapus/{{$item->id}}" method="post" onsubmit="return loding(this);">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button id="del{{$data->firstitem() + $key}}" type="submit" title="Hapus Data Sekolah" hidden></button>
+                                                <label for="del{{$data->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center m-0" style="cursor: pointer;"></label>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

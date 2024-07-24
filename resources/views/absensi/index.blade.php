@@ -7,19 +7,439 @@
             <div class="card">
                 <div class="card-header">{{ __('Absensi') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                <div class="card-body" style="overflow-x: auto;">
+        @if ($message = Session::get('sukses'))
+            <script type="text/javascript">
+            Swal.fire({
+              icon: "success",
+              title: "Berhasil",
+              text: "{{$message}}",
+              showConfirmButton: false,
+              timer: 2000
+            });
+            </script>
+        @endif
+<style type="text/css">
+    th {
+        vertical-align: middle;
+        text-align: center;
+    }
+    td {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
+<style type="text/css">
+    /* style.css file*/
+.containers {
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 5px;
+}
 
-                    {{ __('Ini Halaman Absensi!') }}
+.containers h1 {
+    color: #ffffff;
+}
 
-                    Parameter pakai batch trip.
+.sections {
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1.5px solid #b2b2b2;
+    border-radius: 0.25em;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25);
+}
+
+#my-qr-reader {
+    padding: 20px !important;
+    border: 1.5px solid #b2b2b2 !important;
+    border-radius: 8px;
+}
+
+#my-qr-reader img[alt="Info icon"] {
+    display: none;
+}
+
+#my-qr-reader img[alt="Camera based scan"] {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.html5-qrcode-element {
+    padding: 10px 20px;
+    border: 1px solid #b2b2b2;
+    outline: none;
+    border-radius: 0.25em;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    background-color: #008000ad;
+    transition: 0.3s background-color;
+}
+
+.html5-qrcode-element:hover {
+    background-color: #008000;
+}
+
+#html5-qrcode-anchor-scan-type-change {
+    text-decoration: none !important;
+    color: white;
+}
+
+video {
+    width: 100% !important;
+    border: 1px solid #b2b2b2 !important;
+    border-radius: 0.25em;
+}
+
+</style>
+
+        @if ($message = Session::get('error'))
+        <script type="text/javascript">
+            Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "{{$message}}",
+        });
+        </script>
+        @endif
+
+        @if ($message = Session::get('sukses'))
+            <script type="text/javascript">
+            
+            Swal.fire({
+              // icon: "success",
+              title: "Berhasil",
+              text: "{{$message}}",
+              imageUrl: "{{asset('storage/registrasi/'.Session::get('kode').'/'.Session::get('idre').'/'.Session::get('foto'))}}",
+              imageWidth: 300,
+              showConfirmButton: true,
+              allowOutsideClick: false,
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                    $('#scan').click();
+                    $('#html5-qrcode-button-camera-stop').click();
+                  } 
+                });
+            </script>
+        @endif
+
+        @if ($message = Session::get('warning'))
+            <script type="text/javascript">
+            
+            Swal.fire({
+              icon: "warning",
+              title: "Perhatian",
+              text: "{{$message}}",
+              showConfirmButton: true,
+              allowOutsideClick: false,
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                    $('#scan').click();
+                    $('#html5-qrcode-button-camera-stop').click();
+                  } 
+                });
+            </script>
+        @endif
+        <div class="col-sm-5 mb-2">
+            <form action="" method="GET" >
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <select class="form-select form-select-sm" name="kode_trip" onchange="form.submit()">
+                                @if($data == null)
+                                    <option value="" disabled selected>Pilih Kode Trip</option>
+                                    @foreach($kode as $item)
+                                        <option value="{{$item->kode_trip}}">{{$item->kode_trip}}</option>
+                                    @endforeach
+                                @else
+                                    <option value="{{$kode_trip}}" selected>{{$kode_trip}}</option>
+                                    @foreach($kode as $item)
+                                        <option value="{{$item->kode_trip}}">{{$item->kode_trip}}</option>
+                                    @endforeach
+                                @endif
+                                </select>
+                            </td>
+
+                            @if($data != null)
+                            <td>
+                                    <select class="form-select form-select-sm" name="bus" id="bus" required onchange="form.submit()">
+                                         @if($debus == null)
+                                            <option value="" selected disabled>Pilih Bus</option>
+                                         @else
+                                            <option value="{{$debus}}" selected>{{$debus}}</option>
+                                         @endif
+                                    </select>
+                            </td>
+                                @endif
+
+                            @if($data != null)
+                            <td>
+                                    <select class="form-select form-select-sm" name="absen" id="absen" required onload="urls()" onchange="form.submit()">
+                                        @if($absen == null)
+                                        <option value="" selected disabled>Pilih Absen</option>
+                                        <option value="absen1">Hari ke-1</option>
+                                        <option value="absen2">Hari ke-2</option>
+                                        <option value="absen3">Hari ke-3</option>
+                                        <option value="absen4">Hari ke-4</option>
+                                        <option value="absen5">Hari ke-5</option>
+                                        <option value="absen6">Hari ke-6</option>
+                                        <option value="absen7">Hari ke-7</option>
+                                        <option value="absen8">Hari ke-8</option>
+                                        @else 
+                                         <option value="{{$absen}}" selected>
+                                            @if($absen == 'absen1') Hari ke-1
+                                            @elseif($absen == 'absen2') Hari ke-2
+                                            @elseif($absen == 'absen3') Hari ke-3
+                                            @elseif($absen == 'absen4') Hari ke-4
+                                            @elseif($absen == 'absen5') Hari ke-5
+                                            @elseif($absen == 'absen6') Hari ke-6
+                                            @elseif($absen == 'absen7') Hari ke-7
+                                            @elseif($absen == 'absen8') Hari ke-8
+                                            @endif
+                                        </option>
+                                        <option value="absen1">Hari ke-1</option>
+                                        <option value="absen2">Hari ke-2</option>
+                                        <option value="absen3">Hari ke-3</option>
+                                        <option value="absen4">Hari ke-4</option>
+                                        <option value="absen5">Hari ke-5</option>
+                                        <option value="absen6">Hari ke-6</option>
+                                        <option value="absen7">Hari ke-7</option>
+                                        <option value="absen8">Hari ke-8</option>
+                                        @endif
+                                    </select>
+                            </td>
+                            @endif
+                                
+                                
+            </form>
+            @if($data != null)
+            @if(count($data) != null)
+                @if($kode_trip != null && $debus != null && $absen != null)    <td> <span class="btn btn-sm btn-info" data-toggle="modal" id="scan" data-target="#abs" >ScanQR</span> </td> @endif
+            @endif
+            @endif
+
+            <td><a href="{{route('absensi')}}"><span class="btn btn-secondary float-right btn-sm">Reset</span></a></td>
+                        </tr>
+                    </table>
+                
+        </div>
+
+            <table class="table-striped table-hover table-bordered" width="100%">
+                <tr>
+                    <th rowspan="2">No</th>
+                    <th rowspan="2">Kode Trip</th>
+                    <th rowspan="2">Bus</th>
+                    <th rowspan="2">Nama</th>
+                    <th rowspan="2">Sekolah</th>
+                    <th rowspan="2">Kelas</th>
+                    <th colspan="9">Absensi</th>
+                </tr>
+                <tr>
+                    <th colspan="1">Day 1</th>
+                    <th colspan="1">Day 2</th>
+                    <th colspan="1">Day 3</th>
+                    <th colspan="1">Day 4</th>
+                    <th colspan="1">Day 5</th>
+                    <th colspan="1">Day 6</th>
+                    <th colspan="1">Day 7</th>
+                    <th colspan="1">Day 8</th>
+
+                </tr>
+            @if($data != null)
+                @foreach($data as $key => $item)
+                <tr>
+                    <td>{{$data->firstitem()+$key}}</td>
+                    <td>{{$item->kode_trip}}</td>
+                    <td>{{$item->bus}}</td>
+                    <td>{{$item->nama_lengkap}}</td>
+                    <td>{{$item->sekolah}}</td>
+                    <td>{{$item->kelas}}</td>
+                    <td align="center">@if($item->absen1 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    <td align="center">@if($item->absen2 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    <td align="center">@if($item->absen3 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    <td align="center">@if($item->absen4 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    <td align="center">@if($item->absen5 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    <td align="center">@if($item->absen6 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    <td align="center">@if($item->absen7 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    <td align="center">@if($item->absen8 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                </tr>
+                @endforeach
+
+            @endif
+            </table>
+            
+
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade "
+        id="abs"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+         
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Add image inside the body of modal -->
+                <div align="center" class="modal-body center">
+                    <center>
+                        <div class="containers">
+                            <div class="sections">
+                                <div id="my-qr-reader">
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                </div>
+ @if($data != null)
+
+    <script src="{{asset('storage/html5-qrcode.min.js')}}"></script>
+@if($agent->isDesktop())
+                    <script type="text/javascript">
+                        // script.js file
+
+function domReady(fn) {
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setTimeout(fn, 1000);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
+domReady(function () {
+    // If found you qr code
+    function onScanSuccess(decodeText, decodeResult) {
+    var urls = $('#absen').find(":selected").val()
+
+        // alert("You Qr is : {{url('/')}}/"+$('#absen').find(":selected").val()+'/'+decodeText, decodeResult);
+            $('#html5-qrcode-button-camera-stop').click();
+
+            Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang validasi absensi",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });
+
+            
+            setTimeout(
+              function() 
+              {
+                    window.location.replace("{{url('/')}}/"+urls+'/'+decodeText, decodeResult);
+            }, 2000);
+
+        
+    }
+
+    let htmlscanner = new Html5QrcodeScanner(
+        "my-qr-reader",
+        { fps: 10, qrbos: 250}, 
+        
+    );
+
+    htmlscanner.render(onScanSuccess);
+});
+                    </script>
+                    @else 
+                    <script type="text/javascript">
+                        // script.js file
+
+function domReady(fn) {
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setTimeout(fn, 1000);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
+domReady(function () {
+
+    // If found you qr code
+    function onScanSuccess(decodeText, decodeResult) {
+        var urls = $('#absen').find(":selected").val()
+        // alert("You Qr is : " + decodeText, decodeResult);
+            $('#html5-qrcode-button-camera-stop').click();
+
+            Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang validasi absensi",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });
+            
+            setTimeout(
+              function() 
+              {
+                    window.location.replace("{{url('/')}}/"+urls+'/'+decodeText, decodeResult);
+            }, 2000);
+        
+    }
+
+    let htmlscanner = new Html5QrcodeScanner(
+        "my-qr-reader",
+        { fps: 10, qrbos: 250, videoConstraints: {
+                    facingMode: { exact: "environment" },
+                },
+            }, 
+        );
+
+    htmlscanner.render(onScanSuccess);
+});
+                    </script>
+
+
+    @endif
+    @endif
+                <div class="modal-footer">
+                
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal">
+                        Close
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{{-- end of modal --}}
 </div>
+
+@if($data != null)
+    <script type="text/javascript">
+(function() {
+    var elm = document.getElementById('bus'),
+        df = document.createDocumentFragment();
+    for (var i = 1; i <= {{$bus[0]->jumlah_bus}}; i++) {
+        var option = document.createElement('option');
+        option.value = "Bus " + i;
+        option.appendChild(document.createTextNode("Bus " + i));
+        df.appendChild(option);
+    }
+    elm.appendChild(df);
+}());
+    </script>
+    @endif
+
+
 @endsection
+

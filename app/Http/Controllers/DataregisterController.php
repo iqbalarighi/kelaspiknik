@@ -51,6 +51,7 @@ class DataregisterController extends Controller
          $data->surat = $imageName;
       }
 
+      $data->bus = $request->bus;
       $data->sekolah = $request->sekolah;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;

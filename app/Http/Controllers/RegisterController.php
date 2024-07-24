@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use App\Models\RegisterModel;
-use App\Models\MasterdataModel;
+use App\Models\TripModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Helpers\Helper;
@@ -17,14 +17,16 @@ class RegisterController extends Controller
 
     // dd(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 5));
     $kode = $request->kode_trip;
+    $jbus = $request->bus;
 
       if($kode != null){
-        $data = MasterdataModel::where('kode_trip', $kode)->first();
+        $data = TripModel::where('kode_trip', $kode)->first();
             
             if($data == null){
                 return back()
                 ->with('error', 'Kode Trip Tidak Ditemukan');
             }
+
        return view('registrasi.index', compact('data', 'kode'));
       } else {
         $data = null;
@@ -34,7 +36,6 @@ class RegisterController extends Controller
 
    public function save(Request $request, $kode)
    {
-
 
 //start of validator
 
@@ -97,6 +98,7 @@ $input = request()->all();
 
       $data->id_reg = $id_reg;
       $data->kode_trip = $kode;
+      $data->bus = $request->bus;
       $data->sekolah = $request->sekolah;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;

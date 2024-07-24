@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trip', function (Blueprint $table) {
+        Schema::create('absensi', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_trip')->unique();
-            $table->string('nama_sekolah');
-            $table->string('judul_trip');
-            $table->string('jumlah_bus');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trip');
+        Schema::dropIfExists('absensi');
     }
 };

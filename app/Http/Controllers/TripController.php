@@ -5,37 +5,46 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\MasterdataModel;
+use App\Models\TripModel;
+use App\Models\RegisterModel;
 
-class MasterdataController extends Controller
+class TripController extends Controller
 {
    public function index()
    {
-    $data = MasterdataModel::latest()->paginate(10);
+    $data = TripModel::latest()->paginate(10);
 
-       return view('masterdata.index', compact('data'));
+       return view('trip.index', compact('data'));
    }
 
 public function input()
 {
-    return view('masterdata.inputtrip');
+    return view('trip.inputtrip');
 }
 
-public function school(Request $request)
+public function bus(Request $request)
     {
-        $scl = MasterdataModel::where('nama_sekolah', 'LIKE', '%'.$request->get('term'). '%')
-                    ->distinct()
-                    ->get();
+        if($request->ajax()){
 
-        foreach ($scl as $school)
-            {
-                $dat['id'] = $school->nama_sekolah;
-                $dat['lokasi'] = $school->nama_sekolah;
+            $bus = RegisterModel::where('kode_trip', 'LIKE', '%'.$request->kode_trip. '%')
+                    ->where('bus', 'LIKE', '%'.$request->bus. '%')
+                    ->count();
 
-                $data[] = $dat;
-            }
+            $bus2 = $request->bus;
+
+$data = ['bus' => $bus, 'bus2' => $bus2];
+
+            // if ($bus < 2){
+            //     $hasil =  '<font style="color:green">Bus masih tersedia <i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i></font>';
+            // } else {
+            //     $hasil = '<font style="color:red"> Bus tidak tersedia <i style="font-size:15pt;" class="bi bi-x-circle-fill ps-3"></i></font>';
+            // }
 
 return response()->json($data);
+
+
+    }
+
     }
 
 public function save(Request $request)
@@ -52,11 +61,12 @@ public function save(Request $request)
         $string = $month.$randomString;
 
 
-    $data = new MasterdataModel;
+    $data = new TripModel;
 
     $data->kode_trip = $string;
     $data->judul_trip = $request->judul_trip;
     $data->nama_sekolah = $request->nama;
+    $data->jumlah_bus = $request->bus;
 
     $data->save();
 
@@ -66,7 +76,7 @@ public function save(Request $request)
 
    public function delete($id)
    {
-        $data = MasterdataModel::findOrFail($id);
+        $data = TripModel::findOrFail($id);
         $data->delete();
 
        return back()

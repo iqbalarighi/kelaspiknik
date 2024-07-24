@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_reg', 20)->unique();
             $table->string('kode_trip');
+            $table->string('bus')->nullable();
             $table->string('sekolah');
             $table->string('nama_lengkap');
             $table->string('kelas');
@@ -29,6 +30,14 @@ return new class extends Migration
             $table->string('no_tel_ortu1');
             $table->string('no_tel_ortu2');
             $table->text('surat');
+            $table->date('absen1')->nullable();
+            $table->date('absen2')->nullable();
+            $table->date('absen3')->nullable();
+            $table->date('absen4')->nullable();
+            $table->date('absen5')->nullable();
+            $table->date('absen6')->nullable();
+            $table->date('absen7')->nullable();
+            $table->date('absen8')->nullable();
             $table->timestamps();
         });
     }

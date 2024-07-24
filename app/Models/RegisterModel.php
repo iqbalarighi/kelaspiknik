@@ -14,6 +14,7 @@ class RegisterModel extends Model
     protected $fillable = [
         'id_reg',
         'kode_trip',
+        'bus',
         'sekolah',
         'nama_lengkap', 
         'kelas',

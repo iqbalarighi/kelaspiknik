@@ -86,19 +86,6 @@
                             <input type="text" class="form-control form-control-sm" maxlength="5" placeholder="" id="kode_trip" name="kode_trip" value="{{ old('kode_trip') }}" required>
                             <label for="kode_trip">Input Kode Trip</label>
                         </div>
-{{--                         <select class="form-select form-select-sm" >
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                            <option>Bis 1</option>
-                        </select> --}}
 
                         <div class="text-center mt-2">
                             <button type="submit" class="btn btn-primary ">Kirim</button>
@@ -110,6 +97,13 @@
                 @csrf
                     <div class="mb-3 mt-1">
                         <input type="text" class="form-control form-control-sm" placeholder="" id="sekolah" name="sekolah" value="{{$data->nama_sekolah}}" required readonly>
+                    </div>
+
+                    <div class="mb-3 mt-1">
+                        <select class="form-select form-select-sm" name="bus" id="bus" required>
+                             <option value="" selected disabled>Pilih Bus</option>
+                        </select>
+                        <center><span id="hasil"></span></center>
                     </div>
                     
                     <div class="fw-bold">Data Peserta</div>
@@ -271,6 +265,7 @@ function filterNumericAndDecimal(event) {
 <script type="text/javascript">
     function checkLength(el) {
   if (el.value.length < 10) {
+    el.focus();
         Swal.fire({
           icon: "warning",
           title: "Peringatan",
@@ -304,9 +299,47 @@ allowClear: true
 });
 
 </script> --}}
+@if($data != null)
+    <script type="text/javascript">
+(function() {
+    var elm = document.getElementById('bus'),
+        df = document.createDocumentFragment();
+    for (var i = 1; i <= {{$data->jumlah_bus}}; i++) {
+        var option = document.createElement('option');
+        option.value = "Bus " + i;
+        option.appendChild(document.createTextNode("Bus " + i));
+        df.appendChild(option);
+    }
+    elm.appendChild(df);
+}());
+    </script>
+    @endif
+
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+
+<script type="text/javascript">
+
+    $('#bus').on('change', function() {
+    $value = $(this).val();
+    $kode = $('#kode_trip').val();
+    
+    $.ajax({
+        type : 'get',
+        url : '{{route('bus')}}',
+        data:{'bus':$value, 'kode':$kode},
+        
+        success:function(data){
+            console.log(data);
+            if(data.bus < 45){
+        $('#hasil').html(data.bus2 +' masih tersedia <i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i>').css("color","green");
+    } else {
+        $('#hasil').html(data.bus2 +' tidak tersedia <i style="font-size:15pt;" class="bi bi-x-circle-fill ps-3"></i>').css("color","red");
+        $('#bus').val('');
+    }
+
+        }
+    });
+});
+</script>
+
 @endsection
-
-
-
-
-                

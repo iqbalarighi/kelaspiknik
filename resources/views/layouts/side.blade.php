@@ -97,23 +97,26 @@
         <div class="sidebar-heading bg-side">
             <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
         </div>
+            
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light  {{Request::is('trip')||Request::is('user')?'active':''}}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Master Data 
+                        <i id="ubah" class="bi bi-caret-right-fill"></i>
+              </a>
+                <div class="collapse {{Request::is('trip')||Request::is('user')  ? 'show' : '' }}" id="collapseExample">
+                    <div class="card card-body p-1">
+                        <div class="list-group list-group-flush" style="width: 100%;">
+                            <a href="{{route('user')}}" class="list-group-item list-group-item-action bg-light ps-4 py-1 {{Request::is('user')?'active':''}}">User</a>
+                            <a href="{{route('trip')}}" class="list-group-item list-group-item-action bg-light ps-4 py-1 {{Request::is('trip')?'active':''}}">Trip</a>
+                        </div> 
+                    </div>
+                </div>
+
+
             <a href="{{route('home')}}" class="list-group-item list-group-item-action bg-light {{Request::is('dashboard')?'active':''}}">Dashboard</a>
-            <a href="{{route('masterdata')}}" class="list-group-item list-group-item-action bg-light {{Request::is('masterdata')?'active':''}}">Master Data</a>
             <a href="{{route('datareg')}}" class="list-group-item list-group-item-action bg-light {{Request::is('datareg')?'active':''}}">Data Registrasi</a>
             <a href="{{route('absensi')}}" class="list-group-item list-group-item-action bg-light {{Request::is('absensi')?'active':''}}">Data Absensi</a>
             <a href="{{route('qrcode')}}" class="list-group-item list-group-item-action bg-light {{Request::is('qrcode')?'active':''}}">QR Scanner</a>
 
-            {{-- <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Laporan 
-                        <i id="ubah" class="bi bi-caret-right-fill"></i>
-              </a>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        <div class="list-group list-group-flush" style="width: 100%;">
-                            <a href="{{route('data-register')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
-                        </div> 
-                    </div>
-                </div> --}}
 
         </div>
         </div>
@@ -203,6 +206,23 @@
     x.type = "text";
   } else {
     x.type = "password";
+  }
+}
+</script>
+
+<script>
+    var z = document.getElementById("ubah");
+    var y = document.getElementById("collapseExample");
+    if (y.className === "collapse show"){
+    z.className = "bi bi-caret-down-fill";
+    }
+
+    function cekDown() {
+  var x = document.getElementById("ubah");
+   if (x.className === "bi bi-caret-right-fill") {
+    x.className = "bi bi-caret-down-fill";
+  } else {
+    x.className = "bi bi-caret-right-fill";
   }
 }
 </script>

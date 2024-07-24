@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MasterdataModel extends Model
+class TripModel extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,7 @@ class MasterdataModel extends Model
     protected $fillable = [
         'kode_trip',
         'judul_trip',
-        'nama_sekolah'
+        'nama_sekolah',
+        'jumlah_bus'
     ];
 }
