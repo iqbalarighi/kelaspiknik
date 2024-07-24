@@ -55,7 +55,6 @@ class DataregisterController extends Controller
       $data->sekolah = $request->sekolah;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;
-      $data->nis = $request->nis;
       $data->ttl = $ttl;
       $data->penyakit = $request->penyakit;
       $data->alamat = $request->alamat;
