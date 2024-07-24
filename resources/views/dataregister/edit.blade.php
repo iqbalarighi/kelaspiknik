@@ -111,11 +111,6 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" id="nis" name="nis" value="{{$data->nis}}" required>
-                        <label for="nis">Nomor Induk Siswa (NIS) <font size="2" color="red">*</font></label>
-                    </div>
-
-                    <div class="form-floating mb-1">
                         <input type="text" class="form-control form-control-sm" placeholder="" id="tempat" name="tempat" value="{{$value[0]}}" required>
                         <label for="tempat">Tempat Lahir<font size="2" color="red">*</font></label>
                     </div>
