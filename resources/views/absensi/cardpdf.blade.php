@@ -1,4 +1,6 @@
+
 <style>
+    @page { margin: 30px; }
         body {
             font-family: Arial, sans-serif;
         }
@@ -81,7 +83,7 @@
     </style>
 
 <body>
-    <div class="row" style="margin-top: 30px;">
+    <div class="row" style="">
     @foreach($data as $key => $idcard) 
         <div class="gridx">
         <div class="id-card">
