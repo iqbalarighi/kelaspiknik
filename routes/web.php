@@ -76,6 +76,8 @@ Route::get('/absen7/{id_reg}', 'absen7');
 Route::get('/absen8/{id_reg}', 'absen8');
 Route::get('/enkripsi', 'enkripsi');
 Route::get('/qrgen', 'qrgen');
+Route::get('/absensi/idcard', 'idcard');
+Route::get('/absensi/cardpdf/{kode}/{bus}/', 'cardpdf');
 
 });
 

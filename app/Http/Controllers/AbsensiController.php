@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use App\Models\RegisterModel;
 use App\Models\TripModel;
 use Carbon\Carbon;
+use PDF;
 
 class AbsensiController extends Controller
 {
@@ -46,6 +48,31 @@ class AbsensiController extends Controller
         }
 
 
+    }
+
+    public function idcard()
+    {
+        $idcard = RegisterModel::get();
+
+        return view('absensi.idcard', compact('idcard'));
+    }
+
+    public function cardpdf($kode, $bus)
+    {
+
+        $data = RegisterModel::where('kode_trip', $kode)
+                    ->Where('bus', $bus)
+                    ->get();
+            foreach ($data as $key => $value) {
+                
+                $code = base64_encode(base64_encode($value->id_reg));
+            }
+
+        // $qrcode = QrCode::size(150)->style('dot')->generate();
+
+        $pdf = PDF::loadView('absensi.cardpdf', compact('data'));
+
+        return $pdf->stream('ID Card '.$kode.'.pdf');
     }
 
     public function qrcode()

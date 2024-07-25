@@ -145,73 +145,13 @@ video {
             </script>
         @endif
         <div class="mb-2">
-{{--             <form action="" method="GET" >
-                    <table width="100%">
-                        <tr>
-                            <td>
-                                <select class="form-select form-select-sm" name="kode_trip" onchange="form.submit()">
-                                @if($data == null)
-                                    <option value="" disabled selected>Pilih Kode Trip</option>
-                                    @foreach($kode as $item)
-                                        <option value="{{$item->kode_trip}}">{{$item->kode_trip}}</option>
-                                    @endforeach
-                                @else
-                                    <option value="{{$kode_trip}}" selected>{{$kode_trip}}</option>
-                                    @foreach($kode as $item)
-                                        <option value="{{$item->kode_trip}}">{{$item->kode_trip}}</option>
-                                    @endforeach
-                                @endif
-                                </select>
-                            </td>
-
-                            @if($data != null)
-                            <td>
-                                    <select class="form-select form-select-sm" name="bus" id="bus" required onchange="form.submit()">
-                                         @if($debus == null)
-                                            <option value="" selected disabled>Pilih Bus</option>
-                                         @else
-                                            <option value="{{$debus}}" selected>{{$debus}}</option>
-                                         @endif
-                                    </select>
-                            </td>
-                                @endif
-
-                                @if($data != null)
-                            <td>
-                                    <select class="form-select form-select-sm" name="absen" id="absen" required onchange="form.submit()">
-
-                                        <option value="" {{$absen == '' ? '':'selected'}} disabled>Pilih Hari</option>
-                                        <option value="absen1" {{$absen == 'absen1' ? 'selected':''}}>Hari ke-1</option>
-                                        <option value="absen2" {{$absen == 'absen2' ? 'selected':''}}>Hari ke-2</option>
-                                        <option value="absen3" {{$absen == 'absen3' ? 'selected':''}}>Hari ke-3</option>
-                                        <option value="absen4" {{$absen == 'absen4' ? 'selected':''}}>Hari ke-4</option>
-                                        <option value="absen5" {{$absen == 'absen5' ? 'selected':''}}>Hari ke-5</option>
-                                        <option value="absen6" {{$absen == 'absen6' ? 'selected':''}}>Hari ke-6</option>
-                                        <option value="absen7" {{$absen == 'absen7' ? 'selected':''}}>Hari ke-7</option>
-                                        <option value="absen8" {{$absen == 'absen8' ? 'selected':''}}>Hari ke-8</option>
-
-                                    </select>
-                            </td>
-                            @endif 
-                            </form>
-
-                            @if($data != null)
-                            @if(count($data) != null)
-                                @if($kode_trip != null && $debus != null)    <td> <span class="btn btn-sm btn-info" data-toggle="modal" onclick="$('#html5-qrcode-button-camera-stop').click();" id="scan" data-target="#abs" >ScanQR</span> </td> @endif
-                            @endif
-                            @endif
-
-                            <td><a href="{{route('absensi')}}"><span class="btn btn-secondary float-right btn-sm">Reset</span></a></td>
-                        </tr>
-                    </table> --}}
-
 
             <form action="" method="GET" >
                     <div class="row" width="100%">
-                        <div class="col-sm-auto">
+                        <div class="col-sm-auto pb-1">
                                 <select class="form-select form-select-sm" name="kode_trip" onchange="form.submit()">
+                                    <option value="" disabled selected>Kode Trip</option>
                                 @if($data == null)
-                                    <option value="" disabled selected>Pilih Kode Trip</option>
                                     @foreach($kode as $item)
                                         <option value="{{$item->kode_trip}}">{{$item->kode_trip}}</option>
                                     @endforeach
@@ -225,43 +165,40 @@ video {
                             </div>
 
                             @if($data != null)
-                            <div class="col-sm-auto pt-1">
+                            <div class="col-sm-auto pb-1">
                                     <select class="form-select form-select-sm" name="bus" id="bus" required onchange="form.submit()">
-                                         @if($debus == null)
-                                            <option value="" selected disabled>Pilih Bus</option>
-                                         @else
-                                            <option value="{{$debus}}" selected>{{$debus}}</option>
-                                         @endif
+                                        <option value="" selected disabled>Pilih bus</option>
+                                @if($debus != null)
+                                        <option value="{{$debus}}" selected>{{$debus}}</option>
+                                @endif
                                     </select>
                             </div>
                                 @endif
 
                                 @if($data != null)
-                            <div class="col-sm-auto pt-1">
+                            <div class="col-sm-auto pb-1">
                                     <select class="form-select form-select-sm" name="absen" id="absen" required onchange="form.submit()">
-
                                         <option value="" {{$absen == '' ? 'selected':''}} disabled>Pilih Hari</option>
-                                        <option value="absen1" {{$absen == 'absen1' ? 'selected':''}}>Hari ke-1</option>
-                                        <option value="absen2" {{$absen == 'absen2' ? 'selected':''}}>Hari ke-2</option>
-                                        <option value="absen3" {{$absen == 'absen3' ? 'selected':''}}>Hari ke-3</option>
-                                        <option value="absen4" {{$absen == 'absen4' ? 'selected':''}}>Hari ke-4</option>
-                                        <option value="absen5" {{$absen == 'absen5' ? 'selected':''}}>Hari ke-5</option>
-                                        <option value="absen6" {{$absen == 'absen6' ? 'selected':''}}>Hari ke-6</option>
-                                        <option value="absen7" {{$absen == 'absen7' ? 'selected':''}}>Hari ke-7</option>
-                                        <option value="absen8" {{$absen == 'absen8' ? 'selected':''}}>Hari ke-8</option>
-
                                     </select>
                             </div>
                             @endif 
                             </form>
 
+                                    <div class="col pb-1"> 
                             @if($data != null)
-                            @if(count($data) != null)
-                                @if($kode_trip != null && $debus != null)    <div class="col pt-1"> <span class="btn btn-sm btn-info" data-toggle="modal" onclick="$('#html5-qrcode-button-camera-stop').click();" id="scan" data-target="#abs" >ScanQR</span> </div> @endif
+                                @if(count($data) != null)
+                                    @if($kode_trip != null && $debus != null && $absen != null)    
+                                        <span class="btn btn-sm btn-info" data-toggle="modal" onclick="$('#html5-qrcode-button-camera-stop').click();" id="scan" data-target="#abs" >ScanQR</span> 
+                                     
                             @endif
+                                @if($kode_trip != null && $debus != null) 
+                                    @if(Auth::user()->role == 'Superadmin')
+                                        <a href="/absensi/cardpdf/{{$kode_trip}}/{{$debus}}" target="_blank"><span class="btn btn-primary btn-sm ml-2 float-end">Download ID Card</span></a>
+                                    @endif
+                                @endif 
                             @endif
-
-                            
+                        @endif
+                                    </div>
                     </div>
 
                 
@@ -349,7 +286,10 @@ video {
                         </div>
                     </center>
                 </div>
- @if($data != null)
+
+@if($data != null)
+    @if(count($data) != null)
+        @if($kode_trip != null && $debus != null && $absen != null)  
 
     <script src="{{asset('storage/html5-qrcode.min.js')}}"></script>
 @if($agent->isDesktop())
@@ -482,6 +422,8 @@ domReady(function () {
 
     @endif
     @endif
+    @endif
+    @endif
 
                 <div class="modal-footer">
                 
@@ -513,6 +455,52 @@ domReady(function () {
     </script>
     @endif
 
+@if($data != null)
+    <script type="text/javascript">
+(function() {
+    var elm = document.getElementById('absen'),
+        df = document.createDocumentFragment();
+    for (var i = 1; i <= 8; i++) {
+        var option = document.createElement('option');
+        option.value = "absen" + i;
+        option.appendChild(document.createTextNode("Day " + i));
+        df.appendChild(option);
+    }
+    elm.appendChild(df);
+}());
+    </script>
+    @endif
+
+<script type="text/javascript">
+    var usedNames = {};
+$("select[name='bus'] > option").each(function () {
+    if(usedNames[this.text]) {
+        $(this).remove();
+    } else {
+        usedNames[this.text] = this.value;
+    }
+});
+</script>
+<script type="text/javascript">
+    var usedNames = {};
+$("select[name='kode_trip'] > option").each(function () {
+    if(usedNames[this.text]) {
+        $(this).remove();
+    } else {
+        usedNames[this.text] = this.value;
+    }
+});
+</script>
+<script type="text/javascript">
+    var usedNames = {};
+$("select[name='absen'] > option").each(function () {
+    if(usedNames[this.text]) {
+        $(this).remove();
+    } else {
+        usedNames[this.text] = this.value;
+    }
+});
+</script>
 
 @endsection
 
