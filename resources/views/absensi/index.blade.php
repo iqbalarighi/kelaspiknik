@@ -115,7 +115,7 @@ video {
               title: "Berhasil",
               text: "{{$message}}",
               imageUrl: "{{asset('storage/registrasi/'.Session::get('kode').'/'.Session::get('idre').'/'.Session::get('foto'))}}",
-              imageWidth: 300,
+              imageWidth: 250,
               showConfirmButton: true,
               allowOutsideClick: false,
             }).then((result) => {
@@ -178,7 +178,28 @@ video {
                                 @if($data != null)
                             <div class="col-sm-auto pb-1">
                                     <select class="form-select form-select-sm" name="absen" id="absen" required onchange="form.submit()">
-                                        <option value="" {{$absen == '' ? 'selected':''}} disabled>Pilih Hari</option>
+                                        <option value="" selected disabled>Pilih Hari</option>
+                                       @if($absen != null)
+                                        <option value="{{$absen}}" selected >
+                                            @if($absen == 'absen1')
+                                                Day 1
+                                                @elseif($absen == 'absen2')
+                                                Day 2
+                                                @elseif($absen == 'absen3')
+                                                Day 3
+                                                @elseif($absen == 'absen4')
+                                                Day 4
+                                                @elseif($absen == 'absen5')
+                                                Day 5
+                                                @elseif($absen == 'absen6')
+                                                Day 6
+                                                @elseif($absen == 'absen7')
+                                                Day 7
+                                                @elseif($absen == 'absen8')
+                                                Day 8
+                                            @endif
+                                        </option>
+                                        @endif
                                     </select>
                             </div>
                             @endif 

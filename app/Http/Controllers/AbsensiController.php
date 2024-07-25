@@ -63,10 +63,6 @@ class AbsensiController extends Controller
         $data = RegisterModel::where('kode_trip', $kode)
                     ->Where('bus', $bus)
                     ->get();
-            foreach ($data as $key => $value) {
-                
-                $code = base64_encode(base64_encode($value->id_reg));
-            }
 
         // $qrcode = QrCode::size(150)->style('dot')->generate();
 
