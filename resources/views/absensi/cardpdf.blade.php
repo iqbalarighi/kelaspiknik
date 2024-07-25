@@ -1,8 +1,8 @@
 
 <style>
-    @page { margin: 30px; }
         body {
             font-family: Arial, sans-serif;
+            margin-top: 30px;
         }
         .id-card {
             width: 256px;

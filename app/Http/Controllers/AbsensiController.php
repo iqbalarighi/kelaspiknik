@@ -66,7 +66,7 @@ class AbsensiController extends Controller
 
         // $qrcode = QrCode::size(150)->style('dot')->generate();
 
-        $pdf = PDF::loadView('absensi.cardpdf', compact('data'));
+        $pdf = PDF::loadView('absensi.cardpdf', compact('data'))->setPaper('a4', 'potrait');
 
         return $pdf->stream('ID Card '.$kode.'.pdf');
     }
