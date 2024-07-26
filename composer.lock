@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "dd4c64e3b93b297da632abb5f656a20f",
-=======
     "content-hash": "6a5ae105dbf40c9e5dd17f8c1ad12bf3",
->>>>>>> dc236a334d9f083a6cf47deac8c2c47e6c7dbbc2
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -352,8 +348,6 @@
             "time": "2024-07-12T11:35:52+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "dasprid/enum",
             "version": "1.0.5",
             "source": {
@@ -404,7 +398,6 @@
             "time": "2023-08-25T16:18:39+00:00"
         },
         {
->>>>>>> dc236a334d9f083a6cf47deac8c2c47e6c7dbbc2
             "name": "dflydev/dot-access-data",
             "version": "v3.0.3",
             "source": {
@@ -2743,8 +2736,6 @@
             "time": "2022-12-02T22:17:43+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "masterminds/html5",
             "version": "2.9.0",
             "source": {
@@ -2812,7 +2803,6 @@
             "time": "2024-03-31T07:05:07+00:00"
         },
         {
->>>>>>> dc236a334d9f083a6cf47deac8c2c47e6c7dbbc2
             "name": "mobiledetect/mobiledetectlib",
             "version": "2.8.45",
             "source": {
@@ -3375,17 +3365,6 @@
             "time": "2023-02-08T01:06:31+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "phpoffice/phpspreadsheet",
-            "version": "1.29.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "fde2ccf55eaef7e86021ff1acce26479160a0fa0"
-            },
-            "dist": {
-                "type": "zip",
-=======
             "name": "phenx/php-font-lib",
             "version": "0.5.6",
             "source": {
@@ -3485,7 +3464,6 @@
             },
             "dist": {
                 "type": "zip",
->>>>>>> dc236a334d9f083a6cf47deac8c2c47e6c7dbbc2
                 "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/fde2ccf55eaef7e86021ff1acce26479160a0fa0",
                 "reference": "fde2ccf55eaef7e86021ff1acce26479160a0fa0",
                 "shasum": ""
@@ -9529,5 +9507,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
