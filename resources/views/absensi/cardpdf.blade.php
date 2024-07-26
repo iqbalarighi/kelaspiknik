@@ -14,6 +14,7 @@
             margin: 30px auto;
 /*            color: black;*/
             text-align: center;
+            border: 1px black solid;
         }
         /*.id-card::before {
             content: '';
@@ -27,13 +28,13 @@
 
         .id-img {
             width: 256px;
-            height: 400px;
+            height: 399px;
 /*            border-radius: 15px;*/
             overflow: hidden;
 /*            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);*/
             background-size: cover;
             position: absolute;
-            margin-left: 5px;
+            margin-left: 1px;
 /*            color: black;*/
             text-align: center;
             z-index: 0; 
