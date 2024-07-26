@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use File;
+use App\Mail\responseMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -114,6 +116,26 @@ $input = request()->all();
       $data->no_tel_ortu2 = $request->notel_ortu_2;
 
       $data->save();
+
+      $terima = $request->email;
+      $nama = $request->nama;
+      $idreg = $id_reg;
+
+      $details = [ 
+        'nama' => $nama, 
+        'idreg' => $idreg,
+      ];
+
+      if ($data->save()) {
+          $email = new responseMail($details);
+            Mail::to($terima)->send($email);
+
+
+      } else {
+        return back()
+      ->with('error', 'Email tidak terkirim'); 
+
+      }
 
       return back()
       ->with('sukses', 'Data Registrasi Anda Telah Tersimpan'); 

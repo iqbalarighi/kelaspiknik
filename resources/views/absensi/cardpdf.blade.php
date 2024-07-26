@@ -2,9 +2,11 @@
 <style>
         body {
             font-family: Arial, sans-serif;
-            margin-top: 30px;
+            margin-top: 0;
+            page-break-after: auto;
         }
-        .id-card {
+        .id-card { 
+            page-break-after: auto;
             width: 256px;
             height: 400px;
 /*            border-radius: 15px;*/
@@ -84,7 +86,7 @@
     </style>
 
 <body>
-    <div class="row" style="">
+    <div class="row">
     @foreach($data as $key => $idcard) 
         <div class="gridx">
         <div class="id-card">
@@ -99,16 +101,19 @@
                     <p style="margin-bottom: 0px; width: 150px;">{{$idcard->nama_lengkap}}</p>
                     <p style="margin-bottom: 0px; width: 150px;font-style: italic; font-size: 10pt;">Kelas {{$idcard->kelas}}</p>
                 </div>
-
             </div>
         </div>
-                    @php
-                    $qrcode = base64_encode(SimpleSoftwareIO\QrCode\Facades\QrCode::size(70)->format('svg')->size(80)->errorCorrection('H')->generate(base64_encode(base64_encode($idcard->id_reg))));
-                    @endphp
-                    <img class="qr-code" src="data:image/png;base64, {!! $qrcode !!}" > 
+                   {{--  @php
+                    $qrcode = base64_encode(SimpleSoftwareIO\QrCode\Facades\QrCode::size(70)->format('svg')->size(80)->errorCorrection('H')->generate());
+                    
+                    ;
+                    @endphp --}}
+                    <img class="qr-code" src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(base64_encode(base64_encode($idcard->id_reg)))) !!}" > 
 
         </div>
 </div>
     @endforeach
            </div>
 </body>
+
+{{-- onclick="window.print()" --}}

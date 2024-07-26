@@ -8,6 +8,7 @@ use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DataregisterController;
+use App\Mail\responseMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,4 +84,11 @@ Route::get('/absensi/cardpdf/{kode}/{bus}/', 'cardpdf');
 
 Route::controller(Controller::class)->middleware('auth')->group(function () {
 Route::get('/user/', 'indexs')->name('user');
+});
+
+Route::get('sendresponse', function() {
+  $email = new responseMail();
+  Mail::to('gamebell771@gmail.com')->send($email);
+
+  return 'berhasil cuy';
 });
