@@ -12,11 +12,15 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="https://www.sispam.id/storage/sweetalert2@11.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <link href="{{asset('storage/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{asset('storage/select2.min.js')}}"></script>
 
     <style type="text/css">
         .bg-green {
@@ -32,7 +36,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-green shadow-sm ">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="https://kelaspiknik.com">
                     {{-- {{ config('app.name', 'Test') }} --}}
                     <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
                 </a>
@@ -66,6 +70,9 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('Dashboard') }}</a>
+                            </li>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -82,6 +89,7 @@
                                     </form>
                                 </div>
                             </li>
+                            
                         @endguest
                     </ul>
                 </div>

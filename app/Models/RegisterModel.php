@@ -12,11 +12,14 @@ class RegisterModel extends Model
     protected $table = 'data_registrasi';
 
     protected $fillable = [
+        'id_reg',
+        'kode_trip',
+        'bus',
         'sekolah',
         'nama_lengkap', 
         'kelas',
-        'nis',
         'ttl',
+        'penyakit',
         'alamat',
         'email',
         'no_tel',

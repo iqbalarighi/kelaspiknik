@@ -13,6 +13,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://www.sispam.id/storage/sweetalert2@11.js"></script>
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
 
 {{-- <script src={{asset("/storage/bootstrap3-typeahead.js")}}></script> --}}
@@ -26,7 +27,8 @@
 
     <!-- Styles -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
+    <link href="{{asset('storage/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{asset('storage/select2.min.js')}}"></script>
         <script>
         jQuery(document).ready(function($){
             $("#menu-toggle").click(function(e) {
@@ -92,23 +94,29 @@
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading bg-side"><img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
-                </a></div>
-            <a href="{{route('home')}}" class="list-group-item list-group-item-action bg-light {{Request::is('dashboard')?'active':''}}">Dashboard</a>
-            <a href="{{route('masterdata')}}" class="list-group-item list-group-item-action bg-light {{Request::is('masterdata')?'active':''}}">Master Data</a>
-            <a href="{{route('data-register')}}" class="list-group-item list-group-item-action bg-light {{Request::is('data-register')?'active':''}}">Data Registrasi</a>
-
-            {{-- <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Laporan 
+        <div class="sidebar-heading bg-side">
+            <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
+        </div>
+            
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light  {{Request::is('trip')||Request::is('user')?'active':''}}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Master Data 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
+                <div class="collapse {{Request::is('trip')||Request::is('user')  ? 'show' : '' }}" id="collapseExample">
+                    <div class="card card-body p-1">
                         <div class="list-group list-group-flush" style="width: 100%;">
-                            <a href="{{route('data-register')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
+                            <a href="{{route('user')}}" class="list-group-item list-group-item-action bg-light ps-4 py-1 {{Request::is('user')?'active':''}}">User</a>
+                            <a href="{{route('trip')}}" class="list-group-item list-group-item-action bg-light ps-4 py-1 {{Request::is('trip')?'active':''}}">Trip</a>
                         </div> 
                     </div>
-                </div> --}}
+                </div>
+
+
+            <a href="{{route('home')}}" class="list-group-item list-group-item-action bg-light {{Request::is('dashboard')?'active':''}}">Dashboard</a>
+            <a href="{{route('datareg')}}" class="list-group-item list-group-item-action bg-light {{Request::is('datareg')?'active':''}}">Data Registrasi</a>
+            <a href="{{route('absensi')}}" class="list-group-item list-group-item-action bg-light {{Request::is('absensi')?'active':''}}">Data Absensi</a>
+            {{-- <a href="{{route('qrcode')}}" class="list-group-item list-group-item-action bg-light {{Request::is('qrcode')?'active':''}}">QR Scanner</a> --}}
+
 
         </div>
         </div>
@@ -202,5 +210,26 @@
 }
 </script>
 
+<script>
+    var z = document.getElementById("ubah");
+    var y = document.getElementById("collapseExample");
+    if (y.className === "collapse show"){
+    z.className = "bi bi-caret-down-fill";
+    }
 
+    function cekDown() {
+  var x = document.getElementById("ubah");
+   if (x.className === "bi bi-caret-right-fill") {
+    x.className = "bi bi-caret-down-fill";
+  } else {
+    x.className = "bi bi-caret-right-fill";
+  }
+}
+</script>
+
+@if(Auth::user()->name == null)
+    <script type="text/javascript">
+        window.location.replace("{{url('/')}}");
+    </script>
+@endif
 </html>
