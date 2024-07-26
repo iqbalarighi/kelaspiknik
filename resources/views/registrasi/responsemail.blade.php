@@ -10,12 +10,11 @@
 	<p>
 		Terima Kasih {{$details['nama']}} telah melakukan registrasi di kelaspiknik.com. 
 		Berikut QRCode untuk di scan sebagai absensi dan ditukarkan dengan id card di tempat yang telah di tentukan.
-
-
-		@php
-        $qrcode = base64_encode(SimpleSoftwareIO\QrCode\Facades\QrCode::size(70)->format('svg')->size(80)->errorCorrection('H')->generate(base64_encode(base64_encode($details['nama']))));
-        @endphp
-        <img class="qr-code" src="data:image/png;base64, {!! $qrcode !!}" > 
 	</p>
+		<img class="qr-code" id='barcode' 
+                                    src="https://api.qrserver.com/v1/create-qr-code/?data={{base64_encode(base64_encode($details['idreg']))}}&amp;size=300x300" 
+                                    alt="" 
+                                    width="200" 
+                                    height="200" />
 </body>
 </html>
