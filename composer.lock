@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+    "content-hash": "dd4c64e3b93b297da632abb5f656a20f",
     "content-hash": "6a5ae105dbf40c9e5dd17f8c1ad12bf3",
     "packages": [
         {
@@ -3365,6 +3366,16 @@
             "time": "2023-02-08T01:06:31+00:00"
         },
         {
+
+            "name": "phpoffice/phpspreadsheet",
+            "version": "1.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
+                "reference": "fde2ccf55eaef7e86021ff1acce26479160a0fa0"
+            },
+            "dist": {
+                "type": "zip",
             "name": "phenx/php-font-lib",
             "version": "0.5.6",
             "source": {
