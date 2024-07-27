@@ -12,7 +12,7 @@ class TripController extends Controller
 {
    public function index()
    {
-    $data = TripModel::latest()->paginate(10);
+    $data = TripModel::latest()->paginate(15);
 
        return view('trip.index', compact('data'));
    }
@@ -26,13 +26,16 @@ public function bus(Request $request)
     {
         if($request->ajax()){
 
-            $bus = RegisterModel::where('kode_trip', 'LIKE', '%'.$request->kode_trip. '%')
+             $bus = RegisterModel::where('kode_trip', 'LIKE', '%'.$request->kode. '%') // ini hiutng jumlah bus
                     ->where('bus', 'LIKE', '%'.$request->bus. '%')
                     ->count();
 
+        $dat = TripModel::where('kode_trip', $request->kode)->first();
+            
+
             $bus2 = $request->bus;
 
-$data = ['bus' => $bus, 'bus2' => $bus2];
+$data = ['bus' => $bus, 'bus2' => $bus2, 'limit' => $dat->kapasitas];
 
             // if ($bus < 2){
             //     $hasil =  '<font style="color:green">Bus masih tersedia <i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i></font>';
@@ -67,6 +70,7 @@ public function save(Request $request)
     $data->judul_trip = $request->judul_trip;
     $data->nama_sekolah = $request->nama;
     $data->jumlah_bus = $request->bus;
+    $data->kapasitas = $request->kapasitas;
 
     $data->save();
 
@@ -95,5 +99,27 @@ public function buat($value='')
         } 
 
         $string = $month.$randomString;
+}
+
+public function edit($id)
+{
+    $data = TripModel::findOrFail($id);
+
+    return view('trip.edit', compact('data'));
+}
+
+public function update(Request $request, $id)
+{
+    $data = TripModel::findOrFail($id);
+    
+    $data->judul_trip = $request->judul_trip;
+    $data->nama_sekolah = $request->nama;
+    $data->jumlah_bus = $request->bus;
+    $data->kapasitas = $request->kapasitas;
+
+    $data->save();
+
+    return back()
+      ->with('sukses', 'Purubahan Data Tersimpan');
 }
 }

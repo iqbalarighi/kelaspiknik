@@ -342,8 +342,9 @@
         
         success:function(data){
             console.log(data);
-            if(data.bus < 45){
-        $('#hasil').html(data.bus2 +' masih tersedia <i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i>').css("color","green");
+            if(data.bus < data.limit){
+                var sisa = data.limit - data.bus;
+        $('#hasil').html(data.bus2 +' masih tersedia '+sisa+' kursi<i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i>').css("color","green");
     } else {
         $('#hasil').html(data.bus2 +' tidak tersedia <i style="font-size:15pt;" class="bi bi-x-circle-fill ps-3"></i>').css("color","red");
         $('#bus').val('');
