@@ -60,15 +60,11 @@ class AbsensiController extends Controller
     public function cardpdf($kode, $bus)
     {
 
-        $data = RegisterModel::where('kode_trip', $kode)
+        $idcard = RegisterModel::where('kode_trip', $kode)
                     ->Where('bus', $bus)
                     ->get();
 
-        // $qrcode = QrCode::size(150)->style('dot')->generate();
-
-        $pdf = PDF::loadView('absensi.cardpdf', compact('data'))->setPaper('a4', 'potrait');
-
-        return $pdf->stream('ID Card '.$kode.'.pdf');
+         return view('absensi.idcard', compact('idcard'));
     }
 
     public function qrcode()
@@ -93,6 +89,7 @@ class AbsensiController extends Controller
 
        return view('absensi.qrgen', compact('data'));
     }
+    
 //start Absensi
     public function absen1($id_reg)
     {
