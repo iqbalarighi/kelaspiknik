@@ -15,6 +15,7 @@ class TripModel extends Model
         'kode_trip',
         'judul_trip',
         'nama_sekolah',
-        'jumlah_bus'
+        'jumlah_bus',
+        'kapasitas'
     ];
 }

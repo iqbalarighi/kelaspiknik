@@ -46,7 +46,9 @@ Route::controller(TripController::class)->middleware('auth')->group(function () 
   Route::get('/trip', 'index')->name('trip');
   Route::post('/trip/simpan', 'save');
   Route::delete('/trip/hapus/{id}', 'delete');
+  Route::put('/trip/update/{id}', 'update');
   Route::get('/trip/tambah', 'input');
+  Route::get('/trip/ubah/{id}', 'edit');
 });
 
 Route::controller(DataregisterController::class)->middleware('auth')->group(function () {

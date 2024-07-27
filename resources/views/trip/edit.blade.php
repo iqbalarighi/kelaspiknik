@@ -19,23 +19,24 @@
             </script>
         @endif
                 <div class="card-body  col-md-5">
-                    <form action="{{Route('trip')}}/simpan" method="POST" enctype="multipart/form-data">
+                    <form action="{{Route('trip')}}/update/{{$data->id}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                         <div class="card-body">
                             <div class="form-floating ">
-                                <input class="form-control form-control-sm" placeholder="Leave a comment here" id="judul_trip" name="judul_trip" required></input>
+                                <input value="{{$data->judul_trip}}" class="form-control form-control-sm" placeholder="Leave a comment here" id="judul_trip" name="judul_trip" required>
                                 <label for="judul_trip">Judul Trip <font size="2" color="red">*</font></label>
                             </div>
                             <div class="form-floating mb-1">
-                                <input type="text" class="form-control form-control-sm" placeholder="" id="nama" name="nama" value="" required>
+                                <input value="{{$data->nama_sekolah}}" type="text" class="form-control form-control-sm" placeholder="" id="nama" name="nama" value="" required>
                                 <label for="nama">Nama Sekolah <font size="2" color="red">*</font></label>
                             </div>
                             <div class="form-floating mb-1">
-                                <input type="number" class="form-control form-control-sm" placeholder="" id="bus" name="bus" value="" required>
+                                <input value="{{$data->jumlah_bus}}" type="number" class="form-control form-control-sm" placeholder="" id="bus" name="bus" value="" required>
                                 <label for="bus">Jumlah Bus <font size="2" color="red">*</font></label>
                             </div>
                             <div class="form-floating mb-1">
-                                <input type="number" class="form-control form-control-sm" placeholder="" id="kapasitas" name="kapasitas" value="" required>
+                                <input value="{{$data->kapasitas}}" type="number" class="form-control form-control-sm" placeholder="" id="kapasitas" name="kapasitas" value="" required>
                                 <label for="kapasitas">Kapasitas Bus <font size="2" color="red">*</font></label>
                             </div>
                             <div class="text-center mt-2">

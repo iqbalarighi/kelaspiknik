@@ -35,6 +35,7 @@
                         <th>Judul Trip</th>
                         <th>Nama Sekolah</th>
                         <th>Jumlah Bus</th>
+                        <th>Kapasitas Bus</th>
                         <th>Opsi</th>
                     </tr>
                     @foreach($data as $key=>$item)
@@ -43,7 +44,8 @@
                         <td>{{$item->kode_trip}}</td>
                         <td>{{$item->judul_trip}}</td>
                         <td>{{$item->nama_sekolah}}</td>
-                        <td>{{$item->jumlah_bus}}</td>
+                        <td align="center">{{$item->jumlah_bus}}</td>
+                        <td align="center">{{$item->kapasitas}}</td>
                         <td>
                             <div style="display: flex;">
                                 <div class="px-1">
