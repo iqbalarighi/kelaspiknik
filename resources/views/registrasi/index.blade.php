@@ -60,12 +60,12 @@
               title: "Terima Kasih Telah Melakukan Registrasi",
               text: "{{$message}}",
               showConfirmButton: false,
-              timer: 2500
+              timer: 4000
             });
 
             setTimeout(function () {
                window.location.replace("https://www.instagram.com/kelaspiknik/");
-            }, 3500); 
+            }, 5000); 
             </script>
         @endif
     <div class="row justify-content-center">
@@ -133,8 +133,22 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="email" class="form-control form-control-sm" placeholder="" id="email" name="email" value="{{ old('email') }}" required>
+                        <input type="email" class="form-control form-control-sm" placeholder="" id="email" onblur="warning()" name="email" value="{{ old('email') }}" required>
                         <label for="email">Email<font size="2" color="red">*</font></label>
+                       {{--  <script type="text/javascript">
+                            function warning() {
+                            if ($('#email').val() == "" ) {
+                                $('#warning').html('').css("color","");
+                                } else {
+                                $('#warning').html('Pastikan email benar dan aktif untuk menerima pesan dari kelaspiknik.com<i style="font-size:15pt;" class="bi bi-exclamation-circle-fill ps-3"></i>').css("color","orange");
+                                }
+                            }
+                        </script> --}}
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="email" class="form-control form-control-sm" placeholder="" id="email-confirm" onblur="warning()" name="email" value="{{ old('email') }}" required>
+                        <label for="email">Konfirmasi Email<font size="2" color="red">*</font></label>
+                        <center><span id="warning"></span></center>
                     </div>
 
                     <div class="form-floating ">
@@ -180,7 +194,7 @@
 
                     <div class="form-floating mb-1">
                         <input type="text" class="form-control form-control-sm kontak" placeholder="" onblur="checkLength(this)" maxlength="15" id="notel_ortu_2" name="notel_ortu_2" value="{{ old('notel_ortu_2') }}" required>
-                        <label for="notel_ortu_2">Nomor Telepon Orang Tua 2<font size="2" color="red">*</font></label>
+                        <label for="notel_ortu_2">Nomor Telepon Orang Tua 2</label>
                     </div>
 
                     <div class="input-group custom-file-button mt-1">
@@ -222,8 +236,13 @@
     } else {
 
     Swal.fire({
-          title: "Siap Tour Bersama Kelas Piknik ?",
-          text: "Pastikan seluruh data benar dan lengkap",
+          title: "Halo "+$('#nama').val()+" !",
+          html: `Pastikan seluruh data benar dan lengkap 
+                  <br>
+                  Jangan lupa yaa untuk cek email kamu setelah registrasi
+                  <br>
+                  <h2><b>Siap Tour Bersama Kelas Piknik ?</b></h2>
+                  `,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -250,7 +269,31 @@
 
  }
 </script>
+<script>
+$(document).ready(function () {
+   $("#email-confirm").on('keyup', function(){
+    var email = $("#email").val();
+    var confirmEmail = $("#email-confirm").val();
+    if (confirmEmail == email){
+        $('#warning').html('Email Sama ! <i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i>').css('color','green');
+    }
+    else
+    {
+        $("#warning").html("Email Tidak Sama !").css("color","red");
+    }
+   
+});
 
+
+$("#email").on('keyup', function(){
+     if (!$('#email').val().length) {
+    $("#warning").html("").css("color","");
+    $("#email-confirm").val("");
+  }
+});
+
+});
+</script>
 <script>
 $(".kontak").on("input change paste",
 function filterNumericAndDecimal(event) {

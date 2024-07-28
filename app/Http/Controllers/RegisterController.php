@@ -115,8 +115,8 @@ $input = request()->all();
       $data->no_tel_ortu1 = $request->notel_ortu_1;
       $data->no_tel_ortu2 = $request->notel_ortu_2;
 
-      $data->save();
 
+      
       $terima = $request->email;
       $nama = $request->nama;
       $idreg = $id_reg;
@@ -125,17 +125,23 @@ $input = request()->all();
         'nama' => $nama, 
         'idreg' => $idreg,
       ];
-
-      if ($data->save()) {
           $email = new responseMail($details);
-            Mail::to($terima)->send($email);
 
-
-      } else {
-        return back()
-      ->with('error', 'Email tidak terkirim'); 
-
-      }
+      try {
+            $mail = Mail::to($terima)->send($email);
+           
+            if($mail == true){
+                $data->save();
+            } else {
+                return back()
+            ->withInput()
+            ->with('error', 'Email tidak terkirim'); 
+            }
+       } catch (\Exception $e) {
+            return back()
+            ->withInput()
+            ->with('error', 'Email tidak terkirim'); 
+      } 
 
       return back()
       ->with('sukses', 'Data Registrasi Anda Telah Tersimpan'); 
