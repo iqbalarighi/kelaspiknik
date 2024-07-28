@@ -17,27 +17,29 @@ class AbsensiController extends Controller
     {
         $absen = $request->absen;
         $kode_trip = $request->kode_trip;
-        $debus = $request->bus;
+        $bus = $request->bus;
         $agent = new Agent();
 
         if($request->kode_trip != null && $request->bus == null){
-            $data = RegisterModel::where('kode_trip', $request->kode_trip)
+            $data = RegisterModel::where('kode_trip', $kode_trip)
                     // ->orWhere('bus', $request->bus)
-                    ->paginate(15);
+                    ->paginate(10);
+            $data->appends(compact('kode_trip'));
 
-            $bus = TripModel::where('kode_trip', $request->kode_trip)->get('jumlah_bus');
+            $busx = TripModel::where('kode_trip', $kode_trip)->get('jumlah_bus');
             $kode = TripModel::get('kode_trip');
 
-            return view('absensi.index', compact('data', 'bus', 'kode_trip', 'debus', 'kode', 'agent', 'absen'));
-        } elseif($request->kode_trip != null && $request->bus != null){
-            $data = RegisterModel::where('kode_trip', $request->kode_trip)
-                    ->Where('bus', $request->bus)
-                    ->paginate(15);
+            return view('absensi.index', compact('data', 'busx', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
+        } elseif($request->kode_trip != null && $bus != null){
+            $data = RegisterModel::where('kode_trip', $kode_trip)
+                    ->Where('bus', $bus)
+                    ->paginate(10);
+            $data->appends(compact('kode_trip', 'bus', 'absen'));
 
-            $bus = TripModel::where('kode_trip', $request->kode_trip)->get('jumlah_bus');
+            $busx = TripModel::where('kode_trip', $kode_trip)->get('jumlah_bus');
             $kode = TripModel::get('kode_trip');
 
-            return view('absensi.index', compact('data', 'bus', 'kode_trip', 'debus', 'kode', 'agent', 'absen'));
+            return view('absensi.index', compact('data', 'busx', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
         } else {
             $absen = null;
             $data = null;
@@ -46,6 +48,7 @@ class AbsensiController extends Controller
             $kode = TripModel::get('kode_trip');
             return view('absensi.index', compact('data', 'kode', 'agent', 'absen'));
         }
+
 
 
     }

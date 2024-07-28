@@ -168,8 +168,8 @@ video {
                             <div class="col-sm-auto pb-1">
                                     <select class="form-select form-select-sm" name="bus" id="bus" required onchange="form.submit()">
                                         <option value="" selected disabled>Pilih bus</option>
-                                @if($debus != null)
-                                        <option value="{{$debus}}" selected>{{$debus}}</option>
+                                @if($bus != null)
+                                        <option value="{{$bus}}" selected>{{$bus}}</option>
                                 @endif
                                     </select>
                             </div>
@@ -208,13 +208,13 @@ video {
                                     <div class="col pb-1"> 
                             @if($data != null)
                                 @if(count($data) != null)
-                                    @if($kode_trip != null && $debus != null && $absen != null)    
+                                    @if($kode_trip != null && $bus != null && $absen != null)    
                                         <span class="btn btn-sm btn-info" data-toggle="modal" onclick="$('#html5-qrcode-button-camera-stop').click();" id="scan" data-target="#abs" >ScanQR</span> 
                                      
                             @endif
-                                @if($kode_trip != null && $debus != null) 
+                                @if($kode_trip != null && $bus != null) 
                                     @if(Auth::user()->role == 'Superadmin')
-                                        <a href="/absensi/cardpdf/{{$kode_trip}}/{{$debus}}" target="_blank"><span class="btn btn-primary btn-sm ml-2 float-end">Download ID Card</span></a>
+                                        <a href="/absensi/cardpdf/{{$kode_trip}}/{{$bus}}" target="_blank"><span class="btn btn-primary btn-sm ml-2 float-end">Download ID Card</span></a>
                                     @endif
                                 @endif 
                             @endif
@@ -310,7 +310,7 @@ video {
 
 @if($data != null)
     @if(count($data) != null)
-        @if($kode_trip != null && $debus != null && $absen != null)  
+        @if($kode_trip != null && $bus != null && $absen != null)  
 
     <script src="{{asset('storage/html5-qrcode.min.js')}}"></script>
 @if($agent->isDesktop())
@@ -465,7 +465,7 @@ domReady(function () {
 (function() {
     var elm = document.getElementById('bus'),
         df = document.createDocumentFragment();
-    for (var i = 1; i <= {{$bus[0]->jumlah_bus}}; i++) {
+    for (var i = 1; i <= {{$busx[0]->jumlah_bus}}; i++) {
         var option = document.createElement('option');
         option.value = "Bus " + i;
         option.appendChild(document.createTextNode("Bus " + i));

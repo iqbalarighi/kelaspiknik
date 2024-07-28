@@ -103,12 +103,7 @@
                 </div>
             </div>
         </div>
-                   {{--  @php
-                    $qrcode = base64_encode(SimpleSoftwareIO\QrCode\Facades\QrCode::size(70)->format('svg')->size(80)->errorCorrection('H')->generate());
-                    
-                    ;
-                    @endphp --}}
-                    <img class="qr-code" src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(base64_encode(base64_encode($idcard->id_reg)))) !!}" > 
+            <img align="center" class="qr-code" src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate(base64_encode(base64_encode($idcard->id_reg)))) !!}" > 
 
         </div>
 </div>

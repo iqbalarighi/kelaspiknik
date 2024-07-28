@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('foto');
             $table->string('nm_ortu');
             $table->string('no_tel_ortu1');
-            $table->string('no_tel_ortu2');
+            $table->string('no_tel_ortu2')->nullable();
             $table->text('surat');
             $table->date('absen1')->nullable();
             $table->date('absen2')->nullable();
