@@ -93,7 +93,8 @@ class AbsensiController extends Controller
        return view('absensi.qrgen', compact('data'));
     }
     
-//start Absensi
+
+//start Absensi ==========================================
     public function absen1($id_reg)
     {
 
@@ -136,11 +137,23 @@ class AbsensiController extends Controller
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
+    if ($data->absen1 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari pertama!');
+    } 
+
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
+
+if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+}
+
         if($data->absen2 == null){
             $data->absen2 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -154,9 +167,7 @@ class AbsensiController extends Controller
 
             return back()
             ->with('warning', $nama.' sudah absensi hari kedua');
-        }
-        
-        } else {
+        } } else {
            return back()
             ->with('error', 'QRCode tidak valid'); 
         }
@@ -171,11 +182,30 @@ class AbsensiController extends Controller
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
+    if ($data->absen1 == null && $data->absen2 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari pertama dan hari kedua');
+    } elseif ($data->absen2 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kedua');
+    }
+
+
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
+
+if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen2) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+}
         if($data->absen3 == null){
             $data->absen3 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -206,11 +236,38 @@ class AbsensiController extends Controller
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
+    if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari pertama, kedua, dan ketiga');
+    } elseif ($data->absen2 == null && $data->absen3 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kedua dan ketiga');
+    } elseif ($data->absen3 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari ketiga');
+    } 
+
+
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
+
+if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen2) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen3) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+}
+
         if($data->absen4 == null){
             $data->absen4 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -241,6 +298,24 @@ class AbsensiController extends Controller
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
+    if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari pertama, kedua, ketiga, dan keempat');
+    } elseif ($data->absen2 == null && $data->absen3 == null && $data->absen4 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kedua, ketiga, dan keempat');
+    } elseif ($data->absen3 == null && $data->absen4 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari ketiga dan keempat');
+    } elseif ($data->absen4 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari keempat');
+    } 
+
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
@@ -249,6 +324,20 @@ class AbsensiController extends Controller
         if($data->absen5 == null){
             $data->absen5 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
+
+if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen2) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen3) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen4) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+}
 
             return back()
             ->with('sukses', $nama.' berhasil melakukan absensi hari kelima')
@@ -276,6 +365,28 @@ class AbsensiController extends Controller
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
+    if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari pertama, kedua, ketiga, keempat, dan kelima');
+    } elseif ($data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kedua, ketiga, keempat, dan kelima');
+    } elseif ($data->absen3 == null && $data->absen4 == null && $data->absen5 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari ketiga, keempat, dan kelima');
+    } elseif ($data->absen4 == null && $data->absen5 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari keempat, dan kelima');
+    } elseif ($data->absen5 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kelima');
+    } 
+
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
@@ -284,6 +395,23 @@ class AbsensiController extends Controller
         if($data->absen6 == null){
             $data->absen6 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
+
+if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen2) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen3) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen4) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen5) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+}
 
             return back()
             ->with('sukses', $nama.' berhasil melakukan absensi hari keenam')
@@ -311,11 +439,58 @@ class AbsensiController extends Controller
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
+    if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari pertama, kedua, ketiga, keempat, kelima, dan keenam');
+    } elseif ($data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kedua, ketiga, keempat, kelima, dan keenam');
+    } elseif ($data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari ketiga, keempat, kelima, dan keenam');
+    } elseif ($data->absen4 == null && $data->absen5 == null && $data->absen6 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari keempat, kelima, dan keenam');
+    } elseif ($data->absen5 == null && $data->absen6 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kelima dan keenam');
+    } elseif ($data->absen6== null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari keenam');
+    } 
+
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
+
+if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen2) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen3) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen4) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen5) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen6) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+}
+
         if($data->absen7 == null){
             $data->absen7 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
@@ -346,11 +521,64 @@ class AbsensiController extends Controller
         
         $data = RegisterModel::where('id_reg', $decrypted)->first();
 
+    if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null && $data->absen7 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari pertama, kedua, ketiga, keempat, kelima, keenam, dan ketujuh');
+    } elseif ($data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null && $data->absen7 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kedua, ketiga, keempat, kelima, keenam, dan ketujuh');
+    } elseif ($data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null && $data->absen7 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari ketiga, keempat, kelima, keenam, dan ketujuh');
+    } elseif ($data->absen4 == null && $data->absen5 == null && $data->absen6 == null && $data->absen7 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari keempat, kelima, keenam, dan ketujuh');
+    } elseif ($data->absen5 == null && $data->absen6 == null && $data->absen7 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari kelima, keenam, dan ketujuh');
+    } elseif ($data->absen6== null && $data->absen7 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari keenam dan ketujuh');
+    } elseif ($data->absen7 == null) {
+        $nama = $data->nama_lengkap;
+        return back()
+            ->with('warning', $nama.' Belum absensi hari ketujuh');
+    } 
+
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
+
+if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen2) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen3) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen4) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen5) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen6) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+} elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen7) {
+    return back()
+     ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
+}
         if($data->absen8 == null){
             $data->absen8 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
