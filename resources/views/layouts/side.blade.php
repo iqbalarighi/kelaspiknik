@@ -97,7 +97,7 @@
         <div class="sidebar-heading bg-side">
             <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
         </div>
-            
+        @if(Auth::user()->role == "admin")
             <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light  {{Request::is('trip')||Request::is('trip/*')||Request::is('user')?'active':''}}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Master Data 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
@@ -110,10 +110,12 @@
                         </div> 
                     </div>
                 </div>
-
+        @endif
 
             <a href="{{route('home')}}" class="list-group-item list-group-item-action bg-light {{Request::is('dashboard')?'active':''}}">Dashboard</a>
+        @if(Auth::user()->role == "admin")
             <a href="{{route('datareg')}}" class="list-group-item list-group-item-action bg-light {{Request::is('datareg')?'active':''}}">Data Registrasi</a>
+        @endif
             <a href="{{route('absensi')}}" class="list-group-item list-group-item-action bg-light {{Request::is('absensi')?'active':''}}">Data Absensi</a>
             {{-- <a href="{{route('qrcode')}}" class="list-group-item list-group-item-action bg-light {{Request::is('qrcode')?'active':''}}">QR Scanner</a> --}}
 

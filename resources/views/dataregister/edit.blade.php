@@ -1,6 +1,9 @@
 @extends('layouts.side')
 
 @section('content')
+@if (Auth::user()->role === 'user')
+        {{abort(403)}}
+@endif
 {{-- style --}}
 <style>
 .containerx {

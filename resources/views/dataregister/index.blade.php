@@ -1,6 +1,9 @@
 @extends('layouts.side')
 
 @section('content')
+@if (Auth::user()->role === 'user')
+        {{abort(403)}}
+@endif
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">

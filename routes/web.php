@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Mail\responseMail;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\EmailController;
@@ -85,8 +85,8 @@ Route::get('/absensi/cardpdf/{kode}/{bus}/', 'cardpdf');
 
 });
 
-Route::controller(Controller::class)->middleware('auth')->group(function () {
-  Route::get('/user', 'indexs')->name('user');
+Route::controller(UserController::class)->middleware('auth')->group(function () {
+  Route::get('/user', 'index')->name('user');
   Route::get('/user/tambah', function() {
     return view('user.adduser');
   });

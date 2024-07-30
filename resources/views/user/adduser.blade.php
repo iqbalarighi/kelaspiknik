@@ -178,7 +178,7 @@ $(document).ready(function () {
 });
 });
 </script>
-{{-- @elseif (Auth::user()->role === 'user' || Auth::user()->role === 'admin' )
+@if (Auth::user()->role === 'user')
         {{abort(403)}}
-@endif --}}
+@endif
 @endsection
