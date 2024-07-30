@@ -40,4 +40,38 @@ if ($validator->fails()) {
         return back()
         ->with('sukses', 'Data User Tersimpan');
     }
+
+    public function hapus($id)
+    {
+        $hapus = User::findOrFail($id);
+
+        $hapus->delete();
+        
+       return back()
+       ->with('sukses', 'User Terhapus');
+    }
+
+    public function edit($id)
+    {
+        $data = User::findOrFail($id);
+
+        return view('user.edit', compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+       $data = User::findOrFail($id);
+
+       $data->name = $request->nama;
+       $data->email = $request->email;
+       $data->role = $request->role;
+       if ($request->pass != null) {
+       $data->password = bcrypt($request->pass, ['rounds' => 12],);
+       }
+       $data->save();
+
+
+       return back()
+       ->with('sukses', 'Data user telah diperbarui');
+    }
 }

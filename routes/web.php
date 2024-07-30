@@ -91,6 +91,9 @@ Route::controller(UserController::class)->middleware('auth')->group(function () 
     return view('user.adduser');
   });
   Route::post('/user/tambah/simpan', 'simpan');
+  Route::put('/user/ubah/simpan/{id}', 'update');
+  Route::delete('/user/hapus/{id}', 'hapus');
+  Route::get('/user/ubah/{id}', 'edit');
 });
 
 Route::get('sendresponse', function() {
