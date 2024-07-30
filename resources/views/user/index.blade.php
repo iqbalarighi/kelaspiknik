@@ -24,7 +24,12 @@
             });
             </script>
         @endif
-
+<style type="text/css">
+    th {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
                     <table class="table-hover table-striped" width="100%" >
                         <tr>
                             <th>No</th>
@@ -41,7 +46,7 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->role}}</td>
                             <td>
-                                <div style="display: flex;">
+                                <div style="display: flex;" class="justify-content-center">
                                     <div class="px-1">
                                         <a href="/user/ubah/{{$item->id}}"  hidden>
                                             <button id="{{$data->firstitem() + $key}}" type="submit" title="Ubah Data"></button>

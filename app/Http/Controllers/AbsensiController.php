@@ -26,7 +26,7 @@ class AbsensiController extends Controller
                     ->paginate(10);
             $data->appends(compact('kode_trip'));
 
-            $busx = TripModel::where('kode_trip', $kode_trip)->get('jumlah_bus');
+            $busx = TripModel::where('kode_trip', $kode_trip)->first();
             $kode = TripModel::get('kode_trip');
 
             return view('absensi.index', compact('data', 'busx', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
@@ -36,7 +36,7 @@ class AbsensiController extends Controller
                     ->paginate(10);
             $data->appends(compact('kode_trip', 'bus', 'absen'));
 
-            $busx = TripModel::where('kode_trip', $kode_trip)->get('jumlah_bus');
+            $busx = TripModel::where('kode_trip', $kode_trip)->first();
             $kode = TripModel::get('kode_trip');
 
             return view('absensi.index', compact('data', 'busx', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));

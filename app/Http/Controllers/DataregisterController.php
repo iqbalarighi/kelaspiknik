@@ -10,11 +10,24 @@ use Illuminate\Support\Facades\Storage;
 
 class DataregisterController extends Controller
 {
-   public function index()
-   {
-      $data = RegisterModel::latest()->paginate(10);
+   public function index(Request $req)
+   { 
+      $cari = $req->cari;
+      if($cari != null){
+         // dd($cari);
+         $data = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+         ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
+         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
+         ->latest()->paginate(10);
+         $data->appends(compact('cari'));
 
-      return view('dataregister.index', compact('data'));
+      } else {
+
+      $data = RegisterModel::latest()->paginate(10);
+      }
+
+      return view('dataregister.index', compact('data', 'cari'));
+
    }
 
    public function edit($id)

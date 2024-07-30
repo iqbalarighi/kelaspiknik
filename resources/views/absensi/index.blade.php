@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card">
-                <div class="card-header">{{ __('Absensi') }}
+                <div class="card-header justify-content-between" style="display: flex;">    
+                    @if($data != null)
+                        <h5>{{$busx->judul_trip}}</h5>
+                    @else
+                        {{ __('Absensi') }}
+                    @endif
                     <a href="{{route('absensi')}}"><span class="btn btn-secondary float-right btn-sm">Reset</span></a>
                 </div>
                 <div class="card-body">
@@ -220,10 +225,9 @@ video {
                             @endif
                         @endif
                                     </div>
-                    </div>
-
-                
+                </div>
         </div>
+
         <div  style="overflow-x: auto;">
             
             <table class="table-striped table-hover" width="100%" >
@@ -454,7 +458,7 @@ domReady(function () {
 (function() {
     var elm = document.getElementById('bus'),
         df = document.createDocumentFragment();
-    for (var i = 1; i <= {{$busx[0]->jumlah_bus}}; i++) {
+    for (var i = 1; i <= {{$busx->jumlah_bus}}; i++) {
         var option = document.createElement('option');
         option.value = "Bus " + i;
         option.appendChild(document.createTextNode("Bus " + i));
