@@ -213,7 +213,7 @@ video {
                                      
                             @endif
                                 @if($kode_trip != null && $bus != null) 
-                                    @if(Auth::user()->role == 'Superadmin')
+                                    @if(Auth::user()->role == 'admin')
                                         <a href="/absensi/cardpdf/{{$kode_trip}}/{{$bus}}" target="_blank"><span class="btn btn-primary btn-sm ml-2 float-end">Download ID Card</span></a>
                                     @endif
                                 @endif 
@@ -345,6 +345,7 @@ domReady(function () {
 
         // alert("You Qr is : {{url('/')}}/"+$('#absen').find(":selected").val()+'/'+decodeText, decodeResult);
             $('#html5-qrcode-button-camera-stop').click();
+                window.location.replace("{{url('/')}}/"+urls+'/'+decodeText, decodeResult);
 
             Swal.fire({
             title: "Loading . . . ",
@@ -356,13 +357,6 @@ domReady(function () {
                 target.style.opacity = '0'
             }
             });
-
-            
-            setTimeout(
-              function() 
-              {
-                    window.location.replace("{{url('/')}}/"+urls+'/'+decodeText, decodeResult);
-            }, 2000);
 
         
     }
@@ -408,6 +402,7 @@ domReady(function () {
     }
         // alert("You Qr is : " + decodeText, decodeResult);
             $('#html5-qrcode-button-camera-stop').click();
+                window.location.replace("{{url('/')}}/"+urls+'/'+decodeText, decodeResult);
 
             Swal.fire({
             title: "Loading . . . ",
@@ -419,12 +414,6 @@ domReady(function () {
                 target.style.opacity = '0'
             }
             });
-            
-            setTimeout(
-              function() 
-              {
-                    window.location.replace("{{url('/')}}/"+urls+'/'+decodeText, decodeResult);
-            }, 2000);
         
     }
 
