@@ -86,7 +86,11 @@ Route::get('/absensi/cardpdf/{kode}/{bus}/', 'cardpdf');
 });
 
 Route::controller(Controller::class)->middleware('auth')->group(function () {
-Route::get('/user/', 'indexs')->name('user');
+  Route::get('/user', 'indexs')->name('user');
+  Route::get('/user/tambah', function() {
+    return view('user.adduser');
+  });
+  Route::post('/user/tambah/simpan', 'simpan');
 });
 
 Route::get('sendresponse', function() {
