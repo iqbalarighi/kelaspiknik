@@ -163,7 +163,7 @@
             @yield('content')
         </main>
             <footer class="mt-auto">
-                  <center>Design By M. Iqbal Arighi Alfarisi {{Carbon\Carbon::today()->isoFormat('Y');}} Powered By kelaspiknik.com</center>  
+                  <center>Design By Iqbal Arighi {{Carbon\Carbon::today()->isoFormat('Y');}}. Powered By kelaspiknik.com</center>  
             </footer>
         </div>
     </div>

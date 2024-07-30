@@ -12,7 +12,7 @@
                     <a href="{{route('user')}}/tambah"><span class="btn btn-primary float-right btn-sm">Tambah User</span></a>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: auto;">
         @if ($message = Session::get('sukses'))
             <script type="text/javascript">
             Swal.fire({
@@ -62,6 +62,7 @@
                     @endforeach
                     </table>
                 </div>
+                {{ $data->onEachSide(5)->links() }}
             </div>
         </div>
     </div>
