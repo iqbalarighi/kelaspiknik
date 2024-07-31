@@ -12,9 +12,30 @@ class TripController extends Controller
 {
    public function index()
    {
+    
     $data = TripModel::latest()->paginate(15);
+foreach ($data as $key => $value) {
+    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    ->WhereNotNull('absen1')
+    ->WhereNotNull('absen2')
+    ->WhereNotNull('absen3')
+    ->WhereNotNull('absen4')
+    ->WhereNotNull('absen5')
+    ->WhereNotNull('absen6')
+    ->WhereNotNull('absen7')
+    ->WhereNotNull('absen8')
+    ->latest()
+    ->count();
 
-       return view('trip.index', compact('data'));
+    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+
+    $juml[] = $jum;
+    $dds[] = $dat;
+
+}
+
+// dd($juml, $dds);
+       return view('trip.index', compact('data', 'juml', 'dds'));
    }
 
 public function input()
@@ -26,7 +47,7 @@ public function bus(Request $request)
     {
         if($request->ajax()){
 
-             $bus = RegisterModel::where('kode_trip', 'LIKE', '%'.$request->kode. '%') // ini hiutng jumlah bus
+             $bus = RegisterModel::whereNotNull('kode_trip', 'LIKE', '%'.$request->kode. '%') // ini hiutng jumlah bus
                     ->where('bus', 'LIKE', '%'.$request->bus. '%')
                     ->count();
 

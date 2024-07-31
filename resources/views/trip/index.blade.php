@@ -30,7 +30,7 @@
                     <a href="{{route('trip')}}/tambah"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
                 <div class="card-body">
-
+{{-- {{dd($juml, $dds)}} --}}
                 <table style="width: 100%;" class="table-stripped table-hover">
                     <tr>
                         <th>No</th>
@@ -39,6 +39,7 @@
                         <th>Nama Sekolah</th>
                         <th>Jumlah Bus</th>
                         <th>Kapasitas Bus</th>
+                        <th>Status</th>
                         <th>Opsi</th>
                     </tr>
                     @foreach($data as $key=>$item)
@@ -49,6 +50,15 @@
                         <td>{{$item->nama_sekolah}}</td>
                         <td align="center">{{$item->jumlah_bus}}</td>
                         <td align="center">{{$item->kapasitas}}</td>
+                        <td align="center">
+                            @if($juml[$key] == null && $dds[$key] == null)
+                                <span class="btn btn-sm btn-primary">Ready</span>
+                            @elseif($juml[$key] == $dds[$key])
+                                <span class="btn btn-sm btn-danger">Finish</span>
+                            @else
+                                <span class="btn btn-sm btn-success">On Progress</span>
+                            @endif
+                        </td>
                         <td>
                             <div style="display: flex;">
                                 <div class="px-1">
