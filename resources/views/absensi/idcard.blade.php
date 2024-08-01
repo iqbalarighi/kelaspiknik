@@ -1,4 +1,4 @@
-@extends('layouts.side')
+@extends('layouts.pdf')
 
 @section('content')
  <style>
@@ -125,5 +125,8 @@
                                </div>
                     </body>
 
-
+<script type="text/javascript">
+         window.onafterprint = window.close;
+         window.print();
+      </script>
 @endsection
