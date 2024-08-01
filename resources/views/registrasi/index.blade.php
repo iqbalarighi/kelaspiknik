@@ -368,7 +368,7 @@ allowClear: true
 
     $.ajax({
         type : 'get',
-        url : '{{route('bus')}}',
+        url : '{{route('bus')}}/',
         data:{'bus':$value, 'kode':$kode},
         
         success:function(data){

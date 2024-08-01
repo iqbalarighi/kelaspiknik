@@ -30,7 +30,7 @@
                     <a href="{{route('trip')}}/tambah"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
                 <div class="card-body">
-{{-- {{dd($juml, $dds)}} --}}
+                    <div style="overflow-x: auto;">
                 <table style="width: 100%;" class="table-stripped table-hover">
                     <tr>
                         <th>No</th>
@@ -39,6 +39,7 @@
                         <th>Nama Sekolah</th>
                         <th>Jumlah Bus</th>
                         <th>Kapasitas Bus</th>
+                        <th>Lama Trip</th>
                         <th>Status</th>
                         <th>Opsi</th>
                     </tr>
@@ -50,6 +51,7 @@
                         <td>{{$item->nama_sekolah}}</td>
                         <td align="center">{{$item->jumlah_bus}}</td>
                         <td align="center">{{$item->kapasitas}}</td>
+                        <td align="center">{{$item->lama_trip}} Hari</td>
                         <td align="center">
                             @if($juml[$key] == null && $dds[$key] == null)
                                 <span class="btn btn-sm btn-primary">Ready</span>
@@ -80,6 +82,8 @@
                     </tr>
                     @endforeach
                 </table>
+                    </div>
+                    <div class="px-1">{{ $data->onEachSide(5)->links() }}</div>
                 </div>
             </div>
         </div>

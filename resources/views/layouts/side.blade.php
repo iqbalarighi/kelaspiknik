@@ -96,6 +96,7 @@
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading bg-side">
             <img src="https://kelaspiknik.com/wp-content/uploads/2022/12/logo.png" height="40px">
+            {{-- <img src="{{asset('storage/image/logo.png')}}" height="40px"> --}}
         </div>
         @if(Auth::user()->role == "admin")
             <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light  {{Request::is('trip')||Request::is('trip/*')||Request::is('user')?'active':''}}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">

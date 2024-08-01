@@ -26,20 +26,20 @@ class AbsensiController extends Controller
                     ->paginate(10);
             $data->appends(compact('kode_trip'));
 
-            $busx = TripModel::where('kode_trip', $kode_trip)->first();
+            $trip = TripModel::where('kode_trip', $kode_trip)->first();
             $kode = TripModel::get('kode_trip');
 
-            return view('absensi.index', compact('data', 'busx', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
+            return view('absensi.index', compact('data', 'trip', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
         } elseif($request->kode_trip != null && $bus != null){
             $data = RegisterModel::where('kode_trip', $kode_trip)
                     ->Where('bus', $bus)
                     ->paginate(10);
             $data->appends(compact('kode_trip', 'bus', 'absen'));
 
-            $busx = TripModel::where('kode_trip', $kode_trip)->first();
+            $trip = TripModel::where('kode_trip', $kode_trip)->first();
             $kode = TripModel::get('kode_trip');
 
-            return view('absensi.index', compact('data', 'busx', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
+            return view('absensi.index', compact('data', 'trip', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
         } else {
             $absen = null;
             $data = null;
@@ -602,4 +602,21 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
         
     }
 //end Absensi
+
+        public function kode_trip(Request $request)
+    {
+        $kode = TripModel::where('kode_trip', 'LIKE', '%'.$request->get('term'). '%')
+                    ->distinct()
+                    ->get();
+
+        foreach ($kode as $hsl)
+            {
+                $dat['kodex'] = $hsl->kode_trip;
+
+                $data[] = $dat;
+            }
+
+return response()->json($data);
+        
+    }
 }

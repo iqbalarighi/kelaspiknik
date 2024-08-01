@@ -82,6 +82,7 @@ Route::get('/enkripsi', 'enkripsi');
 Route::get('/qrgen', 'qrgen');
 Route::get('/absensi/idcard', 'idcard');
 Route::get('/absensi/cardpdf/{kode}/{bus}/', 'cardpdf');
+Route::get('/kode_trip', 'kode_trip')->name('kode_trip');
 
 });
 

@@ -41,6 +41,10 @@
                                 <input type="number" class="form-control form-control-sm" placeholder="" id="kapasitas" name="kapasitas" value="" required>
                                 <label for="kapasitas">Kapasitas Bus <font size="2" color="red">*</font></label>
                             </div>
+                            <div class="form-floating mb-1">
+                                <input type="number" class="form-control form-control-sm" placeholder="" id="lama_trip" name="lama_trip" value="" required>
+                                <label for="lama_trip">Lama Trip<font size="2" color="red">*</font></label>
+                            </div>
                             <div class="text-center mt-2">
                                 <button type="submit" class="btn btn-primary ">Kirim</button>
                             </div>

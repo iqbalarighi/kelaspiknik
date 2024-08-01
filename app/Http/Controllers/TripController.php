@@ -12,28 +12,112 @@ class TripController extends Controller
 {
    public function index()
    {
-    
     $data = TripModel::latest()->paginate(15);
+        
+
 foreach ($data as $key => $value) {
+    
+    if ($value->lama_trip == 2) {
     $dat = RegisterModel::where('kode_trip', $value->kode_trip)
-    ->WhereNotNull('absen1')
-    ->WhereNotNull('absen2')
-    ->WhereNotNull('absen3')
-    ->WhereNotNull('absen4')
-    ->WhereNotNull('absen5')
-    ->WhereNotNull('absen6')
-    ->WhereNotNull('absen7')
-    ->WhereNotNull('absen8')
-    ->latest()
-    ->count();
+        ->WhereNotNull('absen1')
+        ->WhereNotNull('absen2')
+        ->latest()
+        ->count();
 
     $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
 
     $juml[] = $jum;
     $dds[] = $dat;
+    } elseif ($value->lama_trip == 3) {
+    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+        ->WhereNotNull('absen1')
+        ->WhereNotNull('absen2')
+        ->WhereNotNull('absen3')
+        ->latest()
+        ->count();
+
+    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+
+    $juml[] = $jum;
+    $dds[] = $dat;
+    } elseif ($value->lama_trip == 4) {
+    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+        ->WhereNotNull('absen1')
+        ->WhereNotNull('absen2')
+        ->WhereNotNull('absen3')
+        ->WhereNotNull('absen4')
+        ->latest()
+        ->count();
+
+    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+
+    $juml[] = $jum;
+    $dds[] = $dat;
+    } elseif ($value->lama_trip == 5) {
+    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+        ->WhereNotNull('absen1')
+        ->WhereNotNull('absen2')
+        ->WhereNotNull('absen3')
+        ->WhereNotNull('absen4')
+        ->WhereNotNull('absen5')
+        ->latest()
+        ->count();
+
+    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+
+    $juml[] = $jum;
+    $dds[] = $dat;
+    } elseif ($value->lama_trip == 6) {
+    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+        ->WhereNotNull('absen1')
+        ->WhereNotNull('absen2')
+        ->WhereNotNull('absen3')
+        ->WhereNotNull('absen4')
+        ->WhereNotNull('absen5')
+        ->WhereNotNull('absen6')
+        ->latest()
+        ->count();
+
+    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+
+    $juml[] = $jum;
+    $dds[] = $dat;
+    } elseif ($value->lama_trip == 7) {
+    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+        ->WhereNotNull('absen1')
+        ->WhereNotNull('absen2')
+        ->WhereNotNull('absen3')
+        ->WhereNotNull('absen4')
+        ->WhereNotNull('absen5')
+        ->WhereNotNull('absen6')
+        ->WhereNotNull('absen7')
+        ->latest()
+        ->count();
+
+    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+
+    $juml[] = $jum;
+    $dds[] = $dat;
+    } elseif ($value->lama_trip == 8) {
+    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+        ->WhereNotNull('absen1')
+        ->WhereNotNull('absen2')
+        ->WhereNotNull('absen3')
+        ->WhereNotNull('absen4')
+        ->WhereNotNull('absen5')
+        ->WhereNotNull('absen6')
+        ->WhereNotNull('absen7')
+        ->WhereNotNull('absen8')
+        ->latest()
+        ->count();
+
+    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+
+    $dds[] = $dat;
+    $juml[] = $jum;
+    }
 
 }
-
 // dd($juml, $dds);
        return view('trip.index', compact('data', 'juml', 'dds'));
    }
@@ -45,13 +129,16 @@ public function input()
 
 public function bus(Request $request)
     {
+        $bus = $request->bus;
+        $kode = $request->kode;
+
         if($request->ajax()){
 
-             $bus = RegisterModel::whereNotNull('kode_trip', 'LIKE', '%'.$request->kode. '%') // ini hiutng jumlah bus
-                    ->where('bus', 'LIKE', '%'.$request->bus. '%')
+             $bus = RegisterModel::where('kode_trip', 'LIKE', '%'.$kode.'%')
+                    ->where('bus', 'LIKE', '%'.$bus. '%')
                     ->count();
 
-        $dat = TripModel::where('kode_trip', $request->kode)->first();
+        $dat = TripModel::where('kode_trip', $kode)->first();
             
 
             $bus2 = $request->bus;
@@ -92,6 +179,7 @@ public function save(Request $request)
     $data->nama_sekolah = $request->nama;
     $data->jumlah_bus = $request->bus;
     $data->kapasitas = $request->kapasitas;
+    $data->lama_trip = $request->lama_trip;
 
     $data->save();
 
@@ -137,10 +225,11 @@ public function update(Request $request, $id)
     $data->nama_sekolah = $request->nama;
     $data->jumlah_bus = $request->bus;
     $data->kapasitas = $request->kapasitas;
+    $data->lama_trip = $request->lama_trip;
 
     $data->save();
 
     return back()
-      ->with('sukses', 'Purubahan Data Tersimpan');
+      ->with('sukses', 'Perubahan Data Tersimpan');
 }
 }

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header justify-content-between" style="display: flex;">    
                     @if($data != null)
-                        <h5>{{$busx->judul_trip}}</h5>
+                        <h5>{{$trip->judul_trip}}</h5>
                     @else
                         {{ __('Absensi') }}
                     @endif
@@ -154,7 +154,7 @@ video {
             <form action="" method="GET" >
                     <div class="row" width="100%">
                         <div class="col-sm-auto pb-1">
-                                <select class="form-select form-select-sm" name="kode_trip" onchange="form.submit()">
+                                {{-- <select class="form-select form-select-sm" name="kode_trip" onchange="form.submit()">
                                     <option value="" disabled selected>Kode Trip</option>
                                 @if($data == null)
                                     @foreach($kode as $item)
@@ -166,23 +166,31 @@ video {
                                         <option value="{{$item->kode_trip}}">{{$item->kode_trip}}</option>
                                     @endforeach
                                 @endif
-                                </select>
+                                </select> --}}
+                        <select style="width:100%;" id="js-example-basic-multiple" class="form-select form-select-sm" name="kode_trip" aria-label="Default select example" onchange="form.submit()">
+                            @if($data != null)
+                                <option selected value="{{$data == null ? '' : $kode_trip}}">{{$data == null ? '' : $kode_trip}}</option>
+                            @endif
+                        </select>
+                                {{-- @if($data == null)
+                            @else
+                            <input type="text" name="kode_trip" value="{{$kode_trip}}" >
+                            @endif --}}
                             </div>
 
                             @if($data != null)
                             <div class="col-sm-auto pb-1">
-                                    <select class="form-select form-select-sm" name="bus" id="bus" required onchange="form.submit()">
-                                        <option value="" selected disabled>Pilih bus</option>
-                                @if($bus != null)
-                                        <option value="{{$bus}}" selected>{{$bus}}</option>
-                                @endif
+                                    <select class="form-select form-select-sm mobil-bus" name="bus" id="bus" aria-label="Default select example" required onchange="form.submit()">
+
+                                        <option value="{{$bus == null ? '' : $bus}}">{{$bus == null ? '' : $bus}}</option>
+
                                     </select>
                             </div>
                                 @endif
 
                                 @if($data != null)
                             <div class="col-sm-auto pb-1">
-                                    <select class="form-select form-select-sm" name="absen" id="absen" required onchange="form.submit()">
+                                    <select class="form-select form-select-sm absen" name="absen" id="absen" required onchange="form.submit()">
                                         <option value="" selected disabled>Pilih Hari</option>
                                        @if($absen != null)
                                         <option value="{{$absen}}" selected >
@@ -210,8 +218,8 @@ video {
                             @endif 
                             </form>
 
-                                    <div class="col pb-1"> 
                             @if($data != null)
+                                    <div class="col pb-1"> 
                                 @if(count($data) != null)
                                     @if($kode_trip != null && $bus != null && $absen != null)    
                                         <span class="btn btn-sm btn-info" data-toggle="modal" onclick="$('#html5-qrcode-button-camera-stop').click();" id="scan" data-target="#abs" >ScanQR</span> 
@@ -223,23 +231,31 @@ video {
                                     @endif
                                 @endif 
                             @endif
-                        @endif
                                     </div>
+                        @endif
                 </div>
         </div>
 
-        <div  style="overflow-x: auto;">
+        <div style="overflow-x: auto;">
             
-            <table class="table-striped table-hover" width="100%" >
+            <table class="table-hover table-bordered table-striped" width="100%" >
+                @if($data != null)
+                <tr>
+                    <th colspan="15">
+                        {{$trip->nama_sekolah}}
+                    </th>
+                </tr>
+                @endif
                 <tr>
                     <th rowspan="2">No</th>
-                    <th rowspan="2">Kode Trip</th>
+                    {{-- <th rowspan="2">Kode Trip</th> --}}
                     <th rowspan="2">Bus</th>
                     <th rowspan="2">Nama</th>
-                    <th rowspan="2">Sekolah</th>
+                    {{-- <th rowspan="2">Sekolah</th> --}}
                     <th rowspan="2">Kelas</th>
                     <th colspan="9">Absensi</th>
                 </tr>
+                @if($data == null)
                 <tr>
                     <th colspan="1">Day 1</th>
                     <th colspan="1">Day 2</th>
@@ -249,25 +265,29 @@ video {
                     <th colspan="1">Day 6</th>
                     <th colspan="1">Day 7</th>
                     <th colspan="1">Day 8</th>
-
                 </tr>
+                @else
+                <tr id="lama_trip">
+                    
+                </tr>
+                @endif
             @if($data != null)
                 @foreach($data as $key => $item)
                 <tr>
-                    <td>{{$data->firstitem()+$key}}</td>
-                    <td>{{$item->kode_trip}}</td>
-                    <td>{{$item->bus}}</td>
+                    <td align="center">{{$data->firstitem()+$key}}</td>
+                    {{-- <td align="center">{{$item->kode_trip}}</td> --}}
+                    <td align="center">{{$item->bus}}</td>
                     <td>{{$item->nama_lengkap}}</td>
-                    <td>{{$item->sekolah}}</td>
-                    <td>{{$item->kelas}}</td>
-                    <td align="center">@if($item->absen1 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
-                    <td align="center">@if($item->absen2 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
-                    <td align="center">@if($item->absen3 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
-                    <td align="center">@if($item->absen4 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
-                    <td align="center">@if($item->absen5 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
-                    <td align="center">@if($item->absen6 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
-                    <td align="center">@if($item->absen7 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
-                    <td align="center">@if($item->absen8 != null) <i style="color: green;" class="bi bi-check-square-fill"></i> @endif</td>
+                    {{-- <td>{{$item->sekolah}}</td> --}}
+                    <td align="center">{{$item->kelas}}</td>
+                    @if($item->absen1 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen2 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen3 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen4 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen5 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen6 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen7 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen8 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
                 </tr>
                 @endforeach
 
@@ -458,7 +478,7 @@ domReady(function () {
 (function() {
     var elm = document.getElementById('bus'),
         df = document.createDocumentFragment();
-    for (var i = 1; i <= {{$busx->jumlah_bus}}; i++) {
+    for (var i = 1; i <= {{$trip->jumlah_bus}}; i++) {
         var option = document.createElement('option');
         option.value = "Bus " + i;
         option.appendChild(document.createTextNode("Bus " + i));
@@ -474,13 +494,27 @@ domReady(function () {
 (function() {
     var elm = document.getElementById('absen'),
         df = document.createDocumentFragment();
-    for (var i = 1; i <= 8; i++) {
+    for (var i = 1; i <= {{$trip->lama_trip}}; i++) {
         var option = document.createElement('option');
         option.value = "absen" + i;
         option.appendChild(document.createTextNode("Day " + i));
         df.appendChild(option);
     }
     elm.appendChild(df);
+}());
+    </script>
+    @endif
+
+@if($data != null)
+    <script type="text/javascript">
+(function() {
+   var $tableTr = $('#lama_trip');
+for (var i = 0; i < {{$trip->lama_trip}}; i++) {
+    var h = i + 1;
+      $tableTr.append($('<th/>').html('Day ' + h)).css("background-color","#f2f2f2");
+
+  }
+    $tableTr.append($tableTr);
 }());
     </script>
     @endif
@@ -516,5 +550,50 @@ $("select[name='absen'] > option").each(function () {
 });
 </script>
 
+
+<script>
+$('#js-example-basic-multiple').select2({
+        ajax: {
+            url: "{{route('kode_trip')}}",
+            dataType: "json",
+              delay: 250,
+
+processResults: function (data) {
+      // Transforms the top-level key of the response object from 'items' to 'results'
+      return {
+        results: $.map(data, function (item) {
+                        return { text: item.kodex, id: item.kodex }
+                    })
+      };
+    }
+},
+
+placeholder: 'Kode Trip',
+width: 'auto',
+allowClear: true
+
+});
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('.mobil-bus').select2({
+    placeholder: "Pilih Bus",
+    width: 'auto',
+    allowClear: true
+});
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('.absen').select2({
+    placeholder: "Pilih Hari",
+    width: 'auto',
+    allowClear: true
+});
+});
+</script>
 @endsection
 
