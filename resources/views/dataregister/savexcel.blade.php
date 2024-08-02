@@ -1,11 +1,12 @@
 <style type="text/css">
-	th {
+	table, th {
 		font-weight: bold;
 	}
 </style>
 	<table border="1" width="100%">
+
 						<tr>
-							<th colspan="5" align="center" style="font-size: 18pt;">{{$data[0]->sekolah}}</th>
+							<th colspan="4" align="center" style="font-size: 18pt; height: 40px; text-align: center; vertical-align: middle;">{{$data[0]->sekolah}}</th>
 						</tr>
                         <tr>
                             <th>No</th>

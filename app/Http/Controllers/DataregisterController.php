@@ -33,8 +33,13 @@ class DataregisterController extends Controller
 
    public function exportexcel($cari)
    { 
+      $count = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+         ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
+         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
+         ->latest()
+         ->count();
 
-      return Excel::download(new DataregExport($cari), 'Kelas Piknik '.$cari.'.xls');
+      return Excel::download(new DataregExport($cari, $count), 'Kelas Piknik '.$cari.'.xls');
 
    }
 
