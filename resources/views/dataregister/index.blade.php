@@ -35,6 +35,11 @@
     <div>
         <div class="row" >
                 <form action="" method="GET">
+                    @if($cari != null)
+                    <div class="col-sm-4 float-start" style="display: flex;">
+                        <a href="datareg/export/{{$cari}}" target="_blank" class="btn btn-sm btn-primary">Export Excel</a>
+                    </div>
+                    @endif
                     <div class="col-sm-4 float-end" style="display: flex;">
                         <input type="text" name="cari" class="form-control form-control-sm">
                         &nbsp;

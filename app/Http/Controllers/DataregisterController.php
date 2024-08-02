@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DataregExport;
 use App\Models\RegisterModel;
+use Illuminate\Http\Request;
 use App\Models\TripModel;
 use File;
-use Illuminate\Support\Facades\Storage;
 
 class DataregisterController extends Controller
 {
@@ -27,6 +29,12 @@ class DataregisterController extends Controller
       }
 
       return view('dataregister.index', compact('data', 'cari'));
+   }
+
+   public function exportexcel($cari)
+   { 
+
+      return Excel::download(new DataregExport($cari), 'Kelas Piknik '.$cari.'.xls');
 
    }
 

@@ -60,6 +60,7 @@ Route::controller(DataregisterController::class)->middleware('auth')->group(func
  Route::get('/datareg/hapus/foto/{id}', 'hapusfoto');
  Route::get('/datareg/hapus/surat/{id}', 'hapusurat');
  Route::get('/datareg/detail/{id_reg}', 'detail');
+ Route::get('/datareg/export/{cari}', 'exportexcel');
 });
 
 // Route::get('/qrcode', function () {
