@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\DataregExport;
+use App\Exports\NotelExport;
 use App\Models\RegisterModel;
 use Illuminate\Http\Request;
 use App\Models\TripModel;
@@ -33,13 +34,37 @@ class DataregisterController extends Controller
 
    public function exportexcel($cari)
    { 
+      $trip = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+         ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
+         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
+         ->latest()
+         ->get();
+
       $count = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
          ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
          ->count();
 
-      return Excel::download(new DataregExport($cari, $count), 'Kelas Piknik '.$cari.'.xls');
+      return Excel::download(new DataregExport($cari, $count), 'Kelas Piknik Trip '.$trip[0]->kode_trip.'.xlsx');
+
+   }
+
+   public function exportnotel($cari)
+   { 
+      $trip = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+         ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
+         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
+         ->latest()
+         ->get();
+      
+      $count = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+         ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
+         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
+         ->latest()
+         ->count();
+
+      return Excel::download(new NotelExport($cari, $count), 'Nomor Telepon Trip '.$trip[0]->kode_trip.'.xlsx');
 
    }
 
