@@ -43,7 +43,7 @@
                         </div>
                         @endif
                         <div class="col-sm-4 float-end" style="display: flex;">
-                            <input type="text" name="cari" class="form-control form-control-sm">
+                            <input type="search" name="cari" class="form-control form-control-sm">
                             &nbsp;
                             <input type="submit" value="{{$cari != null ? 'Reset' : 'Cari'}}" class="btn btn-sm btn-primary">
                         </div>
