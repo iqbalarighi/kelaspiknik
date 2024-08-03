@@ -3,16 +3,16 @@
 @section('content')
  <style>
         body {
-/*            font-family: Arial, sans-serif;*/
+           size: landscape;
         }
         .id-card {
-            width: 256px;
-            height: 400px;
+            width: 312px;
+            height: 470px;
 /*            border-radius: 15px;*/
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
             position: relative;
-            margin: 30px auto;
+            margin: 10px auto;
             color: black;
             text-align: center;
         }
@@ -27,14 +27,14 @@
 /*        }*/
 
         .id-img {
-            width: 250px;
-            height: 400px;
+            width: 320px;
+            height: 470px;
 /*            border-radius: 15px;*/
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
             background-size: cover;
             position: absolute;
-            margin-left: -60px;
+            margin-left: -100px;
             color: black;
             text-align: center;
             z-index: 0; 
@@ -56,22 +56,22 @@
         }
         .details h1 {
             margin-top:-40px;
-            font-size: 16pt;
+            font-size: 18pt;
             font-weight: bold;
         }
         .pad {
             text-align: left;
-            margin-top: 20px;
+            margin-top: 50px;
             
             margin-bottom: -10px;
-            font-size: 13pt;
+            font-size: 15pt;
         }
         .qr-code {
-            width: 80px;
-            height: 80px;
+            width: 110px;
+            height: 110px;
             z-index: 3;
             position: absolute;
-              bottom: 80px;
+              bottom: 90px;
               right: 15px;
 /*              border: 1px black solid;*/
               padding: 0;
@@ -97,7 +97,7 @@
                         @foreach($idcard as $key => $idcard) 
 
                             <div class="id-card" >
-                            <img class="id-img mt-0" src="{{asset('storage/image/idcard.png')}}" width="250px" style="">
+                            <img class="id-img mt-0" src="{{asset('storage/image/idcard.png')}}" width="318px" style="">
                                 <img src="{{asset('storage/image/logo.png')}}" alt="Profile Picture" class="profile-pic">
                             <div class="details">
                                 <div>
@@ -115,8 +115,8 @@
                                     src="https://api.qrserver.com/v1/create-qr-code/?data={{base64_encode(base64_encode($idcard->id_reg))}}&amp;size=300x300" 
                                     alt="" 
                                     title="{{($idcard->nama_lengkap)}}" 
-                                    width="100" 
-                                    height="100" />
+                                    width="150" 
+                                    height="150" />
 
 
                             </div>
@@ -125,8 +125,8 @@
                                </div>
                     </body>
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
          window.onafterprint = window.close;
          window.print();
-      </script>
+      </script> --}}
 @endsection

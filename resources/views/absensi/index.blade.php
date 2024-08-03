@@ -280,14 +280,30 @@ video {
                     <td>{{$item->nama_lengkap}}</td>
                     {{-- <td>{{$item->sekolah}}</td> --}}
                     <td align="center">{{$item->kelas}}</td>
-                    @if($item->absen1 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
-                    @if($item->absen2 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
-                    @if($item->absen3 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
-                    @if($item->absen4 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
-                    @if($item->absen5 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
-                    @if($item->absen6 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
-                    @if($item->absen7 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
-                    @if($item->absen8 != null) <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> @endif
+                    @if($item->absen1 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
+                    @if($item->absen2 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
+                    @if($item->absen3 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
+                    @if($item->absen4 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
+                    @if($item->absen5 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
+                    @if($item->absen6 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
+                    @if($item->absen7 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
+                    @if($item->absen8 != null) 
+                        <td align="center"><i style="color: green;" class="bi bi-check-square-fill"></i></td> 
+                    @endif
                 </tr>
                 @endforeach
 
@@ -499,6 +515,7 @@ domReady(function () {
         option.value = "absen" + i;
         option.appendChild(document.createTextNode("Day " + i));
         df.appendChild(option);
+
     }
     elm.appendChild(df);
 }());
@@ -509,10 +526,10 @@ domReady(function () {
     <script type="text/javascript">
 (function() {
    var $tableTr = $('#lama_trip');
-for (var i = 0; i < {{$trip->lama_trip}}; i++) {
-    var h = i + 1;
-      $tableTr.append($('<th/>').html('Day ' + h)).css("background-color","#f2f2f2");
+for (var i = 1; i <= {{$trip->lama_trip}}; i++) {
+      $tableTr.append($('<th>').html('Day ' + i)).css("background-color","#f2f2f2");
 
+        console.log(i);
   }
     $tableTr.append($tableTr);
 }());
