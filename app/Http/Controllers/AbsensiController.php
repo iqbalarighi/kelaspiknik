@@ -321,9 +321,6 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
             $foto = $data->foto;
             $kode = $data->kode_trip;
             $idre = $data->id_reg;
-        if($data->absen5 == null){
-            $data->absen5 = Carbon::now()->parse()->format('Y-m-d');
-            $data->save();
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     return back()
@@ -338,6 +335,9 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     return back()
      ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
 }
+        if($data->absen5 == null){
+            $data->absen5 = Carbon::now()->parse()->format('Y-m-d');
+            $data->save();
 
             return back()
             ->with('sukses', $nama.' berhasil melakukan absensi hari kelima')
@@ -408,7 +408,9 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
 } elseif(Carbon::now()->parse()->format('Y-m-d') == $data->absen5) {
     return back()
      ->with('error', 'Tidak bisa absen hari berikutnya di hari yang sama'); 
-} elseif($data->absen6 == null){
+} 
+
+        if($data->absen6 == null){
             $data->absen6 = Carbon::now()->parse()->format('Y-m-d');
             $data->save();
 
