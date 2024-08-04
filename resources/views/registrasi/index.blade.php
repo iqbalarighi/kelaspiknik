@@ -91,6 +91,13 @@
                             <button type="submit" class="btn btn-primary ">Kirim</button>
                         </div>
                     </form>
+                    <script type="text/javascript">
+                        $(function() {
+    $('input').keyup(function() {
+        this.value = this.value.toLocaleUpperCase();
+    });
+});
+                    </script>
                         @else
                    
                     <form action="{{url('regis')}}/{{$kode}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">

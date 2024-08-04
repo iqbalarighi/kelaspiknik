@@ -162,7 +162,7 @@ public function save(Request $request)
  {
     $month = Carbon::now()->format('m');
    
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#%&';
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < 3; $i++) {

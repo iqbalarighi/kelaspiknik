@@ -134,7 +134,6 @@ video {
 
         @if ($message = Session::get('warning'))
             <script type="text/javascript">
-            
             Swal.fire({
               icon: "warning",
               title: "Perhatian",
@@ -222,8 +221,14 @@ video {
                                     <div class="col pb-1"> 
                                 @if(count($data) != null)
                                     @if($kode_trip != null && $bus != null && $absen != null)    
-                                        <span class="btn btn-sm btn-info" data-toggle="modal" onclick="$('#html5-qrcode-button-camera-stop').click();" id="scan" data-target="#abs" >ScanQR</span> 
-                                     
+                                        <span class="btn btn-sm btn-info" data-toggle="modal" onclick="$('#html5-qrcode-button-camera-stop').click(); start();" id="scan" data-target="#abs" >ScanQR</span> 
+                                     <script type="text/javascript">
+                                         function start() {
+                                            setTimeout( function(){
+                                             $('#html5-qrcode-button-camera-start').click();                                             
+                                            }, 100);
+                                         }
+                                     </script>
                             @endif
                                 @if($kode_trip != null && $bus != null) 
                                     @if(Auth::user()->role == 'admin')
@@ -406,11 +411,13 @@ domReady(function () {
         { fps: 10, qrbos: 250}, 
         
     );
-
+htmlscanner.clear();
     htmlscanner.render(onScanSuccess);
+
+
 });
                     </script>
-                    @else 
+            @else 
                     <script type="text/javascript">
                         // script.js file
 
