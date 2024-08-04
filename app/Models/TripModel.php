@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\RegisterModel;
 
 class TripModel extends Model
 {
@@ -18,4 +19,9 @@ class TripModel extends Model
         'jumlah_bus',
         'kapasitas'
     ];
+
+    public function register()
+    {
+       return $this->hasOne(RegisterModel::class);
+    }
 }

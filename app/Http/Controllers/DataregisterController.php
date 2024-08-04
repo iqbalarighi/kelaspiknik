@@ -18,9 +18,11 @@ class DataregisterController extends Controller
       $cari = $req->cari;
       if($cari != null){
          // dd($cari);
-         $data = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+         $data = RegisterModel::whereHas('trip', function ($query) use ($cari){
+              $query->where('kode_trip', 'like', '%'.$cari.'%')
+                     ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
+          })
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
-         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()->paginate(10);
          $data->appends(compact('cari'));
 
@@ -34,13 +36,13 @@ class DataregisterController extends Controller
 
    public function exportexcel($cari)
    { 
-      $trip = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $trip = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
          ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
          ->get();
 
-      $count = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $count = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
          ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
@@ -52,13 +54,13 @@ class DataregisterController extends Controller
 
    public function exportnotel($cari)
    { 
-      $trip = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $trip = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
          ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
          ->get();
       
-      $count = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $count = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
          ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()

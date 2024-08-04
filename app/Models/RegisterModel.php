@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TripModel;
 
 class RegisterModel extends Model
 {
@@ -29,4 +31,9 @@ class RegisterModel extends Model
         'no_tel_ortu1',
         'no_tel_ortu2'
     ];
+
+    public function trip(): BelongsTo
+{
+    return $this->belongsTo(TripModel::class, 'kode_trip');
+}
 }

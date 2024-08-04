@@ -64,6 +64,7 @@ $input = request()->all();
     }
 
 //end of validator
+$trip = TripModel::where('kode_trip', $kode)->first();
 
     $year = Carbon::now()->format('Y');
     $month = Carbon::now()->format('m');
@@ -99,9 +100,9 @@ $input = request()->all();
       }
 
       $data->id_reg = $id_reg;
-      $data->kode_trip = $kode;
+      $data->kode_trip = $trip->id;
       $data->bus = $request->bus;
-      $data->sekolah = $request->sekolah;
+      $data->sekolah = $trip->id;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;
       $data->ttl = $ttl;
@@ -142,7 +143,7 @@ $input = request()->all();
             ->withInput()
             ->with('error', 'Email tidak terkirim'); 
       } 
-
+ $data->save();
       return back()
       ->with('sukses', 'Data Registrasi Anda Telah Tersimpan'); 
    }

@@ -100,7 +100,7 @@
                     </script>
                         @else
                    
-                    <form action="{{url('regis')}}/{{$kode}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
+                    <form action="{{url('regis')}}/{{$data->kode_trip}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
                 @csrf
                     <div class="mb-3 mt-1">
                         <input type="text" class="form-control form-control-sm" placeholder="" id="sekolah" name="sekolah" value="{{$data->nama_sekolah}}" required readonly>
