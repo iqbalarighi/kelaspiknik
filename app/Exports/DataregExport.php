@@ -51,6 +51,10 @@ class DataregExport implements FromView, ShouldAutoSize, WithStyles
         $sheet->getStyle('A2:D2')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('D3D3D3');
         $sheet->getStyle('A1:D2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         $sheet->getStyle('A1:D2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A3:B'.$count)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A3:B'.$count)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('D3:D'.$count)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('D3:D'.$count)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A2:D'.$count)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
     }
 
@@ -58,9 +62,11 @@ class DataregExport implements FromView, ShouldAutoSize, WithStyles
     {
         $cari = $this->cari;
 
-        $data = RegisterModel::where('kode_trip', 'LIKE', '%'.$cari.'%')
+        $data = RegisterModel::whereHas('trip', function ($query) use ($cari){
+              $query->where('kode_trip', 'like', '%'.$cari.'%')
+                     ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
+          })
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
-         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->orderBy('bus', 'asc')
          ->orderBy('nama_lengkap', 'asc')
          ->latest()

@@ -9,7 +9,7 @@ nama lengkap
 Nama orang tua
 Nomor telp
 						<tr>
-							<th colspan="8" align="center" style="font-size: 18pt; height: 40px; text-align: center; vertical-align: middle;">{{$data[0]->sekolah}}</th>
+							<th colspan="8" align="center" style="font-size: 18pt; height: 40px; text-align: center; vertical-align: middle;">{{$data[0]->trip->nama_sekolah}}</th>
 						</tr>
                         <tr>
                             <th>No</th>

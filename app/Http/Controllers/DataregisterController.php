@@ -27,8 +27,10 @@ class DataregisterController extends Controller
          $data->appends(compact('cari'));
 
       } else {
+         $cari = '';
+      $data = RegisterModel::with('trip')->latest()->paginate(10);
 
-      $data = RegisterModel::latest()->paginate(10);
+     return view('dataregister.index', compact('data', 'cari'));
       }
 
       return view('dataregister.index', compact('data', 'cari'));
@@ -36,37 +38,49 @@ class DataregisterController extends Controller
 
    public function exportexcel($cari)
    { 
-      $trip = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $trip = RegisterModel::with('trip')
+      ->whereRelation('trip', function ($query) use ($cari){
+              $query->where('kode_trip', 'like', '%'.$cari.'%')
+                     ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
+          })
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
-         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
          ->get();
 
-      $count = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $count = RegisterModel::with('trip')
+      ->whereRelation('trip', function ($query) use ($cari){
+              $query->where('kode_trip', 'like', '%'.$cari.'%')
+                     ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
+          })
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
-         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
          ->count();
-
-      return Excel::download(new DataregExport($cari, $count), 'Kelas Piknik Trip '.$trip[0]->kode_trip.'.xlsx');
+// dd($trip);
+      return Excel::download(new DataregExport($cari, $count), 'Kelas Piknik Trip '.$trip[0]->trip->kode_trip.'.xlsx');
 
    }
 
    public function exportnotel($cari)
    { 
-      $trip = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $trip = RegisterModel::with('trip')
+      ->whereRelation('trip', function ($query) use ($cari){
+              $query->where('kode_trip', 'like', '%'.$cari.'%')
+                     ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
+          })
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
-         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
          ->get();
       
-      $count = RegisterModel::with('trip')->where('kode_trip', 'LIKE', '%'.$cari.'%')
+      $count = RegisterModel::with('trip')
+      ->whereRelation('trip', function ($query) use ($cari){
+              $query->where('kode_trip', 'like', '%'.$cari.'%')
+                     ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
+          })
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
-         ->orWhere('sekolah', 'LIKE', '%'.$cari.'%')
          ->latest()
          ->count();
 
-      return Excel::download(new NotelExport($cari, $count), 'Nomor Telepon Trip '.$trip[0]->kode_trip.'.xlsx');
+      return Excel::download(new NotelExport($cari, $count), 'Nomor Telepon Trip '.$trip[0]->trip->kode_trip.'.xlsx');
 
    }
 
