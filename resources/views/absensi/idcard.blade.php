@@ -101,7 +101,7 @@
                                 <img src="{{asset('storage/image/logo.png')}}" alt="Profile Picture" class="profile-pic">
                             <div class="details">
                                 <div>
-                                    <h1>{{$idcard->sekolah}}</h1>
+                                    <h1>{{$idcard->trip->nama_sekolah}}</h1>
                                 </div>
                                 <div class="row">
                                     <div class="pad">

@@ -21,8 +21,10 @@ class AbsensiController extends Controller
         $agent = new Agent();
 
         if($request->kode_trip != null && $request->bus == null){
-            $data = RegisterModel::where('kode_trip', $kode_trip)
-                    // ->orWhere('bus', $request->bus)
+            $data = RegisterModel::with('trip')
+            ->whereRelation('trip', function ($query) use ($kode_trip){
+              $query->where('kode_trip', 'like', '%'.$kode_trip.'%');
+                    })
                     ->paginate(10);
             $data->appends(compact('kode_trip'));
 
@@ -31,7 +33,10 @@ class AbsensiController extends Controller
 
             return view('absensi.index', compact('data', 'trip', 'kode_trip', 'bus', 'kode', 'agent', 'absen'));
         } elseif($request->kode_trip != null && $bus != null){
-            $data = RegisterModel::where('kode_trip', $kode_trip)
+            $data = RegisterModel::with('trip')
+            ->whereRelation('trip', function ($query) use ($kode_trip){
+              $query->where('kode_trip', 'like', '%'.$kode_trip.'%');
+                    })
                     ->Where('bus', $bus)
                     ->paginate(10);
             $data->appends(compact('kode_trip', 'bus', 'absen'));
@@ -63,7 +68,10 @@ class AbsensiController extends Controller
     public function cardpdf($kode, $bus)
     {
 
-        $idcard = RegisterModel::where('kode_trip', $kode)
+        $idcard = RegisterModel::with('trip')
+            ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+                    })
                     ->Where('bus', $bus)
                     ->get();
 

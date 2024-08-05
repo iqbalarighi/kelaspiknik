@@ -98,7 +98,7 @@
             
                 <div class="mb-3">
                     <select style="width:100%;" class="form-select" id="school" name="sekolah" required>
-                        <option value="{{$data->sekolah}}" selected>{{$data->sekolah}}</option>
+                        <option value="{{$data->trip->nama_sekolah}}" selected>{{$data->trip->nama_sekolah}}</option>
                     </select>
                 </div>
 
@@ -336,7 +336,7 @@
 
     $('#bus').on('change', function() {
     $value = $(this).val();
-    $kode = '{{$data->kode_trip}}';
+    $kode = '{{$data->trip->kode_trip}}';
     
     $.ajax({
         type : 'get',

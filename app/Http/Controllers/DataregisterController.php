@@ -86,8 +86,8 @@ class DataregisterController extends Controller
 
    public function edit($id)
    {
-      $data = RegisterModel::where('id_reg', $id)->first();
-      $jmlh = TripModel::where('kode_trip', $data->kode_trip)->first();
+      $data = RegisterModel::with('trip')->where('id_reg', $id)->first();
+      $jmlh = TripModel::where('kode_trip', $data->trip->kode_trip)->first();
       $value = explode(',', $data->ttl);
 
       return view('dataregister.edit', compact('data', 'value', 'jmlh'));

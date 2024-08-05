@@ -134,7 +134,10 @@ public function bus(Request $request)
 
         if($request->ajax()){
 
-             $bus = RegisterModel::where('kode_trip', 'LIKE', '%'.$kode.'%')
+             $bus = RegisterModel::with('trip')
+             ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
                     ->where('bus', 'LIKE', '%'.$bus. '%')
                     ->count();
 

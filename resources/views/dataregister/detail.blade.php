@@ -18,18 +18,18 @@
     <tr>
         <td>Sekolah</td>
         <td>:</td>
-        <td>{{$data->sekolah}}</td>
+        <td>{{$data->trip->nama_sekolah}}</td>
     </tr>
     <tr>
         <td>Nama</td>
         <td>:</td>
         <td>{{$data->nama_lengkap}}</td>
     </tr>
-{{--     <tr>
-        <td>NIS</td>
+    <tr>
+        <td>BUS</td>
         <td>:</td>
-        <td>{{$data->nis}}</td>
-    </tr> --}}
+        <td>{{$data->bus}}</td>
+    </tr>
     <tr>
         <td>Kelas</td>
         <td>:</td>
