@@ -78,6 +78,24 @@ $trip = TripModel::where('kode_trip', $kode)->first();
 
       $data = new RegisterModel;
 
+
+      $data->id_reg = $id_reg;
+      $data->kode_trip = $trip->id;
+      $data->bus = $request->bus;
+      $data->sekolah = $trip->id;
+      $data->nama_lengkap = $request->nama;
+      $data->kelas = $request->kelas;
+      $data->ttl = $ttl;
+      $data->penyakit = $request->penyakit;
+      $data->alamat = $request->alamat;
+      $data->email = $request->email;
+      $data->no_tel = $request->notel;
+      $data->no_wa = $request->nowa;
+      // $data->foto = implode('|', $image);
+      $data->nm_ortu = $request->nm_ortu;
+      $data->no_tel_ortu1 = $request->notel_ortu_1;
+      $data->no_tel_ortu2 = $request->notel_ortu_2;
+
       $files = $request->file('images');
       $files2 = $request->file('images2');
 
@@ -98,24 +116,6 @@ $trip = TripModel::where('kode_trip', $kode)->first();
          $surat->move(public_path('storage/registrasi/'.$kode.'/'.$id_reg.'/'), $imageName);
          $data->surat = $imageName;
       }
-
-      $data->id_reg = $id_reg;
-      $data->kode_trip = $trip->id;
-      $data->bus = $request->bus;
-      $data->sekolah = $trip->id;
-      $data->nama_lengkap = $request->nama;
-      $data->kelas = $request->kelas;
-      $data->ttl = $ttl;
-      $data->penyakit = $request->penyakit;
-      $data->alamat = $request->alamat;
-      $data->email = $request->email;
-      $data->no_tel = $request->notel;
-      $data->no_wa = $request->nowa;
-      // $data->foto = implode('|', $image);
-      $data->nm_ortu = $request->nm_ortu;
-      $data->no_tel_ortu1 = $request->notel_ortu_1;
-      $data->no_tel_ortu2 = $request->notel_ortu_2;
-
 
       
       $terima = $request->email;

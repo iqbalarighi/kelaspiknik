@@ -86,20 +86,20 @@ class AbsensiController extends Controller
     }
 
 
-    public function enkripsi()
-    {
-        $text = 'REG072400003';
-        $encrypted = Crypt::encryptString($text);
+    // public function enkripsi()
+    // {
+    //     $text = 'REG072400003';
+    //     $encrypted = Crypt::encryptString($text);
 
-        dd($encrypted, $text);
-    }
+    //     dd($encrypted, $text);
+    // }
 
-    public function qrgen()
-    {
-       $data = RegisterModel::latest()->get();
+    // public function qrgen()
+    // {
+    //    $data = RegisterModel::latest()->get();
 
-       return view('absensi.qrgen', compact('data'));
-    }
+    //    return view('absensi.qrgen', compact('data'));
+    // }
     
 
 //start Absensi ==========================================
@@ -108,12 +108,12 @@ class AbsensiController extends Controller
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
         if($data->absen1 == null){
             $data->absen1 = Carbon::now()->parse()->format('Y-m-d');
@@ -143,7 +143,7 @@ class AbsensiController extends Controller
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data->absen1 == null) {
         $nama = $data->nama_lengkap;
@@ -154,7 +154,7 @@ class AbsensiController extends Controller
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
@@ -188,7 +188,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data->absen1 == null && $data->absen2 == null) {
         $nama = $data->nama_lengkap;
@@ -204,7 +204,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
@@ -242,7 +242,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null) {
         $nama = $data->nama_lengkap;
@@ -262,7 +262,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
@@ -304,7 +304,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null) {
         $nama = $data->nama_lengkap;
@@ -327,7 +327,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
@@ -371,7 +371,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null) {
         $nama = $data->nama_lengkap;
@@ -398,7 +398,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
@@ -447,7 +447,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null) {
         $nama = $data->nama_lengkap;
@@ -478,7 +478,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
@@ -529,7 +529,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
 
         $decrypted = base64_decode(base64_decode($id_reg));
         
-        $data = RegisterModel::where('id_reg', $decrypted)->first();
+        $data = RegisterModel::with('trip')->where('id_reg', $decrypted)->first();
 
     if ($data->absen1 == null && $data->absen2 == null && $data->absen3 == null && $data->absen4 == null && $data->absen5 == null && $data->absen6 == null && $data->absen7 == null) {
         $nama = $data->nama_lengkap;
@@ -564,7 +564,7 @@ if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {
     if ($data == true){
             $nama = $data->nama_lengkap;
             $foto = $data->foto;
-            $kode = $data->kode_trip;
+            $kode = $data->trip->kode_trip;
             $idre = $data->id_reg;
 
 if(Carbon::now()->parse()->format('Y-m-d') == $data->absen1) {

@@ -80,8 +80,8 @@ Route::get('/absen5/{id_reg}', 'absen5');
 Route::get('/absen6/{id_reg}', 'absen6');
 Route::get('/absen7/{id_reg}', 'absen7');
 Route::get('/absen8/{id_reg}', 'absen8');
-Route::get('/enkripsi', 'enkripsi');
-Route::get('/qrgen', 'qrgen');
+// Route::get('/enkripsi', 'enkripsi');
+// Route::get('/qrgen', 'qrgen');
 Route::get('/absensi/idcard', 'idcard');
 Route::get('/absensi/cardpdf/{kode}/{bus}/', 'cardpdf');
 Route::get('/kode_trip', 'kode_trip')->name('kode_trip');
@@ -99,11 +99,11 @@ Route::controller(UserController::class)->middleware('auth')->group(function () 
   Route::get('/user/ubah/{id}', 'edit');
 });
 
-Route::get('sendresponse', function() {
-  $email = new responseMail();
-  Mail::to('gamebell771@gmail.com')->send($email);
+// Route::get('sendresponse', function() {
+//   $email = new responseMail();
+//   Mail::to('gamebell771@gmail.com')->send($email);
 
-  return 'berhasil cuy';
-});
+//   return 'berhasil cuy';
+// });
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);

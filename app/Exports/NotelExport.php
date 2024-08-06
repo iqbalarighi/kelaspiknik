@@ -36,6 +36,9 @@ class NotelExport implements FromView, ShouldAutoSize, WithStyles
         $sheet->getStyle('A2:H2')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('D3D3D3');
         $sheet->getStyle('A1:H2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         $sheet->getStyle('A1:H2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A3:B'.$count)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A3:B'.$count)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('B3:H'.$count)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         $sheet->getStyle('A2:H'.$count)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
         return [

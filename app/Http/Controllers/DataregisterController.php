@@ -18,22 +18,35 @@ class DataregisterController extends Controller
       $cari = $req->cari;
       if($cari != null){
          // dd($cari);
-         $data = RegisterModel::whereHas('trip', function ($query) use ($cari){
+         $data = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($cari){
               $query->where('kode_trip', 'like', '%'.$cari.'%')
                      ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
           })
          ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
-         ->latest()->paginate(10);
+         ->latest()->paginate(15);
          $data->appends(compact('cari'));
 
+$guard = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($cari){
+              $query->where('kode_trip', 'like', '%'.$cari.'%')
+                     ->orWhere('nama_sekolah', 'LIKE', '%'.$cari.'%');
+          })
+         ->orWhere('nama_lengkap', 'LIKE', '%'.$cari.'%')
+         ->select('kode_trip')
+         ->distinct()
+         ->get();
+
+// dd($guard->count());
+      return view('dataregister.index', compact('data', 'cari', 'guard'));
       } else {
          $cari = '';
-      $data = RegisterModel::with('trip')->latest()->paginate(10);
+         $guard = '';
+      $data = RegisterModel::with('trip')->latest()->paginate(15);
 
-     return view('dataregister.index', compact('data', 'cari'));
+     return view('dataregister.index', compact('data', 'cari', 'guard'));
       }
 
-      return view('dataregister.index', compact('data', 'cari'));
    }
 
    public function exportexcel($cari)
@@ -101,6 +114,23 @@ class DataregisterController extends Controller
       $nod = $data->id_reg;
       $kod = $data->kode_trip;
 
+
+         
+      if ($request->bus != null) {
+      $data->bus = $request->bus;
+      }
+      $data->nama_lengkap = $request->nama;
+      $data->kelas = $request->kelas;
+      $data->ttl = $ttl;
+      $data->penyakit = $request->penyakit;
+      $data->alamat = $request->alamat;
+      $data->email = $request->email;
+      $data->no_tel = $request->notel;
+      $data->no_wa = $request->nowa;
+      $data->nm_ortu = $request->nm_ortu;
+      $data->no_tel_ortu1 = $request->notel_ortu_1;
+      $data->no_tel_ortu2 = $request->notel_ortu_2;
+
       if ($data->foto == null){
          $foto = $request->file('images');
          $image_name = md5(rand(100, 1000));
@@ -118,19 +148,6 @@ class DataregisterController extends Controller
          $surat->move(public_path('storage/registrasi/'.$kod.'/'.$nod.'/'), $imageName);
          $data->surat = $imageName;
       }
-
-      $data->bus = $request->bus;
-      $data->nama_lengkap = $request->nama;
-      $data->kelas = $request->kelas;
-      $data->ttl = $ttl;
-      $data->penyakit = $request->penyakit;
-      $data->alamat = $request->alamat;
-      $data->email = $request->email;
-      $data->no_tel = $request->notel;
-      $data->no_wa = $request->nowa;
-      $data->nm_ortu = $request->nm_ortu;
-      $data->no_tel_ortu1 = $request->notel_ortu_1;
-      $data->no_tel_ortu2 = $request->notel_ortu_2;
 
       $data->save();
 

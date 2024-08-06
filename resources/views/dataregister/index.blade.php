@@ -37,10 +37,12 @@
                 <form action="" method="GET">
                     <div class="row justify-content-between">
                         @if($cari != null)
-                        <div class="col-sm-4 float-start" style="display: flex;">
-                            <span class="px-1"><a href="datareg/export/{{$cari}}" target="_blank" class="btn btn-sm btn-primary">Export TL</a></span>
-                            <span class="px-1"><a href="datareg/exportnotel/{{$cari}}" target="_blank" class="btn btn-sm btn-primary">Export Admin</a></span>
-                        </div>
+                            @if($guard->count() == '1')
+                            <div class="col-sm-4 float-start" style="display: flex;">
+                                <span class="px-1"><a href="datareg/export/{{$cari}}" target="_blank" class="btn btn-sm btn-primary">Export TL</a></span>
+                                <span class="px-1"><a href="datareg/exportnotel/{{$cari}}" target="_blank" class="btn btn-sm btn-primary">Export Admin</a></span>
+                            </div>
+                            @endif
                         @endif
                         <div class="col-sm-4 float-end" style="display: flex;">
                             <input type="search" name="cari" value="{{$cari != null ? $cari : ''}}" class="form-control form-control-sm">

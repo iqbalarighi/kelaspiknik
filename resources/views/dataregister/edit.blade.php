@@ -104,7 +104,7 @@
 
                 <div class="mb-3 mt-1">
                     <div style="text-align: left !important;" >Kendaraan : {{$data->bus}}</div>
-                    <select class="form-select form-select-sm" name="bus" id="bus" required>
+                    <select class="form-select form-select-sm" name="bus" id="bus">
                          <option value="" selected >Pilih Bus</option>
                     </select>
                     <center><span id="hasil"></span></center>
@@ -165,7 +165,7 @@
                     <div style="text-align: left !important;"><b>Foto Peserta</b>:
                         <div class="row">
                             <div class="containerx">
-                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->kode_trip}}/{{$data->id_reg}}/{{$data->foto}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
+                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->trip->kode_trip}}/{{$data->id_reg}}/{{$data->foto}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
                                 <div class="middle">
                                     <div class="text">
                                         <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Foto" onclick="return hapus(this);"></i>
@@ -201,7 +201,7 @@
                     <div style="text-align: left !important;"><b>Surat Pernyataan</b>:
                         <div class="row">
                             <div class="containerx">
-                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->kode_trip}}/{{$data->id_reg}}/{{$data->surat}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
+                               <img class="image" src="{{asset('storage/registrasi')}}/{{$data->trip->kode_trip}}/{{$data->id_reg}}/{{$data->surat}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
                                 <div class="middle">
                                     <div class="text">
                                         <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Foto" onclick="return hapus2(this);"></i>
@@ -344,13 +344,15 @@
         data:{'bus':$value, 'kode':$kode},
         
         success:function(data){
-            console.log(data);
             if(data.bus < data.limit){
+            console.log(data.bus);
                 var sisa = data.limit - data.bus;
         $('#hasil').html(data.bus2 +' masih tersedia '+sisa+' kursi<i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i>').css("color","green");
     } else {
+            console.log(data.bus);
         $('#hasil').html(data.bus2 +' tidak tersedia <i style="font-size:15pt;" class="bi bi-x-circle-fill ps-3"></i>').css("color","red");
         $('#bus').val('');
+        $('#bus').prop('required', true)
     }
 
         }

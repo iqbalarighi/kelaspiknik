@@ -34,7 +34,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
             background-size: cover;
             position: absolute;
-            margin-left: -100px;
+            margin-left: -95px;
             color: black;
             text-align: center;
             z-index: 0; 
