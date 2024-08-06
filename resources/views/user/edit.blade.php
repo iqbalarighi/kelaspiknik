@@ -57,8 +57,19 @@
                                 <td>
                                     <select class="form-select form-select-sm" name="role" value="{{$data->role}}" id="role" required>
                                         <option value="" disabled>Pilih Role Akses</option>
-                                        <option value="user">User</option>
-                                        <option value="admin">Admin</option>
+                                        <option value="user" {{$data->role == 'user' ? 'selected' : ''}}>User</option>
+                                        <option value="admin" {{$data->role == 'admin' ? 'selected' : ''}}>Admin</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>:</td>
+                                <td>
+                                    <select class="form-select form-select-sm" name="status" value="{{$data->status}}" id="status" required>
+                                        <option value="" disabled>Pilih Role Akses</option>
+                                        <option value="1" {{$data->status == '1' ? 'selected': ''}}>Aktif</option>
+                                        <option value="0" {{$data->status == '0' ? 'selected': ''}}>Nonaktif</option>
                                     </select>
                                 </td>
                             </tr>

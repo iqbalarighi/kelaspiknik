@@ -65,6 +65,7 @@ if ($validator->fails()) {
        $data->name = $request->nama;
        $data->email = $request->email;
        $data->role = $request->role;
+       $data->status = $request->status;
        if ($request->pass != null) {
        $data->password = bcrypt($request->pass, ['rounds' => 12],);
        }

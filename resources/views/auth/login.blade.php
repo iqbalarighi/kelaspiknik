@@ -6,7 +6,15 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
+        @if ($message = Session::get('error'))
+        <script type="text/javascript">
+            Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "{{$message}}",
+        });
+        </script>
+        @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

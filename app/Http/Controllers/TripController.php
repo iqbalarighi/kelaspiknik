@@ -16,32 +16,47 @@ class TripController extends Controller
         
 
 foreach ($data as $key => $value) {
-    
+    $kode = $value->kode_trip;
     if ($value->lama_trip == 2) {
-    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    $dat = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
         ->WhereNotNull('absen1')
         ->WhereNotNull('absen2')
         ->latest()
         ->count();
 
-    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+    $jum = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })->latest()->count();
 
     $juml[] = $jum;
     $dds[] = $dat;
     } elseif ($value->lama_trip == 3) {
-    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    $dat = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
         ->WhereNotNull('absen1')
         ->WhereNotNull('absen2')
         ->WhereNotNull('absen3')
         ->latest()
         ->count();
 
-    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+    $jum = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })->latest()->count();
 
     $juml[] = $jum;
     $dds[] = $dat;
     } elseif ($value->lama_trip == 4) {
-    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    $dat = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
         ->WhereNotNull('absen1')
         ->WhereNotNull('absen2')
         ->WhereNotNull('absen3')
@@ -49,12 +64,18 @@ foreach ($data as $key => $value) {
         ->latest()
         ->count();
 
-    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+    $jum = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })->latest()->count();
 
     $juml[] = $jum;
     $dds[] = $dat;
     } elseif ($value->lama_trip == 5) {
-    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    $dat = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
         ->WhereNotNull('absen1')
         ->WhereNotNull('absen2')
         ->WhereNotNull('absen3')
@@ -63,12 +84,18 @@ foreach ($data as $key => $value) {
         ->latest()
         ->count();
 
-    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+    $jum = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })->latest()->count();
 
     $juml[] = $jum;
     $dds[] = $dat;
     } elseif ($value->lama_trip == 6) {
-    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    $dat = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
         ->WhereNotNull('absen1')
         ->WhereNotNull('absen2')
         ->WhereNotNull('absen3')
@@ -78,12 +105,18 @@ foreach ($data as $key => $value) {
         ->latest()
         ->count();
 
-    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+    $jum = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })->latest()->count();
 
     $juml[] = $jum;
     $dds[] = $dat;
     } elseif ($value->lama_trip == 7) {
-    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    $dat = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
         ->WhereNotNull('absen1')
         ->WhereNotNull('absen2')
         ->WhereNotNull('absen3')
@@ -94,12 +127,18 @@ foreach ($data as $key => $value) {
         ->latest()
         ->count();
 
-    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+    $jum = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })->latest()->count();
 
     $juml[] = $jum;
     $dds[] = $dat;
     } elseif ($value->lama_trip == 8) {
-    $dat = RegisterModel::where('kode_trip', $value->kode_trip)
+    $dat = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })
         ->WhereNotNull('absen1')
         ->WhereNotNull('absen2')
         ->WhereNotNull('absen3')
@@ -111,7 +150,10 @@ foreach ($data as $key => $value) {
         ->latest()
         ->count();
 
-    $jum = RegisterModel::where('kode_trip', $value->kode_trip)->latest()->count();
+    $jum = RegisterModel::with('trip')
+         ->whereRelation('trip', function ($query) use ($kode){
+              $query->where('kode_trip', 'like', '%'.$kode.'%');
+          })->latest()->count();
 
     $dds[] = $dat;
     $juml[] = $jum;

@@ -36,7 +36,7 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Role</th>
-                            {{-- <th>Level</th> --}}
+                            <th>Status</th>
                             <th>Opsi</th>
                         </tr>
                     @foreach($data as $key => $item)
@@ -44,7 +44,8 @@
                             <td>{{$data->firstitem()+$key}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->email}}</td>
-                            <td>{{$item->role}}</td>
+                            <td align="center" valign="middle">{{$item->role}}</td>
+                            <td align="center" valign="middle">{{$item->status == '1' ? 'Aktif' : 'Nonaktif'}}</td>
                             <td>
                                 <div style="display: flex;" class="justify-content-center">
                                     <div class="px-1">
