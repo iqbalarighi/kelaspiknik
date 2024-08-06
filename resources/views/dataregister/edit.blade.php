@@ -97,8 +97,8 @@
                 <div class="card-body">
             
                 <div class="mb-3">
-                    <select style="width:100%;" class="form-select" id="school" name="sekolah" required>
-                        <option value="{{$data->trip->nama_sekolah}}" selected>{{$data->trip->nama_sekolah}}</option>
+                    <select style="width:100%;" class="form-select">
+                        <option value="" selected disabled>{{$data->trip->nama_sekolah}}</option>
                     </select>
                 </div>
 

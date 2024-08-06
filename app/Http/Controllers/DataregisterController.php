@@ -120,7 +120,6 @@ class DataregisterController extends Controller
       }
 
       $data->bus = $request->bus;
-      $data->sekolah = $request->sekolah;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;
       $data->ttl = $ttl;

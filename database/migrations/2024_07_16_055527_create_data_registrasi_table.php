@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('id_reg', 20)->unique();
             $table->string('kode_trip');
             $table->string('bus')->nullable();
-            $table->string('sekolah');
             $table->string('nama_lengkap');
             $table->string('kelas');
             $table->string('ttl');

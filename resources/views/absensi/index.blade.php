@@ -14,7 +14,7 @@
                     <a href="{{route('absensi')}}"><span class="btn btn-secondary float-right btn-sm">Reset</span></a>
                 </div>
                 <div class="card-body">
-        @if ($message = Session::get('sukses'))
+{{--         @if ($message = Session::get('sukses'))
             <script type="text/javascript">
             Swal.fire({
               icon: "success",
@@ -24,7 +24,7 @@
               timer: 2000
             });
             </script>
-        @endif
+        @endif --}}
 <style type="text/css">
     th {
         vertical-align: middle;
