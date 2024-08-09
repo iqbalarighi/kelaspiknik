@@ -107,3 +107,5 @@ Route::controller(UserController::class)->middleware('auth')->group(function () 
 // });
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
+Route::get('/email', [EmailController::class, 'mail'])->middleware('auth');
+Route::get('/emailtest', [EmailController::class, 'test'])->middleware('auth');

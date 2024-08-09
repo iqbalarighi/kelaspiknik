@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\EmailModel;
 
 class responseMail extends Mailable
 {
@@ -43,10 +44,12 @@ class responseMail extends Mailable
      * Get the message content definition.
      */
     public function content(): Content
-    {
+    {   $data = EmailModel::all();
         return new Content(
             view: 'registrasi.responsemail',
-            with: [ 'detail' => $this->details
+            with: [ 
+                'detail' => $this->details,
+                'data'  => $data
             ]
         );
     }
