@@ -44,12 +44,12 @@ class responseMail extends Mailable
      * Get the message content definition.
      */
     public function content(): Content
-    {   $data = EmailModel::all();
+    {   
+        // $data = EmailModel::all();
         return new Content(
             view: 'registrasi.responsemail',
             with: [ 
                 'detail' => $this->details,
-                'data'  => $data
             ]
         );
     }

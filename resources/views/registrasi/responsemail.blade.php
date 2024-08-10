@@ -15,15 +15,15 @@
 	<p>
 		Klik QRCode berikut untuk mengunduh <br>
 		<a href="https://api.qrserver.com/v1/create-qr-code/?data={{base64_encode(base64_encode($details['idreg']))}}&amp;size=300x300" download>
-			<img style="left:50%; right: 50%;"
-			class="qr-code" 
-			id='barcode' 
-	        src="https://api.qrserver.com/v1/create-qr-code/?data={{base64_encode(base64_encode($details['idreg']))}}&amp;size=300x300" 
-	        alt="" 
-	        width="200" 
-	        height="200" 
-	         />
-    	</a>
+		<img style="left:50%; right: 50%;"
+		class="qr-code" 
+		id='barcode' 
+        src="https://api.qrserver.com/v1/create-qr-code/?data={{base64_encode(base64_encode($details['idreg']))}}&amp;size=300x300" 
+        alt="" 
+        width="200" 
+        height="200" 
+         />
+    </a>
 	</p>
 </body>
-</html> {{dd($data)}}
+</html>

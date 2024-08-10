@@ -14,7 +14,6 @@ class TripController extends Controller
    {
     $data = TripModel::latest()->paginate(15);
         
-
 foreach ($data as $key => $value) {
     $kode = $value->kode_trip;
     if ($value->lama_trip == 2) {
@@ -158,7 +157,10 @@ foreach ($data as $key => $value) {
     $dds[] = $dat;
     $juml[] = $jum;
     }
-
+}
+if ($data->isEmpty()) {
+    $juml = null;
+     $dds = null;
 }
 // dd($juml, $dds);
        return view('trip.index', compact('data', 'juml', 'dds'));

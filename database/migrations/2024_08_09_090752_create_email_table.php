@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('email', function (Blueprint $table) {
             $table->id();
-            $table->text('isi');
+            $table->text('isi')->nullable();
             $table->timestamps();
         });
     }

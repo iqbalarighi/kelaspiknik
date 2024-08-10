@@ -82,7 +82,6 @@ $trip = TripModel::where('kode_trip', $kode)->first();
       $data->id_reg = $id_reg;
       $data->kode_trip = $trip->id;
       $data->bus = $request->bus;
-      $data->sekolah = $trip->id;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;
       $data->ttl = $ttl;

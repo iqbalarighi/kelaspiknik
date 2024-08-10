@@ -17,7 +17,6 @@ class RegisterModel extends Model
         'id_reg',
         'kode_trip',
         'bus',
-        'sekolah',
         'nama_lengkap', 
         'kelas',
         'ttl',

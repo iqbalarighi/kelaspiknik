@@ -13,8 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <form method="post" action="" >
+                        <textarea class="form-control form-control-sm">{{$data->isEmpty() ? '' : $data[0]->isi}}</textarea>
+                    </form>
 
-                    {{ __('Ini Halaman Home!') }}
                 </div>
             </div>
         </div>

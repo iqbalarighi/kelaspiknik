@@ -9,8 +9,9 @@ class EmailController extends Controller
 {
     public function index()
     {
-       $data = EmailModel::all();
-       return view('mail.index');
+       $data = EmailModel::get();
+
+       return view('mail.index', compact('data'));
     }
 
     public function test()
@@ -23,4 +24,6 @@ class EmailController extends Controller
          $data = EmailModel::all();
          return view('registrasi.responsemail', compact('details','data'));
     }
+
+
 }
