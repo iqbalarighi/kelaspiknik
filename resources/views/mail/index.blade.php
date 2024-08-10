@@ -13,9 +13,19 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form method="post" action="" >
-                        <textarea class="form-control form-control-sm">{{$data->isEmpty() ? '' : $data[0]->isi}}</textarea>
+
+
+                    <div class="col-md-5">
+                    <form method="post" action="{{url('email/update')}}/{{$data->id}}" >
+                        @csrf
+                        @method('PUT')
+                        <textarea class="form-control form-control-sm" rows="4" name="mail">{{$data==null ? '' : $data->isi}}</textarea>
+                        
+                        <center>
+                            <input type="submit" class="btn btn-primary btn-sm mt-1" value="Update">
+                        </center>
                     </form>
+                    </div>
 
                 </div>
             </div>
