@@ -1,6 +1,7 @@
 @extends('layouts.side')
 
 @section('content')
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -14,7 +15,7 @@
                         </div>
                     @endif
 
-                    {{ __('Ini Halaman Home!') }}
+                    
                 </div>
             </div>
         </div>
