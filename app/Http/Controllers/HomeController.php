@@ -31,7 +31,7 @@ class HomeController extends Controller
           ->selectRaw('kode_trip as kode')
           ->distinct()
           ->latest()
-          ->limit(12)
+          ->limit(10)
           ->pluck('kode');
 
         $tanggal = DB::table('data_registrasi')
