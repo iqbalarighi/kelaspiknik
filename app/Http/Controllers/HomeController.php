@@ -27,28 +27,52 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $kode =   DB::table('trip')
+        $kode = DB::table('trip')
           ->selectRaw('kode_trip as kode')
           ->distinct()
+          ->limit(12)
           ->latest()
           ->pluck('kode');
 
+        $tanggal = DB::table('trip')
+          ->selectRaw('EXTRACT(YEAR_MONTH FROM created_at) as tanggal')
+          ->distinct()
+          ->limit(12)
+          ->latest()
+          ->pluck('tanggal');   
 
-        // foreach ($data as $value) {
+        // foreach ($tanggal as $value) {
         //     $bul[] = Str::substr($value, 4,2);
         //     $tah[] = Str::substr($value, 0,4);
         //  }
 
+foreach ($tanggal as $but) {
+            $vc = $but.'01';
+            $bulantahun[] = Carbon::parse($vc)->isoFormat('MMMM YYYY');
+            $bultah[] = Carbon::parse($vc)->format('Y-m');
+         }
+
             foreach ($kode as $key => $bbb) {
-                    $data = RegisterModel::with('trip')
-                    ->whereRelation('trip', function ($query) use ($bbb){
-                      $query->where('kode_trip', 'like', '%'.$bbb.'%');
+                $kod = $bbb; 
+                    $jumtrip []= RegisterModel::with('trip')
+                    ->whereRelation('trip', function ($query) use ($kod){
+                      $query->where('kode_trip', $kod);
                   })
-                    ->get();
+                    ->count();
     }
 
-dd($data->count());
+foreach ($bultah as $key => $vs) {
+    $total []= DB::table('data_registrasi')->select('created_at')
+                ->where('created_at','LIKE','%'.$vs.'%')
+                ->count();
+}
 
-        return view('home');
+foreach ($kode as $key => $value) {
+    $trip[] = $value;
+}
+
+// dd($jumtrip);
+
+        return view('home', compact('jumtrip', 'trip', 'bulantahun', 'total'));
     }
 }
