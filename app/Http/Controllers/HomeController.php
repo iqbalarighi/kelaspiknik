@@ -30,15 +30,15 @@ class HomeController extends Controller
         $kode = DB::table('trip')
           ->selectRaw('kode_trip as kode')
           ->distinct()
-          ->limit(12)
           ->latest()
+          ->limit(12)
           ->pluck('kode');
 
-        $tanggal = DB::table('trip')
+        $tanggal = DB::table('data_registrasi')
           ->selectRaw('EXTRACT(YEAR_MONTH FROM created_at) as tanggal')
           ->distinct()
-          ->limit(12)
           ->latest()
+          ->limit(12)
           ->pluck('tanggal');   
 
     foreach ($tanggal as $but) {
@@ -65,7 +65,6 @@ class HomeController extends Controller
     foreach ($kode as $key => $value) {
         $trip[] = $value;
     }
-
         return view('home', compact('jumtrip', 'trip', 'bulantahun', 'total'));
     }
 }
