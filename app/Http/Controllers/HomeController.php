@@ -41,12 +41,7 @@ class HomeController extends Controller
           ->latest()
           ->pluck('tanggal');   
 
-        // foreach ($tanggal as $value) {
-        //     $bul[] = Str::substr($value, 4,2);
-        //     $tah[] = Str::substr($value, 0,4);
-        //  }
-
-foreach ($tanggal as $but) {
+    foreach ($tanggal as $but) {
             $vc = $but.'01';
             $bulantahun[] = Carbon::parse($vc)->isoFormat('MMMM YYYY');
             $bultah[] = Carbon::parse($vc)->format('Y-m');
@@ -61,17 +56,15 @@ foreach ($tanggal as $but) {
                     ->count();
     }
 
-foreach ($bultah as $key => $vs) {
-    $total []= DB::table('data_registrasi')->select('created_at')
-                ->where('created_at','LIKE','%'.$vs.'%')
-                ->count();
-}
+    foreach ($bultah as $key => $vs) {
+        $total []= DB::table('data_registrasi')->select('created_at')
+                    ->where('created_at','LIKE','%'.$vs.'%')
+                    ->count();
+    }
 
-foreach ($kode as $key => $value) {
-    $trip[] = $value;
-}
-
-// dd($jumtrip);
+    foreach ($kode as $key => $value) {
+        $trip[] = $value;
+    }
 
         return view('home', compact('jumtrip', 'trip', 'bulantahun', 'total'));
     }

@@ -42,14 +42,14 @@
                                  polar: true,
                               },
                             title : {
-                                text: 'Grafik Total Registrasi Kelas Piknik'
+                                text: 'Grafik Total Registrasi Kelas Piknik Per Bulan'
                             }, 
                             xAxis : {
                                 categories : bulan.reverse()
                             },
                             yAxis : {
                                 title: {
-                                    text : 'Total Registrasi Per Bulan'
+                                    text : 'Jumlah Registrasi'
                                 }
                             },
                             plotOptions : {
