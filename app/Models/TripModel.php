@@ -18,6 +18,8 @@ class TripModel extends Model
         'nama_sekolah',
         'jumlah_bus',
         'kapasitas'
+        'lama_trip'
+        'file'
     ];
 
     public function register()
