@@ -82,7 +82,6 @@ $trip = TripModel::where('kode_trip', $kode)->first();
       $data->id_reg = $id_reg;
       $data->kode_trip = $trip->id;
       $data->bus = $request->bus;
-      $data->sekolah = $trip->id;
       $data->nama_lengkap = $request->nama;
       $data->kelas = $request->kelas;
       $data->ttl = $ttl;
@@ -139,11 +138,12 @@ $trip = TripModel::where('kode_trip', $kode)->first();
             ->with('error', 'Email tidak terkirim'); 
             }
        } catch (\Exception $e) {
+        dd($e);
             return back()
             ->withInput()
             ->with('error', 'Email tidak terkirim'); 
       } 
- $data->save();
+ // $data->save();
       return back()
       ->with('sukses', 'Data Registrasi Anda Telah Tersimpan'); 
    }

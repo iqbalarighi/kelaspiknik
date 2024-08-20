@@ -44,9 +44,11 @@ class responseMail extends Mailable
      */
     public function content(): Content
     {
+
         return new Content(
             view: 'registrasi.responsemail',
-            with: [ 'detail' => $this->details
+            with: [ 
+                'details' => $this->details
             ]
         );
     }

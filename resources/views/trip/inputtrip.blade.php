@@ -69,7 +69,7 @@
                                 <label class="input-group-text p-1" class="form-control form-control-sm" for="imginpt" style="font-size: 10pt;">Upload ID Card<font size="2" color="red">*</font></label>
                                 <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images" id="imginpt" required>
                             </div>
-                            <div ><img id="blah" src="" alt="your image" width="200px" /></div>
+                            <div class="mt-2"><center><img id="blah" src="" alt="your image" width="200px" /></center></div>
                             <div class="text-center mt-2">
                                 <button type="submit" class="btn btn-primary ">Kirim</button>
                             </div>

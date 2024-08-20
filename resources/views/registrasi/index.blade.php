@@ -200,7 +200,7 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control form-control-sm kontak" placeholder="" onblur="checkLength(this)" maxlength="15" id="notel_ortu_2" name="notel_ortu_2" value="{{ old('notel_ortu_2') }}" required>
+                        <input type="text" class="form-control form-control-sm kontak" placeholder="" onblur="checkLength(this)" maxlength="15" id="notel_ortu_2" name="notel_ortu_2" value="{{ old('notel_ortu_2') }}">
                         <label for="notel_ortu_2">Nomor Telepon Orang Tua 2</label>
                     </div>
 

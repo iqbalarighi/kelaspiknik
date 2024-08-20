@@ -8,6 +8,7 @@
 	<title>Email Response</title>
 </head>
 <body>
+	{{-- {{dd($details)}} --}}
 	<p style="text-align: justify; text-justify: inter-word;">
 		Terima Kasih {{$details['nama']}} telah melakukan registrasi di kelaspiknik.com. 
 		Berikut QRCode untuk di scan sebagai absensi dan ditukarkan dengan id card di tempat yang telah di tentukan.
