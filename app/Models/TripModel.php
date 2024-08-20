@@ -17,8 +17,8 @@ class TripModel extends Model
         'judul_trip',
         'nama_sekolah',
         'jumlah_bus',
-        'kapasitas'
-        'lama_trip'
+        'kapasitas',
+        'lama_trip',
         'file'
     ];
 
