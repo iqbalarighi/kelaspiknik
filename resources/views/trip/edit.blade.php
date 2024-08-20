@@ -4,6 +4,66 @@
 @if (Auth::user()->role === 'user')
         {{abort(403)}}
 @endif
+
+<style type="text/css">
+    .custom-file-button input[type=file] {
+  margin-left: -2px !important;
+}
+
+.custom-file-button input[type=file]::-webkit-file-upload-button {
+  display: none;
+}
+
+.custom-file-button input[type=file]::file-selector-button {
+  display: none;
+}
+
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+</style>
+<style>
+.containerx {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.containerx:hover .image {
+  opacity: 0.3;
+}
+
+.containerx:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: black;
+  font-size: 24px;
+  padding: auto;
+}
+</style>
+
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -46,8 +106,29 @@
                                 <input value="{{$data->lama_trip}}" type="number" class="form-control form-control-sm" placeholder="" id="numberInput" name="lama_trip" maxlength="1" value="" required>
                                 <label for="lama_trip">Lama Trip <font size="2" color="red">*</font></label>
                             </div>
+                            @if ($data->file == null)
+                                <div class="input-group custom-file-button mt-1">
+                                <label class="input-group-text p-1" class="form-control form-control-sm" for="imginpt" style="font-size: 10pt;">Upload ID Card<font size="2" color="red">*</font></label>
+                                <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images" id="imginpt" required>
+                                </div>
+                            <div class="mt-2"><center><img id="blah" src="" alt="your image" width="200px" /></center></div>
+                            @else
+                            <div style="text-align: left !important;"><b>Layout ID Card</b>:
+                                <div class="row">
+                                    <div class="containerx">
+                                       <img class="image" src="{{asset('storage/trip')}}/{{$data->kode_trip}}/{{$data->file}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
+                                        <div class="middle">
+                                            <div class="text">
+                                                <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Foto" onclick="return hapus(this);"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            
                             <div class="text-center mt-2">
-                                <button type="submit" class="btn btn-primary ">Kirim</button>
+                                <button type="submit" class="btn btn-primary ">Update</button>
                             </div>
                         </div>
 
@@ -85,7 +166,8 @@
                 }
             });
         });
-    </script>    <script>
+    </script> 
+    <script>
         $(document).ready(function() {
             $('#numberInput').on('input', function() {
                 // Get the current value
@@ -113,6 +195,51 @@
             });
         });
     </script>
+<script type="text/javascript">
+     function hapus(form){
+    Swal.fire({
+          title: "Hapus Foto ?",
+          text: "Data terhapus tidak dapat dikembalikan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Batal",
+          confirmButtonText: "Hapus"
+        }).then((result) => {
+          if (result.isConfirmed) {
+        window.location.href = "{{url('/trip/hapus/foto/'.$data->id)}}";
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang menghapus foto registrasi",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });  
+          }
+        });
+    return false;
+ }
+</script>
+<script type="text/javascript">
+    var imginpt = document.getElementById('imginpt');
+    var blah = document.getElementById('blah');
+
+    blah.style.visibility = 'hidden';
+
+    imginpt.onchange = evt => {
+  const [file] = imginpt.files
+  if (file) {
+    blah.style.visibility = 'visible';
+    blah.src = URL.createObjectURL(file);
+  } else {
+    blah.style.visibility = 'hidden';
+  }
+}
+</script>
 @endsection
 
 

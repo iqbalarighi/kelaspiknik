@@ -34,18 +34,18 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
             background-size: cover;
             position: absolute;
-            margin-left: -95px;
+            margin-left: -90px;
             color: black;
             text-align: center;
             z-index: 0; 
         }
 
         .profile-pic {
-            width: 130px;
-            height: 130px;
+            width: 150px;
+            height: 150px;
             /*border-radius: 50%;
             border: 3px solid white;*/
-            margin-top: 60px;
+            margin-top: 70px;
             z-index: 1;
             position: relative;
         }
@@ -61,9 +61,8 @@
         }
         .pad {
             text-align: left;
-            margin-top: 50px;
-            
-            margin-bottom: -10px;
+            position: absolute;
+            bottom: -100px;
             font-size: 15pt;
         }
         .qr-code {
@@ -71,7 +70,7 @@
             height: 110px;
             z-index: 3;
             position: absolute;
-              bottom: 90px;
+              bottom: 100px;
               right: 15px;
 /*              border: 1px black solid;*/
               padding: 0;
@@ -97,7 +96,7 @@
                         @foreach($idcard as $key => $idcard) 
 
                             <div class="id-card" >
-                            <img class="id-img mt-0" src="{{asset('storage/image/idcard.png')}}" width="318px" style="">
+                            <img class="id-img mt-0" src="{{asset('storage/trip')}}/{{$idcard->trip->kode_trip}}/{{$idcard->trip->file}}" width="318px" style="">
                                 <img src="{{asset('storage/image/logo.png')}}" alt="Profile Picture" class="profile-pic">
                             <div class="details">
                                 <div>
@@ -115,8 +114,8 @@
                                     src="https://api.qrserver.com/v1/create-qr-code/?data={{base64_encode(base64_encode($idcard->id_reg))}}&amp;size=300x300" 
                                     alt="" 
                                     title="{{($idcard->nama_lengkap)}}" 
-                                    width="150" 
-                                    height="150" />
+                                    width="140" 
+                                    height="140" />
 
 
                             </div>

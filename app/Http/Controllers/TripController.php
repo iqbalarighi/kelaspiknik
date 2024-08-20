@@ -283,6 +283,17 @@ public function update(Request $request, $id)
     $data->kapasitas = $request->kapasitas;
     $data->lama_trip = $request->lama_trip;
 
+        $files = $request->file('images');
+
+      if ($files != null){
+         $foto = $request->file('images');
+         $image_name = md5(rand(100, 1000));
+         $ext = strtolower($foto->getClientOriginalExtension());
+         $imageName = $image_name.'.'.$ext;
+         $foto->move(public_path('storage/trip/'.$data->kode_trip.'/'), $imageName);
+         $data->file = $imageName;
+      }
+
     $data->save();
 
     return back()
