@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -44,7 +45,6 @@ class responseMail extends Mailable
      */
     public function content(): Content
     {
-
         return new Content(
             view: 'registrasi.responsemail',
             with: [ 
@@ -60,6 +60,10 @@ class responseMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromPath('https://api.qrserver.com/v1/create-qr-code/?data='.base64_encode(base64_encode($this->details['idreg'])).'&amp;size=400x400')
+        ->as('QR Peserta')
+        ->withMime('image/PNG'), 
+    ];
     }
 }
