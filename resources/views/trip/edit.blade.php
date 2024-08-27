@@ -119,7 +119,7 @@
                                        <img class="image" src="{{asset('storage/trip')}}/{{$data->kode_trip}}/{{$data->file}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
                                         <div class="middle">
                                             <div class="text">
-                                                <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Foto" onclick="return hapus(this);"></i>
+                                                <i class="bi bi-trash3" style="color: red; cursor: pointer;" title="Hapus Layout Idcard" onclick="return hapus(this);"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -198,7 +198,7 @@
 <script type="text/javascript">
      function hapus(form){
     Swal.fire({
-          title: "Hapus Foto ?",
+          title: "Hapus Layout ID Card?",
           text: "Data terhapus tidak dapat dikembalikan",
           icon: "warning",
           showCancelButton: true,
@@ -208,10 +208,10 @@
           confirmButtonText: "Hapus"
         }).then((result) => {
           if (result.isConfirmed) {
-        window.location.href = "{{url('/trip/hapus/foto/'.$data->id)}}";
+        window.location.href = "{{url('/trip/hapus/idcard/'.$data->id)}}";
         Swal.fire({
             title: "Loading . . . ",
-            text: "Sedang menghapus foto registrasi",
+            text: "Sedang menghapus layout id card",
             showConfirmButton: false, 
             allowOutsideClick: false,
               didOpen: () => {

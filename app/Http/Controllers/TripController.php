@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\TripModel;
 use App\Models\RegisterModel;
+use File;
 
 class TripController extends Controller
 {
@@ -190,12 +191,6 @@ public function bus(Request $request)
 
 $data = ['bus' => $bus, 'bus2' => $bus2, 'limit' => $dat->kapasitas];
 
-            // if ($bus < 2){
-            //     $hasil =  '<font style="color:green">Bus masih tersedia <i style="font-size:15pt;" class="bi bi-check-circle-fill ps-3"></i></font>';
-            // } else {
-            //     $hasil = '<font style="color:red"> Bus tidak tersedia <i style="font-size:15pt;" class="bi bi-x-circle-fill ps-3"></i></font>';
-            // }
-
 return response()->json($data);
 
 
@@ -299,4 +294,23 @@ public function update(Request $request, $id)
     return back()
       ->with('sukses', 'Perubahan Data Tersimpan');
 }
+
+public function hpscard($id)
+{
+     $data = TripModel::findOrFail($id);
+
+     $del = File::delete(public_path('storage/trip/'.$data->kode_trip.'/'.$data->file));
+     
+     if ($del == true){
+          $data->file = null;
+          $data->save();
+     } else {
+          $data->file = null;
+          $data->save();
+     }
+
+     return back()
+      ->with('sukses','Layout Idcard Terhapus');
+}
+
 }
