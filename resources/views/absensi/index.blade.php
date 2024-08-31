@@ -11,7 +11,10 @@
                     @else
                         {{ __('Absensi') }}
                     @endif
+
+                    @if ($data != null)
                     <a href="{{route('absensi')}}"><span class="btn btn-secondary float-right btn-sm">Reset</span></a>
+                    @endif
                 </div>
                 <div class="card-body">
 {{--         @if ($message = Session::get('sukses'))
